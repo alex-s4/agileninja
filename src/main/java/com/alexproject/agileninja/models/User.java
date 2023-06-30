@@ -34,27 +34,29 @@ public class User {
     private Long id;
 	
 	// @NotEmpty(message="Username is required!")
-    @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
-    @Size(min=1, message="Please enter your first name.")
+    // @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
+    // @Size(min=1, message="Please enter your first name.")
     private String firstName;
     
- // @NotEmpty(message="Username is required!")
-    @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
-    @Size(min=1, message="Please enter your last name.")
+    // @NotEmpty(message="Username is required!")
+    // @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
+    // @Size(min=1, message="Please enter your last name.")
     private String lastName;
     
-    @NotEmpty(message="Email is required!")
-    @Email(message="Please enter a valid email!")
+    @Size(min=3, message="Username must have at least 3 characters")
+    private String username;
+    
+    // @NotEmpty(message="Email is required!")
+    // @Email(message="Please enter a valid email!")
     private String email;
     
     // private String role;
     
-    @NotEmpty(message="Password is required!")
+    // @NotEmpty(message="Password is required!")
     @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
     private String password;
     
     @Transient
-    @NotEmpty(message="Confirm Password is required!")
     @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
     private String confirm;
     
@@ -175,6 +177,12 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
     
     
 }

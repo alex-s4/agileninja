@@ -6,16 +6,13 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.alexproject.agileninja.models.User;
+import com.alexproject.agileninja.models.Role;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long>{
+public interface RoleRepository extends CrudRepository<Role, Long> {
 
-	User findByUsername(String username);
-	
-	User findByEmail(String email);
-	
-	List<User> findAll();
-	
+	List<Role> findAll();
+	List<Role> findByName(String name);
+	List<Role> findAllById(Long id);
 	
 }

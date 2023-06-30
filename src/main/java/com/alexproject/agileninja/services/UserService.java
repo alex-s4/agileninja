@@ -1,49 +1,45 @@
 package com.alexproject.agileninja.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.alexproject.agileninja.repository.UserRepository;
 import com.alexproject.agileninja.models.User;
+import com.alexproject.agileninja.repository.RoleRepository;
+import com.alexproject.agileninja.repository.UserRepository;
 
 @Service
 public class UserService {
-
-	@Autowired
-	private UserRepository userRepo;
 	
-		// Create
-		public User createNewUser(User newUser)
-		{
-			return userRepo.save(newUser);
-		}
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+    private RoleRepository roleRepository;
+	@Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
+	// Saves a client with only the user role
+	public void saveWithUserRole(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoles(roleRepository.findByName("ROLE_USER"));
+        userRepository.save(user);
+    }
+	
+	
+	// Saves a client with only the admin role
+	public void saveUserWithAdminRole(User user) {
 		
-		// Read (all)
-		public List<User> getAllUser()
-		{
-			return userRepo.findAll();
-		}
-		
-		// Read (one)
-		public User getOneUser(Long id)
-		{
-			return userRepo.findById(id).orElse(null);
-		}
-		
-		// Update
-		public User updateUser(User updatedUser)
-		{
-			return userRepo.save(updatedUser);
-		}
-		
-		// Delete	
-		public void deleteUser(Long id)
-		{
-			userRepo.deleteById(id);
-		}
-		
-		
-		
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoles(roleRepository.findAllById((long) 2));
+        userRepository.save(user);
+    }    
+	
+	
+	// Finds a user by their Username
+	public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+	
+	
 }

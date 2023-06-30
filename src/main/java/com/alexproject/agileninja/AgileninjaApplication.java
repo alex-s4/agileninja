@@ -8,6 +8,8 @@ public class AgileninjaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AgileninjaApplication.class, args);
+		
 	}
 
+	
 }
