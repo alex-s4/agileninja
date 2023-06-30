@@ -108,12 +108,7 @@ public class Users {
     }
     
     
-    @GetMapping(value = {"/", "/dashboard"})
-    public String index(Principal principal, Model model) {
-    	String username = principal.getName();
-        model.addAttribute("currentUser", userService.findByUsername(username));
-        return "index.jsp";
-    }
+    
     
     
     
