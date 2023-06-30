@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -76,6 +79,13 @@ public class User {
     // Ticket assigned from the user
     @OneToMany(mappedBy="assignee", fetch=FetchType.LAZY)
     private List<Ticket> ticketsAssigned;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
     
     @PrePersist
     protected void onCreate(){
@@ -159,7 +169,12 @@ public class User {
 	public void setTicketsAssigned(List<Ticket> ticketsAssigned) {
 		this.ticketsAssigned = ticketsAssigned;
 	}
-    
+    public List<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
     
     
 }
