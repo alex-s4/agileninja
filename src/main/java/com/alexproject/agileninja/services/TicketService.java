@@ -43,5 +43,8 @@ public class TicketService {
 		ticketRepository.deleteById(id);
 	}
 	
+	// Others
+	
+	
 	
 }
