@@ -1,5 +1,7 @@
 package com.alexproject.agileninja.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 	
-	
+	// Returns all users
+	public List<User> findAllUsers() {
+		return userRepository.findAll();
+	}
 }
