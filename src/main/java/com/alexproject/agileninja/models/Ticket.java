@@ -42,6 +42,8 @@ public class Ticket {
     @Size(min=1, message="Please insert description")
     private String ticketDescription;
     
+    private String ticketKey;
+    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="project_id")
     private Project project;
@@ -190,6 +192,12 @@ public class Ticket {
 	}
 	public void setAssignee(User assignee) {
 		this.assignee = assignee;
+	}
+	public String getTicketKey() {
+		return ticketKey;
+	}
+	public void setTicketKey(String ticketKey) {
+		this.ticketKey = ticketKey;
 	}
     
     

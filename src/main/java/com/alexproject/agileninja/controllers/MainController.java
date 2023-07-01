@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -60,6 +61,8 @@ public class MainController {
         model.addAttribute("types", typeService.findAllType());
         model.addAttribute("allUsers", userService.findAllUsers());
         
+        model.addAttribute("allTickets", ticketService.findAllTickets());
+        
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         
@@ -96,12 +99,37 @@ public class MainController {
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
 		
+        
+        // Will generate a ticketKey before saving the ticket to database
+        ticketService.generateTicketKey(project, ticket);
+        
 		
 		// Successfully Created a Ticket
         redirectAttributes.addFlashAttribute("newTktSuccess", "Ticket Succesfully Created!");
 		ticketService.createTicket(ticket);
         
 		return "redirect:/";
+	}
+	
+	@GetMapping("/ticket/{ticketKey}")
+	public String ticketPage(@PathVariable String ticketKey,
+			Principal principal, 
+			Model model, 
+			Project project,
+			Ticket ticket,
+			RedirectAttributes redirectAttributes)
+	{
+		// Gets the info of current logged user - MANDATORY for all paths
+    	String username = principal.getName();
+        model.addAttribute("currentUser", userService.findByUsername(username));
+		
+		Ticket theTicket = ticketService.findTicketByKey(ticketKey);
+		
+		model.addAttribute("theTicket", theTicket);
+        
+        
+        
+		return "ticketPage.jsp";
 	}
 	
 	

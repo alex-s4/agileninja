@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alexproject.agileninja.models.Project;
 import com.alexproject.agileninja.models.Ticket;
+import com.alexproject.agileninja.repository.ProjectRepository;
 import com.alexproject.agileninja.repository.TicketRepository;
 
 @Service
@@ -13,6 +15,12 @@ public class TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
+	
+	@Autowired
+	private ProjectRepository projectRepository;
+	
+	@Autowired
+	private ProjectService projectService;
 	
 	// Create
 	public Ticket createTicket(Ticket ticket)
@@ -44,7 +52,20 @@ public class TicketService {
 	}
 	
 	// Others
+	// Generate ticketKey field: ${projectKey}-${ticketId}
+	public void generateTicketKey(Project project, Ticket ticket)
+	{
+		String pKey = ticket.getProject().getProjectKey();
+		Long ticketProjId = (long) project.getTickets().size()+1;
+		String tKey = pKey+"-"+ticketProjId;
+		
+		ticket.setTicketKey(tKey);
+	}
 	
-	
+	// Returns ticket by ticketKey
+	public Ticket findTicketByKey(String ticketKey)
+	{
+		return ticketRepository.findTicketByTicketKey(ticketKey).orElse(null);
+	}
 	
 }

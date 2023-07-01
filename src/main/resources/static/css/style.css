@@ -6,4 +6,11 @@
 
 #new-proj-form, #new-tkt-form {
     display: none;
+    position: fixed;
+    padding: 12px;
+    background-color: rgb(231, 231, 231);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
 }

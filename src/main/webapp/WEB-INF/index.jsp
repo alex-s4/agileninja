@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard - Agile Ninja</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -16,8 +19,8 @@
         <input type="submit" value="New Project" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"/>
     </form> -->
 
-    <button class="new-proj-btn" onclick="openFormNewProj()">New Project</button>
-    <button class="new-proj-btn" onclick="openFormNewTkt()">New Ticket</button>
+    <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button>
+    <button class="new-proj-btn btn btn-primary" onclick="openFormNewTkt()">New Ticket</button>
 
 	
     <form id="logoutForm" method="POST" action="/logout">
@@ -30,8 +33,12 @@
 	</div>
 
     <!-- NEW PROJECT FORM -->
-	<div class="modal-form-proj">
-		<div id="new-proj-form">
+	
+	
+
+	
+	
+	<div id="new-proj-form">
 			<h1>Create new Project</h1>
 			
 			<form:form id="projectCreation" method="POST" action="/project/new" modelAttribute="newProject">
@@ -57,7 +64,7 @@
 			</form:form>
 		</div>
 	</div>
-    
+	
 
     <!-- NEW TICKET FORM -->
 	<div class="modal-form-tkt">
@@ -131,6 +138,37 @@
 	</div>
     
 
+	<!-- ISSUE TABLE -->
+	<div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Key</th>
+					<th scope="col">Type</th>
+					<th scope="col">Issue Name</th>
+					<th scope="col">Status</th>
+					<th scope="col">Priority</th>
+					<th scope="col">Severity</th>
+					<th scope="col">Modified</th>
+					<th scope="col">Assigned to</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="ticket" items="${allTickets}">
+				<tr>
+					<td><a href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketKey()}</a></td>
+					<td>${ticket.getTicketType().getIssueType()}</td>
+					<td>${ticket.getTicketName()}</td>
+					<td>${ticket.getTicketStatus().getIssueStatus()}</td>
+					<td>${ticket.getTicketPriority().getIssuePriority()}</td>
+					<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
+					<td>${ticket.getUpdatedAt()}</td>
+					<td>${ticket.getAssignee().getUsername()}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 
     <script src="/js/app.js"></script>

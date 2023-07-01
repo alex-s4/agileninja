@@ -41,3 +41,7 @@ function openFormNewTkt(){
 function closeFormNewTkt(){
     document.getElementById("new-tkt-form").style.display = "none"
 }
+
+// $('#myModal').on('shown.bs.modal', function () {
+//     $('#myInput').trigger('focus')
+//   })

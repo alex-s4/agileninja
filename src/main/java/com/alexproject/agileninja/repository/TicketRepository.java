@@ -30,5 +30,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 	
 	List<Ticket> findTicketsByProject(Project project);
 	
+	Optional<Ticket> findTicketByTicketKey(String ticketKey);
+	
 	
 }
