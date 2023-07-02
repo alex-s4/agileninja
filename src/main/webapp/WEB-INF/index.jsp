@@ -20,7 +20,7 @@
     </form> -->
 
     <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button>
-    <button class="new-proj-btn btn btn-primary" onclick="openFormNewTkt()">New Ticket</button>
+    <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button>
 
 	
     <form id="logoutForm" method="POST" action="/logout">
@@ -33,18 +33,15 @@
 	</div>
 
     <!-- NEW PROJECT FORM -->
-	
-	
-
-	
-	
-	<div id="new-proj-form">
+	<div id="new-proj-form" class="modal-lc">
+		<div id="modal-newproj-lc" class="modal-content-lc">
+			<span class="close-lc" onclick="closeFormNewProj()">&times;</span>
 			<h1>Create new Project</h1>
 			
 			<form:form id="projectCreation" method="POST" action="/project/new" modelAttribute="newProject">
-			 
+				
 				<p><form:errors path="project.*"/></p>
-	
+
 				<p>
 					<form:label path="projectName">Project Name *</form:label>
 					<form:input path="projectName" required="true"/>
@@ -59,16 +56,17 @@
 				<!-- Hidden Field/s -->
 				<form:input path="projectOwner" value="${currentUser.getId()}" hidden="true"/>
 
-				 <input for="projectCreation" type="submit" value="Create"/><a href="#" onclick="closeFormNewProj()">cancel</a>
-	
+					<input for="projectCreation" type="submit" value="Create"/><a href="#" onclick="closeFormNewProj()">cancel</a>
+
 			</form:form>
 		</div>
 	</div>
 	
 
     <!-- NEW TICKET FORM -->
-	<div class="modal-form-tkt">
-		<div id="new-tkt-form">
+	<div id="new-tkt-form" class="modal-lc">
+		<div id="modal-newproj-lc" class="modal-content-lc">
+			<span class="close-lc" onclick="closeFormNewTkt()">&times;</span>
 			<h1>Create new Ticket</h1>
 			
 			<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
@@ -156,9 +154,9 @@
 			<tbody>
 				<c:forEach var="ticket" items="${allTickets}">
 				<tr>
-					<td><a href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketKey()}</a></td>
+					<td>${ticket.getTicketKey()}</td>
 					<td>${ticket.getTicketType().getIssueType()}</td>
-					<td>${ticket.getTicketName()}</td>
+					<td><a href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketName()}</a></td>
 					<td>${ticket.getTicketStatus().getIssueStatus()}</td>
 					<td>${ticket.getTicketPriority().getIssuePriority()}</td>
 					<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
@@ -171,6 +169,9 @@
 	</div>
 
 
+
+	
+	<!-- JS FILE -->
     <script src="/js/app.js"></script>
 </body>
 </html>
