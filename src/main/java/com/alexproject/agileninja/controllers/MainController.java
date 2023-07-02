@@ -63,6 +63,8 @@ public class MainController {
         
         model.addAttribute("allTickets", ticketService.findAllTickets());
         
+        
+        // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         
@@ -123,11 +125,25 @@ public class MainController {
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
 		
+        // Retrieve ticket
 		Ticket theTicket = ticketService.findTicketByKey(ticketKey);
-		
 		model.addAttribute("theTicket", theTicket);
         
         
+		model.addAttribute("newProject", new Project());
+        model.addAttribute("newTicket", new Ticket());
+        model.addAttribute("existingProjects", projectService.findAllProjects());
+        model.addAttribute("statuses", statusService.findAllStatus());
+        model.addAttribute("severities", severityService.findAllSeverity());
+        model.addAttribute("priorities", priorityService.findAllPriority());
+        model.addAttribute("types", typeService.findAllType());
+        model.addAttribute("allUsers", userService.findAllUsers());
+        
+        model.addAttribute("allTickets", ticketService.findAllTickets());
+        
+        model.addAttribute("backlog", statusService.findStatusById((long) 1));
+		
+		
         
 		return "ticketPage.jsp";
 	}

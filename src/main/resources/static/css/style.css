@@ -4,17 +4,6 @@
     box-sizing: border-box;
 }
 
-/* #new-proj-form, #new-tkt-form {
-    display: none;
-    position: fixed;
-    padding: 12px;
-    background-color: rgb(231, 231, 231);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-} */
-
 div.modal-lc {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -47,4 +36,8 @@ span.close-lc:hover, span.close-lc:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.input-txtfield {
+    width: 80vw;
 }
