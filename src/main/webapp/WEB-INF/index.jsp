@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard - Agile Ninja</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
@@ -135,6 +135,22 @@
 		</div>
 	</div>
     
+	<!-- FILTER SECTION -->
+	<div>
+		<!-- <form action="/ticket/filter" method="POST"> -->
+			<c:forEach var="project" items="${existingProjects}">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="${project.getProjectKey()}" id="p${project.getId()}">
+					<label class="form-check-label" for="p${project.getId()}">
+						${project.getProjectName()} (${project.getProjectKey()})
+					</label>
+				</div>
+			</c:forEach>
+
+			<button class="submit" id="btn-submit-filter">find</button>
+		<!-- </form> -->
+		
+	</div>
 
 	<!-- ISSUE TABLE -->
 	<div>
@@ -152,7 +168,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="ticket" items="${allTickets}">
+				<c:forEach var="ticket" items="${ticketsByProject}">
 				<tr>
 					<td>${ticket.getTicketKey()}</td>
 					<td>${ticket.getTicketType().getIssueType()}</td>
@@ -172,6 +188,7 @@
 
 	
 	<!-- JS FILE -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

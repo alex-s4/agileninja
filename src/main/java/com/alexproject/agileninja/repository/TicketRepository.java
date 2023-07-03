@@ -1,5 +1,6 @@
 package com.alexproject.agileninja.repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,8 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 	List<Ticket> findTicketsByProject(Project project);
 	
 	Optional<Ticket> findTicketByTicketKey(String ticketKey);
+	
+	List<Ticket> findTicketByProjectIn(List<Project> projects);
 	
 	
 }

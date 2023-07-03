@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alexproject.agileninja.models.Comment;
@@ -47,7 +48,11 @@ public class MainController {
 	// Render App's Home Page
 	@GetMapping(value = {"/", "/dashboard"})
     public String index(
-    		Principal principal, Model model, Project project, Ticket ticket) {
+    		Principal principal, 
+    		Model model, 
+    		Project project, 
+    		Ticket ticket,
+    		@RequestParam(value="proj",required=false) String pKey) {
 		// Gets the info of current logged user - MANDATORY for all paths
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
@@ -61,11 +66,22 @@ public class MainController {
         model.addAttribute("types", typeService.findAllType());
         model.addAttribute("allUsers", userService.findAllUsers());
         
-        model.addAttribute("allTickets", ticketService.findAllTickets());
-        
-        
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
+        
+        
+        // Gets all tickets
+        model.addAttribute("allTickets", ticketService.findAllTickets());
+        // Gets all tickets from a specific project
+        model.addAttribute("ticketsByProject", ticketService.findTicketsByProjKey(pKey));
+        
+        System.out.println(pKey);
+        
+        if(pKey==null || pKey.isEmpty()) {
+        	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
+        }
+        // Filtering
+        
         
         
         return "index.jsp";
@@ -150,7 +166,6 @@ public class MainController {
 		
 		// Gets all the comments from the current ticket
 		List<Comment> getTicketComments = ticketService.findTicketByKey(ticketKey).getComments();
-		System.out.println(getTicketComments);
 		model.addAttribute("allComments", getTicketComments);
         
 		return "ticketPage.jsp";
@@ -178,5 +193,13 @@ public class MainController {
 		return "redirect:/ticket/"+currentTicketKey;
 	}
 	
+	
+//	@PostMapping("/ticket/filter")
+//	public String getProjects(Principal principal, 
+//			Model model) 
+//	{
+//		
+//		return "redirect:/";
+//	}
 	
 }

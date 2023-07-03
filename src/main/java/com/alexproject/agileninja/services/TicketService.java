@@ -1,5 +1,6 @@
 package com.alexproject.agileninja.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,18 @@ public class TicketService {
 	public Ticket findTicketByKey(String ticketKey)
 	{
 		return ticketRepository.findTicketByTicketKey(ticketKey).orElse(null);
+	}
+	
+	// Returns all tickets by specified project
+	public List<Ticket> findTicketsByProjKey(String projectKey)
+	{
+		return ticketRepository.findTicketsByProject(projectRepository.findProjectByProjectKey(projectKey).orElse(null));
+	}
+	
+	// Returns all tickets by specified projects
+	public List<Ticket> findTicketsByProjects(Collection<Project> selectedProjects)
+	{
+		return ticketRepository.findTicketByProjectIn(selectedProjects);
 	}
 	
 }
