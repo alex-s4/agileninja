@@ -1,6 +1,8 @@
 package com.alexproject.agileninja.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,19 +71,21 @@ public class MainController {
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
-        
-        // Gets all tickets
-        model.addAttribute("allTickets", ticketService.findAllTickets());
-        // Gets all tickets from a specific project
-        model.addAttribute("ticketsByProject", ticketService.findTicketsByProjKey(pKey));
-        
-        System.out.println(pKey);
-        
-        if(pKey==null || pKey.isEmpty()) {
+        // Project Filter
+        if(pKey==null || pKey.isEmpty()) // If "proj" parameter is blank/null, returns all tickets
+        {
         	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
+        } 
+        else // If "proj" param has one or more values, it returns all tickets under that project
+        {
+        	List<Project> filteredProjects = new ArrayList<>();
+        	List<String> pKeyAsList = Arrays.asList(pKey.split("\\s*,\\s*")); // Comma Separated String to List
+                  	
+            for(String pKeySeparated : pKeyAsList) {
+            	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
+            }
+            model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects)); 
         }
-        // Filtering
-        
         
         
         return "index.jsp";

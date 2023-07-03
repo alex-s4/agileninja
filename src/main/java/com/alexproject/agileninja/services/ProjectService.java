@@ -36,4 +36,9 @@ public class ProjectService {
 	public void deleteProject(Long id) {
 		projectRepository.deleteById(id);
 	}
+	
+	// Others
+	public Project findProjectByKey(String projectKey){
+		return projectRepository.findProjectByProjectKey(projectKey).orElse(null);
+	}
 }

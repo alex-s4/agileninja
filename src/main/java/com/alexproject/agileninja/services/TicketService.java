@@ -76,7 +76,7 @@ public class TicketService {
 	}
 	
 	// Returns all tickets by specified projects
-	public List<Ticket> findTicketsByProjects(Collection<Project> selectedProjects)
+	public List<Ticket> findTicketsByProjects(List<Project> selectedProjects)
 	{
 		return ticketRepository.findTicketByProjectIn(selectedProjects);
 	}
