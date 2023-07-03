@@ -50,21 +50,40 @@ function closeFormNewTkt(){
 
 
 $('#btn-submit-filter').click(function () {
-    var checked = $('input[type="checkbox"].form-check-input:checked'); // get checked values
-    var checkedValues = [];
-    checked.each(function (i) {
-        checkedValues.push(checked[i].value); // add checked values to our temporary list
+
+    // Get values from Project ("proj") Filter
+    var checkedProj = $('input[type="checkbox"].form-check-input-proj:checked'); // get checked values
+    var checkedValuesProj = [];
+    checkedProj.each(function (i) {
+        checkedValuesProj.push(checkedProj[i].value); // add checked values to our temporary list
     });
-    var queryParam = 'proj=' + checkedValues.join(','); // create query param
+    
+    
+    // Get values from Type ("type") Filter
+    var checkedType = $('input[type="checkbox"].form-check-input-type:checked'); // get checked values
+    var checkedValuesType = [];
+    checkedType.each(function (i) {
+        checkedValuesType.push(checkedType[i].value); // add checked values to our temporary list
+    });
+
+
+    // Get values from Status ("status") Filter
+    // Get values from Priority ("prio") Filter
+    // Get values from Severity ("severity") Filter
+    // Get values from Assignee ("assignee") Filter
+    
+    
+    
+    
+    var queryParam = 'proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(','); // create query param
 
     //$('.output').html('Query param is: "' + queryParam + '"'); // verify output
 
-    console.log(queryParam)
+   
 
     window.location.href="http://localhost:8080/?"+queryParam;
+
+    console.log(checkedValuesType.join(','))
 });
 
 
-// document.querySelector("#btn-submit-filter").addEventListener("click", ()=>{
-//     console.log("x")
-// })

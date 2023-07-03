@@ -1,6 +1,5 @@
 package com.alexproject.agileninja.repository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +12,7 @@ import com.alexproject.agileninja.models.Severity;
 import com.alexproject.agileninja.models.Status;
 import com.alexproject.agileninja.models.Ticket;
 import com.alexproject.agileninja.models.Type;
+import com.alexproject.agileninja.models.User;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
@@ -34,6 +34,5 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 	Optional<Ticket> findTicketByTicketKey(String ticketKey);
 	
 	List<Ticket> findTicketByProjectIn(List<Project> projects);
-	
 	
 }

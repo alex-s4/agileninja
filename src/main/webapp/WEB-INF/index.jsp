@@ -137,19 +137,29 @@
     
 	<!-- FILTER SECTION -->
 	<div>
-		<!-- <form action="/ticket/filter" method="POST"> -->
+			<!-- 1. PROJECT FILTER -->
+			<h3>Project</h3>
 			<c:forEach var="project" items="${existingProjects}">
 				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="${project.getProjectKey()}" id="p${project.getId()}">
-					<label class="form-check-label" for="p${project.getId()}">
+					<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
+					<label class="form-check-label-proj" for="proj${project.getId()}">
 						${project.getProjectName()} (${project.getProjectKey()})
 					</label>
 				</div>
 			</c:forEach>
 
+			<!-- 2. ISSUE TYPE FILTER -->
+			<h3>Type</h3>
+			<c:forEach var="type" items="${types}">
+				<div class="form-check">
+					<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
+					<label class="form-check-label-type" for="ty${type.getId()}">
+						${type.getIssueType()}
+					</label>
+				</div>
+			</c:forEach>
+			
 			<button class="submit" id="btn-submit-filter">find</button>
-		<!-- </form> -->
-		
 	</div>
 
 	<!-- ISSUE TABLE -->
