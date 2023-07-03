@@ -55,7 +55,8 @@ public class MainController {
     		Project project, 
     		Ticket ticket,
     		@RequestParam(value="proj",required=false) String pKey,
-    		@RequestParam(value="type", required=false) String issueType) {
+    		@RequestParam(value="type", required=false) String issueType
+    		) {
 		// Gets the info of current logged user - MANDATORY for all paths
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
@@ -73,7 +74,7 @@ public class MainController {
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         // Project Filter
-        if(pKey==null || pKey.isEmpty() || issueType==null || issueType.isEmpty()) // If "proj" parameter is blank/null, returns all tickets
+        if((pKey==null || pKey.isEmpty()) && (issueType==null || issueType.isEmpty())) // If "proj" & "issueType" parameters are blank/null, returns all tickets
         {
         	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
         } 
