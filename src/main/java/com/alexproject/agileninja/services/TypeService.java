@@ -26,4 +26,9 @@ public class TypeService {
 		return typeRepository.findById(id).orElse(null);
 	}
 	
+	public Type findTypeByTypeName(String issueType)
+	{
+		return typeRepository.findTypeByIssueType(issueType).orElse(null);
+	}
+	
 }

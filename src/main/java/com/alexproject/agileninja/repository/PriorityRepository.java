@@ -15,4 +15,6 @@ public interface PriorityRepository extends CrudRepository<Priority, Long> {
 	
 	Optional<Priority> findPriorityById(Long id);
 	
+	Optional<Priority> findPriorityByIssuePriority(String issuePriority);
+	
 }

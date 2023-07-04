@@ -35,7 +35,13 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 	
 	List<Ticket> findTicketByProjectIn(List<Project> projects);
 	
-	@Query("SELECT t FROM Ticket t WHERE t.project in ?1")
-	List<Ticket> findByProjectIn(List<Project> projects);
+	@Query("SELECT t FROM Ticket t WHERE "
+			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
+			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5")
+	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
+								 List<Type> filteredTypes,
+								 List<Status> filteredStatus,
+								 List<Priority> filteredPriority,
+								 List<Severity> filteredSeverity);
 	
 }

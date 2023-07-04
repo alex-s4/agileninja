@@ -14,4 +14,6 @@ public interface TypeRepository extends CrudRepository<Type, Long> {
 	List<Type> findAll();
 	
 	Optional<Type> findTypeById(Long id);
+	
+	Optional<Type> findTypeByIssueType(String issueType);
 }

@@ -24,5 +24,10 @@ public class SeverityService {
 	{
 		return severityRepository.findById(id).orElse(null);
 	}
+	
+	public Severity findSeverityByName(String issueSeverity)
+	{
+		return severityRepository.findSeverityByIssueSeverity(issueSeverity).orElse(null);
+	}
 
 }

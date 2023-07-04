@@ -25,5 +25,10 @@ public class PriorityService {
 		return priorityRepository.findById(id).orElse(null);
 	}
 	
+	public Priority findPriorityByIssuePrio(String issuePriority)
+	{
+		return priorityRepository.findPriorityByIssuePriority(issuePriority).orElse(null);
+	}
+	
 	
 }

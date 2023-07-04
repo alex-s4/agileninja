@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alexproject.agileninja.models.Comment;
+import com.alexproject.agileninja.models.Priority;
 import com.alexproject.agileninja.models.Project;
+import com.alexproject.agileninja.models.Severity;
+import com.alexproject.agileninja.models.Status;
 import com.alexproject.agileninja.models.Ticket;
+import com.alexproject.agileninja.models.Type;
 import com.alexproject.agileninja.services.CommentService;
 import com.alexproject.agileninja.services.PriorityService;
 import com.alexproject.agileninja.services.ProjectService;
@@ -50,43 +54,115 @@ public class MainController {
 	// Render App's Home Page
 	@GetMapping(value = {"/", "/dashboard"})
     public String index(
+    		@RequestParam(value="proj",required=false) String pKeyParam,
+    		@RequestParam(value="type", required=false) String issueTypeParam,
+    		@RequestParam(value="status", required=false) String issueStatParam,
+    		@RequestParam(value="prio", required=false) String issuePrioParam,
+    		@RequestParam(value="severity", required=false) String issueSevParam,
     		Principal principal, 
     		Model model, 
     		Project project, 
-    		Ticket ticket,
-    		@RequestParam(value="proj",required=false) String pKey,
-    		@RequestParam(value="type", required=false) String issueType
+    		Ticket ticket
     		) {
+		
 		// Gets the info of current logged user - MANDATORY for all paths
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
         
+        
         model.addAttribute("newProject", new Project());
         model.addAttribute("newTicket", new Ticket());
-        model.addAttribute("existingProjects", projectService.findAllProjects());
-        model.addAttribute("statuses", statusService.findAllStatus());
-        model.addAttribute("severities", severityService.findAllSeverity());
-        model.addAttribute("priorities", priorityService.findAllPriority());
-        model.addAttribute("types", typeService.findAllType());
+        
+        
+        List<Project> allProjects = projectService.findAllProjects();
+        List<Type> allTypes = typeService.findAllType();
+        List<Status> allStatus = statusService.findAllStatus();
+        List<Priority> allPriorities = priorityService.findAllPriority();
+        List<Severity> allSeverities = severityService.findAllSeverity();
+        
+        model.addAttribute("existingProjects", allProjects);
+        model.addAttribute("statuses", allStatus);
+        model.addAttribute("severities", allSeverities);
+        model.addAttribute("priorities", allPriorities);
+        model.addAttribute("types", allTypes);
         model.addAttribute("allUsers", userService.findAllUsers());
         
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         // Project Filter
-        if((pKey==null || pKey.isEmpty()) && (issueType==null || issueType.isEmpty())) // If "proj" & "issueType" parameters are blank/null, returns all tickets
+        if(pKeyParam.isEmpty() && issueTypeParam.isEmpty() && issueStatParam.isEmpty() && issuePrioParam.isEmpty() && issueSevParam.isEmpty()) // If "proj" & "issueType" parameters are blank/null, returns all tickets
         {
         	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
         } 
-        else // If "proj" param has one or more values, it returns all tickets under that project
+        else // If "proj" and "type" param has one or more values, it returns all tickets under that project
         {
         	List<Project> filteredProjects = new ArrayList<>();
-        	List<String> pKeyAsList = Arrays.asList(pKey.split("\\s*,\\s*")); // Comma Separated String to List
-                  	
+        	List<Type> filteredTypes = new ArrayList<>();
+        	List<Status> filteredStatuses = new ArrayList<>();
+        	List<Priority> filteredPriorities = new ArrayList<>();
+        	List<Severity> filteredSeverity = new ArrayList<>();
+        	
+        	
+        	List<String> pKeyAsList = Arrays.asList(pKeyParam.split("\\s*,\\s*")); // Comma Separated String to List (Project)
+        	List<String> issueTypeAsList = Arrays.asList(issueTypeParam.split("\\s*,\\s*")); // Comma Separated String to List (Type)
+        	List<String> issueStatAsList = Arrays.asList(issueStatParam.split("\\s*,\\s*")); // Comma Separated String to List (Status)
+        	List<String> issuePrioAsList = Arrays.asList(issuePrioParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
+        	List<String> issueSevAsList = Arrays.asList(issueSevParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
+        	
+        	
             for(String pKeySeparated : pKeyAsList) {
             	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
+            	//System.out.println("Projects: "+pKeySeparated);
             }
-            model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects)); 
+            for(String issueTypeSeparated : issueTypeAsList) {
+            	filteredTypes.add(typeService.findTypeByTypeName(issueTypeSeparated));
+            	//System.out.println("Type: "+issueTypeSeparated);
+            }
+            for(String issueStatSeparated : issueStatAsList) {
+            	filteredStatuses.add(statusService.findStatusByTicketStatus(issueStatSeparated));
+            }
+            for(String issuePrioSeparated : issuePrioAsList) {
+            	filteredPriorities.add(priorityService.findPriorityByIssuePrio(issuePrioSeparated));
+            }
+            for(String issueSevSeparated : issueSevAsList) {
+            	System.out.println(issueSevSeparated);
+            	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
+            }
+            
+            //System.out.println(pKeyAsList.size());
+            
+            // Get all objects when parameter is empty
+            if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() )
+            {
+            	if(pKeyParam.isBlank()) {
+                	filteredProjects.addAll(allProjects);
+                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses)); 
+                } 
+                if (issueTypeParam.isBlank()) {
+                	filteredTypes.addAll(allTypes);
+                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses));
+                } 
+                if (issueStatParam.isBlank()) {
+                	filteredStatuses.addAll(allStatus);
+                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses)); 
+                }
+                if (issuePrioParam.isBlank()) {
+                	filteredPriorities.addAll(allPriorities);
+                }
+                if (issueSevParam.isBlank()) {
+                	filteredSeverity.addAll(allSeverities);	
+                }
+                
+                System.out.println(filteredSeverity);
+                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity));
+            }
+            // Normal fetching of data if no parameters were blank
+            else {
+            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity)); 
+            }
+            
+            
         }
         
         
@@ -198,14 +274,5 @@ public class MainController {
 		commentService.createComment(comment);
 		return "redirect:/ticket/"+currentTicketKey;
 	}
-	
-	
-//	@PostMapping("/ticket/filter")
-//	public String getProjects(Principal principal, 
-//			Model model) 
-//	{
-//		
-//		return "redirect:/";
-//	}
 	
 }

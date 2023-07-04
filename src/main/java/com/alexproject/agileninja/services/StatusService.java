@@ -25,4 +25,9 @@ public class StatusService {
 		return statusRepository.findById(id).orElse(null);
 	}
 	
+	public Status findStatusByTicketStatus(String issueStatus)
+	{
+		return statusRepository.findStatusByIssueStatus(issueStatus).orElse(null);
+	}
+	
 }

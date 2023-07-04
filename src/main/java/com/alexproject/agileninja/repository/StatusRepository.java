@@ -14,4 +14,6 @@ public interface StatusRepository extends CrudRepository<Status, Long> {
 	List<Status> findAll();
 	
 	Optional<Status> findStatusById(Long id);
+	
+	Optional<Status> findStatusByIssueStatus(String issueStatus);
 }

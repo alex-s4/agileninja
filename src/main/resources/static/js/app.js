@@ -68,14 +68,38 @@ $('#btn-submit-filter').click(function () {
 
 
     // Get values from Status ("status") Filter
+    var checkedStatus = $('input[type="checkbox"].form-check-input-status:checked'); // get checked values
+    var checkedValuesStatus = [];
+    checkedStatus.each(function (i) {
+        checkedValuesStatus.push(checkedStatus[i].value); // add checked values to our temporary list
+    });
+
+
     // Get values from Priority ("prio") Filter
+    var checkedPriority = $('input[type="checkbox"].form-check-input-priority:checked'); // get checked values
+    var checkedValuesPriority = [];
+    checkedPriority.each(function (i) {
+        checkedValuesPriority.push(checkedPriority[i].value); // add checked values to our temporary list
+    });
+
+
     // Get values from Severity ("severity") Filter
+    var checkedSeverity = $('input[type="checkbox"].form-check-input-severity:checked'); // get checked values
+    var checkedValuesSeverity = [];
+    checkedSeverity.each(function (i) {
+        checkedValuesSeverity.push(checkedSeverity[i].value); // add checked values to our temporary list
+    });
+
+
+
     // Get values from Assignee ("assignee") Filter
     
     
+    console.log(checkedValuesSeverity.join(','))
     
-    
-    var queryParam = 'proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(','); // create query param
+    var queryParam = 'proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
+                    + '&status=' + checkedValuesStatus.join(',') + '&prio=' + checkedValuesPriority.join(',')
+                    + '&severity=' + checkedValuesSeverity.join(','); // create query param
 
     //$('.output').html('Query param is: "' + queryParam + '"'); // verify output
 

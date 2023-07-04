@@ -137,28 +137,77 @@
     
 	<!-- FILTER SECTION -->
 	<div>
-			<!-- 1. PROJECT FILTER -->
-			<h3>Project</h3>
-			<c:forEach var="project" items="${existingProjects}">
-				<div class="form-check">
-					<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
-					<label class="form-check-label-proj" for="proj${project.getId()}">
-						${project.getProjectName()} (${project.getProjectKey()})
-					</label>
-				</div>
-			</c:forEach>
-
-			<!-- 2. ISSUE TYPE FILTER -->
-			<h3>Type</h3>
-			<c:forEach var="type" items="${types}">
-				<div class="form-check">
-					<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
-					<label class="form-check-label-type" for="ty${type.getId()}">
-						${type.getIssueType()}
-					</label>
-				</div>
-			</c:forEach>
 			
+			<div class="d-flex flex-row">
+
+				<!-- 1. PROJECT FILTER -->
+				<div>
+					<h3>Project</h3>
+					<c:forEach var="project" items="${existingProjects}">
+						<div class="form-check">
+							<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
+							<label class="form-check-label-proj" for="proj${project.getId()}">
+								${project.getProjectName()} (${project.getProjectKey()})
+							</label>
+						</div>
+					</c:forEach>
+
+				</div>
+
+				<!-- 2. ISSUE TYPE FILTER -->
+				<div>
+					<h3>Type</h3>
+					<c:forEach var="type" items="${types}">
+						<div class="form-check">
+							<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
+							<label class="form-check-label-type" for="ty${type.getId()}">
+								${type.getIssueType()}
+							</label>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- 3. ISSUE STATUS FILTER -->
+				<div>
+					<h3>Status</h3>
+					<c:forEach var="status" items="${statuses}">
+						<div class="form-check">
+							<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
+							<label class="form-check-label-status" for="st${status.getId()}">
+								${status.getIssueStatus()}
+							</label>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- 4. ISSUE PRIORITY FILTER -->
+				<div>
+					<h3>Priority</h3>
+					<c:forEach var="priority" items="${priorities}">
+						<div class="form-check">
+							<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
+							<label class="form-check-label-priority" for="pr${priority.getId()}">
+								${priority.getIssuePriority()}
+							</label>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- 5. ISSUE SEVERITY FILTER -->
+				<div>
+					<h3>Severity</h3>
+					<c:forEach var="severity" items="${severities}">
+						<div class="form-check">
+							<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
+							<label class="form-check-label-severity" for="sv${severity.getId()}">
+								${severity.getIssueSeverity()}
+							</label>
+						</div>
+					</c:forEach>
+				</div>
+
+
+			</div>
 			<button class="submit" id="btn-submit-filter">find</button>
 	</div>
 
@@ -197,7 +246,8 @@
 
 
 	
-	<!-- JS FILE -->
+	<!-- JS SCRIPT -->
+	<!-- NOTE: INSERT THE JQUERY SCRIPT FIRST BEFORE THE LOCAL JS FILE -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="/js/app.js"></script>
 </body>

@@ -14,4 +14,6 @@ public interface SeverityRepository extends CrudRepository<Severity, Long> {
 	List<Severity> findAll();
 	
 	Optional<Severity> findSeverityById(Long id);
+	
+	Optional<Severity> findSeverityByIssueSeverity(String issueSeverity);
 }

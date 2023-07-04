@@ -1,13 +1,16 @@
 package com.alexproject.agileninja.services;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alexproject.agileninja.models.Priority;
 import com.alexproject.agileninja.models.Project;
+import com.alexproject.agileninja.models.Severity;
+import com.alexproject.agileninja.models.Status;
 import com.alexproject.agileninja.models.Ticket;
+import com.alexproject.agileninja.models.Type;
 import com.alexproject.agileninja.repository.ProjectRepository;
 import com.alexproject.agileninja.repository.TicketRepository;
 
@@ -19,9 +22,7 @@ public class TicketService {
 	
 	@Autowired
 	private ProjectRepository projectRepository;
-	
-	@Autowired
-	private ProjectService projectService;
+
 	
 	// Create
 	public Ticket createTicket(Ticket ticket)
@@ -76,9 +77,13 @@ public class TicketService {
 	}
 	
 	// Returns all tickets by specified projects
-	public List<Ticket> findTicketsByProjects(List<Project> selectedProjects)
+	public List<Ticket> findTicketsByProjects(List<Project> filteredProjects, 
+											  List<Type> filteredTypes, 
+											  List<Status> filteredStatus,
+											  List<Priority> filteredPriority,
+											  List<Severity> filteredSeverity)
 	{
-		return ticketRepository.findByProjectIn(selectedProjects);
+		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity);
 	}
 	
 }
