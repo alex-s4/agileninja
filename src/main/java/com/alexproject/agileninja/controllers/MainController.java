@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,11 +98,14 @@ public class MainController {
         //System.out.println(userService.find.getTicketsAssigned().size());
         
         // Project Filter
-        if(pKeyParam.isEmpty() && issueTypeParam.isEmpty() && issueStatParam.isEmpty() && issuePrioParam.isEmpty() && issueSevParam.isEmpty() & issueAssignedParam.isEmpty()) // If "proj" & "issueType" parameters are blank/null, returns all tickets
+        // Returns all tickets if all parameters are empty or null
+        if((pKeyParam == null || pKeyParam.isEmpty()) && (issueTypeParam == null || issueTypeParam.isEmpty()) && (issueStatParam == null || issueStatParam.isEmpty()) && 
+        	(issuePrioParam == null || issuePrioParam.isEmpty()) && (issueSevParam == null || issueSevParam.isEmpty()) && (issueAssignedParam == null || issueAssignedParam.isEmpty()))
         {
         	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
         } 
-        else // If "proj" and "type" param has one or more values, it returns all tickets under that project
+        // Filters the ticket if parameter has values
+        else 
         {
         	List<Project> filteredProjects = new ArrayList<>();
         	List<Type> filteredTypes = new ArrayList<>();
@@ -110,64 +114,90 @@ public class MainController {
         	List<Severity> filteredSeverity = new ArrayList<>();
         	List<User> filteredAssignee = new ArrayList<>();
         	
+        	// Comma Separated String to List (Project)
+        	if(pKeyParam!=null) 
+        	{
+        		List<String> pKeyAsList = Arrays.asList(pKeyParam.split("\\s*,\\s*"));
+        		for(String pKeySeparated : pKeyAsList) {
+                	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
+        		}	
+        	}
         	
-        	List<String> pKeyAsList = Arrays.asList(pKeyParam.split("\\s*,\\s*")); // Comma Separated String to List (Project)
-        	List<String> issueTypeAsList = Arrays.asList(issueTypeParam.split("\\s*,\\s*")); // Comma Separated String to List (Type)
-        	List<String> issueStatAsList = Arrays.asList(issueStatParam.split("\\s*,\\s*")); // Comma Separated String to List (Status)
-        	List<String> issuePrioAsList = Arrays.asList(issuePrioParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
-        	List<String> issueSevAsList = Arrays.asList(issueSevParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
-        	List<String> issueAssigneeAsList = Arrays.asList(issueAssignedParam.split("\\s*,\\s*"));
         	
-            for(String pKeySeparated : pKeyAsList) {
-            	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
-            	//System.out.println("Projects: "+pKeySeparated);
-            }
-            for(String issueTypeSeparated : issueTypeAsList) {
-            	filteredTypes.add(typeService.findTypeByTypeName(issueTypeSeparated));
-            	//System.out.println("Type: "+issueTypeSeparated);
-            }
-            for(String issueStatSeparated : issueStatAsList) {
-            	filteredStatuses.add(statusService.findStatusByTicketStatus(issueStatSeparated));
-            }
-            for(String issuePrioSeparated : issuePrioAsList) {
-            	filteredPriorities.add(priorityService.findPriorityByIssuePrio(issuePrioSeparated));
-            }
-            for(String issueSevSeparated : issueSevAsList) {
-            	System.out.println(issueSevSeparated);
-            	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
-            }
-            for(String issueAssignedSeparated : issueAssigneeAsList) {
-            	filteredAssignee.add(userService.findByUsername(issueAssignedSeparated));
-            }
-            
-            //System.out.println(pKeyAsList.size());
-            
-            // Get all objects when parameter is empty
-            if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() || issueAssignedParam.isBlank() )
-            {
-            	if(pKeyParam.isBlank()) {
-                	filteredProjects.addAll(allProjects);
-                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses)); 
-                } 
-                if (issueTypeParam.isBlank()) {
-                	filteredTypes.addAll(allTypes);
-                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses));
-                } 
-                if (issueStatParam.isBlank()) {
-                	filteredStatuses.addAll(allStatus);
-                	// model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses)); 
+        	// Comma Separated String to List (Type)
+        	if(issueTypeParam!=null) 
+        	{
+        		List<String> issueTypeAsList = Arrays.asList(issueTypeParam.split("\\s*,\\s*"));
+        		for(String issueTypeSeparated : issueTypeAsList) {
+                	filteredTypes.add(typeService.findTypeByTypeName(issueTypeSeparated));
                 }
-                if (issuePrioParam.isBlank()) {
+        	}
+        	
+        	
+        	// Comma Separated String to List (Status)
+        	if(issueStatParam!=null) 
+        	{
+        		List<String> issueStatAsList = Arrays.asList(issueStatParam.split("\\s*,\\s*"));
+        		for(String issueStatSeparated : issueStatAsList) {
+                	filteredStatuses.add(statusService.findStatusByTicketStatus(issueStatSeparated));
+                }
+        		
+        	}
+        	
+        	
+        	// Comma Separated String to List (Priority)
+        	if(issuePrioParam!=null) 
+        	{
+        		List<String> issuePrioAsList = Arrays.asList(issuePrioParam.split("\\s*,\\s*")); 
+        		for(String issuePrioSeparated : issuePrioAsList) {
+                	filteredPriorities.add(priorityService.findPriorityByIssuePrio(issuePrioSeparated));
+                }
+        	}
+        	
+        	
+        	// Comma Separated String to List (Severity)
+        	if(issueSevParam!=null) 
+        	{
+        		List<String> issueSevAsList = Arrays.asList(issueSevParam.split("\\s*,\\s*")); 
+        		for(String issueSevSeparated : issueSevAsList) {
+                	System.out.println(issueSevSeparated);
+                	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
+                }
+        	}
+        	
+        	
+        	// Comma Separated String to List (Assignee)
+        	if(issueAssignedParam!=null) 
+        	{
+        		List<String> issueAssigneeAsList = Arrays.asList(issueAssignedParam.split("\\s*,\\s*"));
+        		for(String issueAssignedSeparated : issueAssigneeAsList) {
+                	filteredAssignee.add(userService.findByUsername(issueAssignedSeparated));
+                }
+        	}
+        	
+            
+            // Get all objects when parameter is empty or null
+            if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() || issueAssignedParam.isBlank() ||
+               pKeyParam == null || issueTypeParam == null || issueStatParam == null || issuePrioParam == null || issueSevParam == null || issueAssignedParam == null)
+            {
+            	if(pKeyParam.isBlank() || pKeyParam==null) {
+                	filteredProjects.addAll(allProjects);
+                } 
+                if (issueTypeParam.isBlank() || issueTypeParam==null) {
+                	filteredTypes.addAll(allTypes);
+                } 
+                if (issueStatParam.isBlank() || issueStatParam==null) {
+                	filteredStatuses.addAll(allStatus);
+                }
+                if (issuePrioParam.isBlank() || issuePrioParam==null) {
                 	filteredPriorities.addAll(allPriorities);
                 }
-                if (issueSevParam.isBlank()) {
+                if (issueSevParam.isBlank() || issueSevParam==null) {
                 	filteredSeverity.addAll(allSeverities);	
                 }
-                if(issueAssignedParam.isBlank()) {
+                if(issueAssignedParam.isBlank() || issueAssignedParam==null) {
                 	filteredAssignee.addAll(allUsers);
                 }
-                
-                System.out.println(filteredSeverity);
                 model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee));
             }
             // Normal fetching of data if no parameters were blank
