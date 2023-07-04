@@ -13,6 +13,7 @@ import com.alexproject.agileninja.models.Severity;
 import com.alexproject.agileninja.models.Status;
 import com.alexproject.agileninja.models.Ticket;
 import com.alexproject.agileninja.models.Type;
+import com.alexproject.agileninja.models.User;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
@@ -43,5 +44,15 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 								 List<Status> filteredStatus,
 								 List<Priority> filteredPriority,
 								 List<Severity> filteredSeverity);
+	
+	@Query("SELECT t FROM Ticket t WHERE "
+			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
+			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5 AND t.assignee in ?6")
+	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
+								 List<Type> filteredTypes,
+								 List<Status> filteredStatus,
+								 List<Priority> filteredPriority,
+								 List<Severity> filteredSeverity,
+								 List<User> filteredAssignee);
 	
 }

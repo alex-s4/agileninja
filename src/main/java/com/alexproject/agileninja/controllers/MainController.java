@@ -21,6 +21,7 @@ import com.alexproject.agileninja.models.Severity;
 import com.alexproject.agileninja.models.Status;
 import com.alexproject.agileninja.models.Ticket;
 import com.alexproject.agileninja.models.Type;
+import com.alexproject.agileninja.models.User;
 import com.alexproject.agileninja.services.CommentService;
 import com.alexproject.agileninja.services.PriorityService;
 import com.alexproject.agileninja.services.ProjectService;
@@ -59,6 +60,7 @@ public class MainController {
     		@RequestParam(value="status", required=false) String issueStatParam,
     		@RequestParam(value="prio", required=false) String issuePrioParam,
     		@RequestParam(value="severity", required=false) String issueSevParam,
+    		@RequestParam(value="assigned", required=false) String issueAssignedParam,
     		Principal principal, 
     		Model model, 
     		Project project, 
@@ -79,19 +81,23 @@ public class MainController {
         List<Status> allStatus = statusService.findAllStatus();
         List<Priority> allPriorities = priorityService.findAllPriority();
         List<Severity> allSeverities = severityService.findAllSeverity();
+        List<User> allUsers = userService.findAllUsers();
         
         model.addAttribute("existingProjects", allProjects);
         model.addAttribute("statuses", allStatus);
         model.addAttribute("severities", allSeverities);
         model.addAttribute("priorities", allPriorities);
         model.addAttribute("types", allTypes);
-        model.addAttribute("allUsers", userService.findAllUsers());
+        model.addAttribute("allUsers", allUsers);
         
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
+        
+        //System.out.println(userService.find.getTicketsAssigned().size());
+        
         // Project Filter
-        if(pKeyParam.isEmpty() && issueTypeParam.isEmpty() && issueStatParam.isEmpty() && issuePrioParam.isEmpty() && issueSevParam.isEmpty()) // If "proj" & "issueType" parameters are blank/null, returns all tickets
+        if(pKeyParam.isEmpty() && issueTypeParam.isEmpty() && issueStatParam.isEmpty() && issuePrioParam.isEmpty() && issueSevParam.isEmpty() & issueAssignedParam.isEmpty()) // If "proj" & "issueType" parameters are blank/null, returns all tickets
         {
         	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
         } 
@@ -102,6 +108,7 @@ public class MainController {
         	List<Status> filteredStatuses = new ArrayList<>();
         	List<Priority> filteredPriorities = new ArrayList<>();
         	List<Severity> filteredSeverity = new ArrayList<>();
+        	List<User> filteredAssignee = new ArrayList<>();
         	
         	
         	List<String> pKeyAsList = Arrays.asList(pKeyParam.split("\\s*,\\s*")); // Comma Separated String to List (Project)
@@ -109,7 +116,7 @@ public class MainController {
         	List<String> issueStatAsList = Arrays.asList(issueStatParam.split("\\s*,\\s*")); // Comma Separated String to List (Status)
         	List<String> issuePrioAsList = Arrays.asList(issuePrioParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
         	List<String> issueSevAsList = Arrays.asList(issueSevParam.split("\\s*,\\s*")); // Comma Separated String to List (Priority)
-        	
+        	List<String> issueAssigneeAsList = Arrays.asList(issueAssignedParam.split("\\s*,\\s*"));
         	
             for(String pKeySeparated : pKeyAsList) {
             	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
@@ -129,11 +136,14 @@ public class MainController {
             	System.out.println(issueSevSeparated);
             	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
             }
+            for(String issueAssignedSeparated : issueAssigneeAsList) {
+            	filteredAssignee.add(userService.findByUsername(issueAssignedSeparated));
+            }
             
             //System.out.println(pKeyAsList.size());
             
             // Get all objects when parameter is empty
-            if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() )
+            if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() || issueAssignedParam.isBlank() )
             {
             	if(pKeyParam.isBlank()) {
                 	filteredProjects.addAll(allProjects);
@@ -153,13 +163,16 @@ public class MainController {
                 if (issueSevParam.isBlank()) {
                 	filteredSeverity.addAll(allSeverities);	
                 }
+                if(issueAssignedParam.isBlank()) {
+                	filteredAssignee.addAll(allUsers);
+                }
                 
                 System.out.println(filteredSeverity);
-                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity));
+                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee));
             }
             // Normal fetching of data if no parameters were blank
             else {
-            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity)); 
+            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee)); 
             }
             
             

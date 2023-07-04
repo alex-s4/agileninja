@@ -90,16 +90,21 @@ $('#btn-submit-filter').click(function () {
         checkedValuesSeverity.push(checkedSeverity[i].value); // add checked values to our temporary list
     });
 
-
-
     // Get values from Assignee ("assignee") Filter
+    var checkedAssignee = $('input[type="checkbox"].form-check-input-assignee:checked'); // get checked values
+    var checkedValuesAssignee = [];
+    checkedAssignee.each(function (i) {
+        checkedValuesAssignee.push(checkedAssignee[i].value); // add checked values to our temporary list
+    });
     
     
-    console.log(checkedValuesSeverity.join(','))
+    console.log(checkedValuesAssignee.join(','))
     
+    // CREATES A QUERY PARAMETER
+    // IMPORTANT: As much as possible, do not rename your request parameter as same as member variable of an object to avoid type error 
     var queryParam = 'proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
                     + '&status=' + checkedValuesStatus.join(',') + '&prio=' + checkedValuesPriority.join(',')
-                    + '&severity=' + checkedValuesSeverity.join(','); // create query param
+                    + '&severity=' + checkedValuesSeverity.join(',') + '&assigned=' + checkedValuesAssignee.join(','); // create query param
 
     //$('.output').html('Query param is: "' + queryParam + '"'); // verify output
 
@@ -107,7 +112,7 @@ $('#btn-submit-filter').click(function () {
 
     window.location.href="http://localhost:8080/?"+queryParam;
 
-    console.log(checkedValuesType.join(','))
+    //console.log(checkedValuesAssignee.join(','))
 });
 
 

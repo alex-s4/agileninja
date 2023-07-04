@@ -206,6 +206,23 @@
 					</c:forEach>
 				</div>
 
+				<!-- 6. ISSUE ASSIGNEE FILTER -->
+				<div>
+					<h3>Assignee</h3>
+					<c:forEach var="user" items="${allUsers}">
+						<!-- <c:if test="${user.getTicketsAssigned().size()!=0}"> -->
+
+						
+							<div class="form-check">
+								<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
+								<label class="form-check-label-assignee" for="as${user.getId()}">
+									${user.getUsername()}
+								</label>
+							</div>
+						<!-- </c:if> -->
+					</c:forEach>
+				</div>
+
 
 			</div>
 			<button class="submit" id="btn-submit-filter">find</button>
