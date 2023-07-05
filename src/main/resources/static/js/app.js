@@ -1,6 +1,8 @@
 var regFormRole = document.querySelector("#regform-roles")
 
 
+
+
 // This will change form when role was changed in registration page
 if(window.location.href=="http://localhost:8080/registration")
 {
@@ -51,10 +53,12 @@ $('input[type="checkbox"].form-check-input-assignee').each(function(){
 })
 
 
-$('#btn-submit-filter').click(function () {
 
+$('#btn-submit-filter').click(function () {
+    
     // Get values from Project ("proj") Filter
-    var checkedProj = $('input[type="checkbox"].form-check-input-proj:checked'); // get checked values
+    // get checked values
+    var checkedProj = $('input[type="checkbox"].form-check-input-proj:checked');
     var checkedValuesProj = [];
     checkedProj.each(function (i) {
         checkedValuesProj.push(checkedProj[i].value); // add checked values to our temporary list
@@ -100,7 +104,7 @@ $('#btn-submit-filter').click(function () {
     });
     
     
-    console.log(checkedValuesAssignee.join(','))
+    // console.log(checkedValuesAssignee.join(','))
     
     // CREATES A QUERY PARAMETER
     // IMPORTANT: As much as possible, do not rename your request parameter as same as member variable of an object to avoid type error 
@@ -113,4 +117,17 @@ $('#btn-submit-filter').click(function () {
 });
 
 
+// Persist checkbox checked state after page reload
+var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
+var $checkboxes = $(".filter-checkbox-cont :checkbox");
 
+$checkboxes.on("change", function(){
+    $checkboxes.each(function(){
+      checkboxValues[this.id] = this.checked;
+    });
+    localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+  });
+
+  $.each(checkboxValues, function(key, value) {
+    $("#" + key).prop('checked', value);
+  });
