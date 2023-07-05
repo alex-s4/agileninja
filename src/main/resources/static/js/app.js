@@ -46,7 +46,9 @@ function closeFormNewTkt(){
     document.getElementById("new-tkt-form").style.display = "none"
 }
 
-
+$('input[type="checkbox"].form-check-input-assignee').each(function(){
+    $(this).prop('checked',localStorage.getItem(this.Id)=='true');
+})
 
 
 $('#btn-submit-filter').click(function () {
@@ -106,13 +108,9 @@ $('#btn-submit-filter').click(function () {
                     + '&status=' + checkedValuesStatus.join(',') + '&prio=' + checkedValuesPriority.join(',')
                     + '&severity=' + checkedValuesSeverity.join(',') + '&assigned=' + checkedValuesAssignee.join(','); // create query param
 
-    //$('.output').html('Query param is: "' + queryParam + '"'); // verify output
-
-   
-
+    
     window.location.href="http://localhost:8080/?"+queryParam;
-
-    //console.log(checkedValuesAssignee.join(','))
 });
+
 
 

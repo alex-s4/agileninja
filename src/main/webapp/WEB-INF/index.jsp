@@ -138,7 +138,7 @@
 	<!-- FILTER SECTION -->
 	<div>
 			
-			<div class="d-flex flex-row">
+			<div class="d-flex flex-row filter-checkbox-cont">
 
 				<!-- 1. PROJECT FILTER -->
 				<div>
@@ -211,8 +211,6 @@
 					<h3>Assignee</h3>
 					<c:forEach var="user" items="${allUsers}">
 						<!-- <c:if test="${user.getTicketsAssigned().size()!=0}"> -->
-
-						
 							<div class="form-check">
 								<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
 								<label class="form-check-label-assignee" for="as${user.getId()}">
@@ -226,6 +224,7 @@
 
 			</div>
 			<button class="submit" id="btn-submit-filter">find</button>
+		
 	</div>
 
 	<!-- ISSUE TABLE -->

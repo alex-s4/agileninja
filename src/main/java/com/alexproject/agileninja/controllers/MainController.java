@@ -72,11 +72,11 @@ public class MainController {
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
         
-        
+        // Initialize new objects on creation
         model.addAttribute("newProject", new Project());
         model.addAttribute("newTicket", new Ticket());
         
-        
+        // Gathers all data available in DB
         List<Project> allProjects = projectService.findAllProjects();
         List<Type> allTypes = typeService.findAllType();
         List<Status> allStatus = statusService.findAllStatus();
@@ -84,6 +84,7 @@ public class MainController {
         List<Severity> allSeverities = severityService.findAllSeverity();
         List<User> allUsers = userService.findAllUsers();
         
+        // These will be fetched to JSP side
         model.addAttribute("existingProjects", allProjects);
         model.addAttribute("statuses", allStatus);
         model.addAttribute("severities", allSeverities);
@@ -95,9 +96,8 @@ public class MainController {
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         
-        //System.out.println(userService.find.getTicketsAssigned().size());
+        // TICKET FILTERING:
         
-        // Project Filter
         // Returns all tickets if all parameters are empty or null
         if((pKeyParam == null || pKeyParam.isEmpty()) && (issueTypeParam == null || issueTypeParam.isEmpty()) && (issueStatParam == null || issueStatParam.isEmpty()) && 
         	(issuePrioParam == null || issuePrioParam.isEmpty()) && (issueSevParam == null || issueSevParam.isEmpty()) && (issueAssignedParam == null || issueAssignedParam.isEmpty()))
@@ -211,6 +211,9 @@ public class MainController {
         
         return "index.jsp";
     }
+	
+	
+	
 	
 	// Post action on creating new project
 	@PostMapping("/project/new")
