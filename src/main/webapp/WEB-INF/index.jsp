@@ -223,7 +223,7 @@
 
 
 			</div>
-			<button class="submit" id="btn-submit-filter">find</button>
+			<!-- <button class="submit" id="btn-submit-filter">find</button> -->
 		
 	</div>
 

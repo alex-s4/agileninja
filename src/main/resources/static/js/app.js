@@ -48,13 +48,8 @@ function closeFormNewTkt(){
     document.getElementById("new-tkt-form").style.display = "none"
 }
 
-$('input[type="checkbox"].form-check-input-assignee').each(function(){
-    $(this).prop('checked',localStorage.getItem(this.Id)=='true');
-})
 
-
-
-$('#btn-submit-filter').click(function () {
+$('input[type="checkbox"]').click(function () {
     
     // Get values from Project ("proj") Filter
     // get checked values

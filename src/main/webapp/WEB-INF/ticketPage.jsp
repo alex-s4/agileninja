@@ -17,7 +17,7 @@
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="#">${theTicket.getProject().getProjectName()}</a></li>
+        <li class="breadcrumb-item"><a href="/?proj=${theTicket.getProject().getProjectKey()}&type=&status=&prio=&severity=&assigned=">${theTicket.getProject().getProjectName()}</a></li>
         <li class="breadcrumb-item active" aria-current="page">${theTicket.getTicketKey()}</li>
       </ol>
   </nav>
@@ -25,55 +25,72 @@
 
 
 
-  <!-- EDIT MODE -->
+  <!-- DISPLAY/EDIT FORM 2 in 1 -->
 	<div id="edit-mode-lc">
-      <form:form method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
-        <h1>${theTicket.getTicketKey()}: <form:input class="input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
-        <h3>Description</h3>
-        <form:textarea path="ticketDescription" cols="75" />
-        
-        <div>
-          <p><span>Status:</span>
-            <form:select path="ticketStatus">
-              <form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
-            </form:select>
-          </p>
-          <p><span>Priority:</span>
-            <form:select path="ticketPriority">
-              <form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
-            </form:select>
-          </p>
-          <p><span>Severity:</span>
-            <form:select path="ticketSeverity">
-              <form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
-            </form:select>
-          </p>
-        </div>
-        <hr>
-        <div>
-          <p><span>Created By:</span>${theTicket.getReporter().getUsername()}</p>
 
-          <!-- ENHANCEMENT: SEARCH FUNCTION INSTEAD OF SELECT DROPDOWN FORM -->
-          <p><span>Assignee:</span>
-            <form:select path="assignee">
-              <form:options items="${allUsers}" itemValue="id" itemLabel="username" />
-            </form:select>
-          </p>
+        <!-- START OF FORM TAG -->
+        <form:form method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
+            
 
-        </div>
-        <hr>
-        <div>
-          <p><span>Created:</span>${theTicket.getCreatedAt()}</p>
-          <p><span>Modified:</span>${theTicket.getUpdatedAt()}</p>
-        </div>
+            <h1>${theTicket.getTicketKey()}: <form:input class="input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
+            <h3>Description</h3>
+            <form:textarea class="form-control form-control-lc" path="ticketDescription" cols="75" />
+            
+            <div>
+              <p><span>Type:</span>
+                <form:select class="issuePropDropdown" path="ticketType">
+                  <form:options items="${types}" itemValue="id" itemLabel="issueType" />
+                </form:select>
+              </p>
+              <p><span>Status:</span>
+                <form:select class="issuePropDropdown" path="ticketStatus">
+                  <form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
+                </form:select>
+              </p>
+              <p><span>Priority:</span>
+                <form:select class="issuePropDropdown" path="ticketPriority">
+                  <form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
+                </form:select>
+              </p>
+              <p><span>Severity:</span>
+                <form:select class="issuePropDropdown" path="ticketSeverity">
+                  <form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
+                </form:select>
+              </p>
+            </div>
+            <hr>
+            <div>
+              <p><span>Created By:</span>${theTicket.getReporter().getUsername()}</p>
 
-      </form:form>
+              <p><span>Assignee:</span>
+                <form:select class="issuePropDropdown" path="assignee">
+                  <form:options items="${allUsers}" itemValue="id" itemLabel="username" />
+                </form:select>
+              </p>
+
+            </div>
+            <hr>
+            <div>
+              <p><span>Created:</span>${theTicket.getCreatedAt()}</p>
+              <p><span>Modified:</span>${theTicket.getUpdatedAt()}</p>
+            </div>
+
+            <!-- HIDDEN FIELDS -->
+            <form:input path="reporter" value="${currentUser.getId()}" hidden="true"></form:input>
+            <form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
+            <form:input path="project" value="${theTicket.getProject()}" hidden="true"></form:input>
+            <input type="hidden" name="_method" value="put">
+
+            <input type="submit" value="Update">
+        </form:form>
+        <!-- END OF FORM TAG -->
+      
   </div>
 
   <!-- COMMENT SECTION -->
   <div class="comment-section-lc">
 
-        <h3>Comments: (0)</h3>
+        <h3>Comments: (${allComments.size()})</h3>
         <!-- COMMENT LIST -->
         <c:forEach var="theComment" items="${allComments}">
 
