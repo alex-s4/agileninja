@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+
+main.main-content {
+    padding-top: 7em;
+}
+
 div.modal-lc {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -44,6 +49,7 @@ span.close-lc:hover, span.close-lc:focus {
 
 input.input-txtfield, textarea.form-control-lc, select.issuePropDropdown {
     border: 1px solid #fff;
+    width: auto;
     /* -moz-appearance:none; 
     -webkit-appearance:none; 
     appearance:none; */
@@ -68,4 +74,8 @@ button.edit-comment-btn {
 
 .edit-comment-form {
     display: none;
+}
+
+.navbar-img {
+    width: 12em;
 }
