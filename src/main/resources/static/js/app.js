@@ -129,6 +129,7 @@ $checkboxes.on("change", function(){
 
 
 
+
 // Ticket Page: Auto-update when select dropdown is changed or text fields loses focus
   $('.issuePropDropdown').change(function(){
     console.log("test")
@@ -140,37 +141,44 @@ $checkboxes.on("change", function(){
     $('form#issuePropForm').submit()
   })
 
-// TO DO: Edit button will appear on hover of comment container
+
+
+
+// Edit button will appear on hover of comment container
 var commentContainer = $('.comment-cont-lc')
-var editCommentBtn = $(".edit-comment-btn")
 var cancelEditCmntBtn = $(".canc-btn")
 
+// TO DO: INCLUDE DELETE BUTTON ON HOVER
 commentContainer.mouseenter(function(e){
     $(this).css("background-color", "#e9e9e9")
+    var editCommentBtn = $(".edit-comment-btn")
 
-    
-
-    // editCommentBtn.each(function(i){
-    //     console.log(i)
-    //     console.log($(editCommentBtn[i]))
-    //     $(editCommentBtn[i]).css("display", "initial")
-    // })
+    $(this).find(".edit-comment-btn").css("display", "initial")
     
     })
 
 commentContainer.mouseleave(function(e){
     $(this).css("background-color", "initial")
-
-    // editCommentBtn.each(function(i){
-    //     $(this).css("display", "none")
-    // })
+    var editCommentBtn = $(".edit-comment-btn")
+    $(this).find(".edit-comment-btn").css("display", "none")
+    
 })
 
 
-editCommentBtn.click(function(i){
-    // var editCmtBtnId = $(this).attr('id')
-    $(this).closest("div").next().next().css("display", "block")
+// Edit Comment form will appear upon hover of comment container
+$(".edit-comment-btn").click(function(){
+    var editCommentForm = $(this).closest("div").next().next()
+    var charLengthCommentInput = editCommentForm.find("textarea").html().length * 2
 
-    console.log($(this).closest("div").next().css("display", "none"))
+    editCommentForm.css("display", "block")
+
+    editCommentForm.find("textarea").focus()
+    editCommentForm.find("textarea")[0].setSelectionRange(charLengthCommentInput,charLengthCommentInput)
     
+    
+})
+
+// Form will be replaced back by the comment text display upon click of "cancel" button
+cancelEditCmntBtn.click(function(){
+    $(this).closest(".edit-comment-form").css("display", "none")
 })

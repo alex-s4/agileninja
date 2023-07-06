@@ -63,7 +63,7 @@ select.issuePropDropdown:hover {
 
 button.edit-comment-btn {
     height: fit-content;
-    /* display: none; */
+    display: none;
 }
 
 .edit-comment-form {
