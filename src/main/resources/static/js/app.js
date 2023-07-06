@@ -1,8 +1,5 @@
 var regFormRole = document.querySelector("#regform-roles")
 
-
-
-
 // This will change form when role was changed in registration page
 if(window.location.href=="http://localhost:8080/registration")
 {
@@ -27,25 +24,6 @@ if(window.location.href=="http://localhost:8080/registration")
         }
     })
 
-}
-
-
-// New Project Form will display on click
-function openFormNewProj(){
-    document.getElementById("new-proj-form").style.display = "block"
-}
-
-function closeFormNewProj(){
-    document.getElementById("new-proj-form").style.display = "none"
-}
-
-// New Ticket Form will display on click
-function openFormNewTkt(){
-    document.getElementById("new-tkt-form").style.display = "block"
-}
-
-function closeFormNewTkt(){
-    document.getElementById("new-tkt-form").style.display = "none"
 }
 
 

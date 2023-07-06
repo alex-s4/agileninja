@@ -13,21 +13,23 @@
 </head>
 <body>
 
-  <!-- NAVIGATIONAL BAR -->
+  
+	<!-- NAVIGATIONAL BAR -->
 	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
+					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-					<a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-					<a class="nav-link" href="#">Profile</a>
-					<a class="nav-link" href="#">Pricing</a>
-					<a class="nav-link disabled">Disabled</a>
+						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj">New Project</button>
+						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick">New Ticket</button>
+						<a class="nav-link" href="/dashboard">Dashboard</a>
+						<a class="nav-link" href="#">Profile</a>
+						
 					</div>
 				</div>
 
@@ -36,9 +38,121 @@
 					<input class="btn btn-secondary" type="submit" value="Logout!" />
 				</form>
 		</div>
-  </nav>
+	</nav>
 
   <main class="main-content px-5">
+
+      <!-- NEW PROJECT FORM -->
+			<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- MODAL CONTENT -->
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Project</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form:form id="projectCreation" method="POST" action="/project/new" modelAttribute="newProject">
+								
+								<p><form:errors path="project.*"/></p>
+
+								<p>
+									<form:label path="projectName">Project Name *</form:label>
+									<form:input path="projectName" required="true"/>
+								</p>
+								<p>
+									<form:label path="projectKey">Project Key *</form:label>
+									<form:input path="projectKey" minlength="2" maxlength="3" style="text-transform:uppercase" required="true"/>
+								</p>
+								
+								<p>* - Required</p>
+								
+								<!-- Hidden Field/s -->
+								<form:input path="projectOwner" value="${currentUser.getId()}" hidden="true"/>
+								
+								<div class="modal-footer">
+									<!-- <a href="#" onclick="closeFormNewProj()">cancel</a> -->
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+									<input class="btn btn-primary" for="projectCreation" type="submit" value="Create"/>
+								</div>
+							</form:form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- NEW TICKET FORM -->
+			<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Ticket</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+
+						<div class="modal-body">
+							<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
+								<p><form:errors path="ticket.*"/></p>
+					
+								<p>
+									<form:label path="project">Project*</form:label>
+									<form:select path="project">
+										<form:option value="-" label="--Please Select a Project--"/>
+										<form:options items="${existingProjects}" itemValue="id" itemLabel="projectName"/>
+									</form:select>
+								</p>
+								<p>
+									<form:label path="ticketName">Title</form:label>
+									<form:input path="ticketName" type="text"/>
+								</p>
+								<p>
+									<form:label path="assignee">Assignee</form:label>
+									<form:select path="assignee">
+										<c:forEach var="user" items="${allUsers}">
+											<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
+										</c:forEach>
+									</form:select>
+								</p>
+								<p>
+									<form:label path="ticketSeverity">Severity</form:label>
+									<form:select path="ticketSeverity">
+										<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
+									</form:select>
+								</p>
+								<p>
+									<form:label path="ticketPriority">Priority</form:label>
+									<form:select path="ticketPriority">
+										<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
+									</form:select>
+								</p>
+								<p>
+									<form:label path="ticketType">Type</form:label>
+									<form:select path="ticketType">
+										<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
+									</form:select>
+								</p>
+								<p>
+									<form:label path="ticketDescription">Description</form:label>
+									<form:textarea path="ticketDescription"></form:textarea>
+								</p>
+								<p>* - Required</p>
+								<!-- Hidden Field/s -->
+								<form:input path="reporter" type="text" value="${currentUser.getId()}" hidden="true" />
+								<form:input path="ticketStatus" value="${backlog.getId()}" hidden="true"/>
+
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+									<input for="ticketCreation" class="btn btn-primary" type="submit" value="Create"/>
+								</div>
+
+							</form:form>
+						</div>
+					</div>
+				</div>
+			</div>
 
         <!-- BREADCRUMB -->
         <nav aria-label="breadcrumb">
