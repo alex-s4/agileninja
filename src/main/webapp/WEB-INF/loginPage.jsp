@@ -36,8 +36,15 @@
 
     <main class="main-content px-5">
             <h1>Login</h1>
-            <p>${errorMessage}</p>
-            <p>${logoutMessage}</p>
+            
+            <div class="alert alert-danger position-absolute" role="alert">
+                ${errorMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-success position-absolute" role="alert">
+                ${logoutMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <form method="POST" action="/login">
                 <p>
                     <label for="username">Username</label>

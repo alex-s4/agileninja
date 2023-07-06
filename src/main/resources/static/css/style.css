@@ -83,3 +83,13 @@ button.edit-comment-btn {
 .filter-checkbox-cont {
     margin-right: 25em;
 }
+
+.navbar {
+    z-index: 99;
+}
+
+.alert {
+    z-index: 100;
+    top: 1em;
+    right: 6em;
+}

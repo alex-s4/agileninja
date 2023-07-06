@@ -1,5 +1,6 @@
 var regFormRole = document.querySelector("#regform-roles")
 
+
 // This will change form when role was changed in registration page
 if(window.location.href=="http://localhost:8080/registration")
 {

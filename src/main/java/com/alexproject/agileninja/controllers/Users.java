@@ -53,7 +53,7 @@ public class Users {
 			// Error if username already exists
 			if (userService.findByUsername(user.getUsername())!=null) {
 				redirectAttributes.addFlashAttribute("registrationMessageError", "Username is already taken");
-				return "redirect:/registration";
+				return "registrationPage.jsp";
 			} else {
 				userService.saveWithUserRole(user);
 				return "redirect:/login";
@@ -81,7 +81,7 @@ public class Users {
 			// Error if username already exists
 			if (userService.findByUsername(user.getUsername())!=null) {
 				redirectAttributes.addFlashAttribute("registrationMessageError", "Username is already taken");
-				return "redirect:/registration";
+				return "registrationPage.jsp";
 			} else {
 				userService.saveUserWithAdminRole(user);
 				return "redirect:/login";
