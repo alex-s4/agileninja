@@ -126,3 +126,51 @@ $checkboxes.on("change", function(){
   $.each(checkboxValues, function(key, value) {
     $("#" + key).prop('checked', value);
   });
+
+
+
+// Ticket Page: Auto-update when select dropdown is changed or text fields loses focus
+  $('.issuePropDropdown').change(function(){
+    console.log("test")
+    $('form#issuePropForm').submit()
+  })
+
+  $('.issuePropInputText').blur(function(){
+    console.log("test")
+    $('form#issuePropForm').submit()
+  })
+
+// TO DO: Edit button will appear on hover of comment container
+var commentContainer = $('.comment-cont-lc')
+var editCommentBtn = $(".edit-comment-btn")
+var cancelEditCmntBtn = $(".canc-btn")
+
+commentContainer.mouseenter(function(e){
+    $(this).css("background-color", "#e9e9e9")
+
+    
+
+    // editCommentBtn.each(function(i){
+    //     console.log(i)
+    //     console.log($(editCommentBtn[i]))
+    //     $(editCommentBtn[i]).css("display", "initial")
+    // })
+    
+    })
+
+commentContainer.mouseleave(function(e){
+    $(this).css("background-color", "initial")
+
+    // editCommentBtn.each(function(i){
+    //     $(this).css("display", "none")
+    // })
+})
+
+
+editCommentBtn.click(function(i){
+    // var editCmtBtnId = $(this).attr('id')
+    $(this).closest("div").next().next().css("display", "block")
+
+    console.log($(this).closest("div").next().css("display", "none"))
+    
+})

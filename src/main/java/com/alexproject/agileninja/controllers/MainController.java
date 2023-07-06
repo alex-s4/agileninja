@@ -297,9 +297,15 @@ public class MainController {
 		model.addAttribute("newComment", new Comment());
 		
 		// Gets all the comments from the current ticket
-		List<Comment> getTicketComments = ticketService.findTicketByKey(ticketKey).getComments();
+		List<Comment> getTicketComments = theTicket.getComments();
 		model.addAttribute("allComments", getTicketComments);
         
+		for(Comment comment : getTicketComments) {
+			String aCommentModel = "theComment" + comment.getId();
+			model.addAttribute(aCommentModel, commentService.findCommentById(comment.getId()));
+		}
+		
+		
 		return "ticketPage.jsp";
 	}
 	
@@ -345,6 +351,26 @@ public class MainController {
 		return "redirect:/ticket/"+currentTicketKey;
 	}
 	
+	@PutMapping("/ticket/{ticketId}/comment/{id}/edit")
+	public String editComment (@PathVariable Long ticketId, @PathVariable Long id, @Valid @ModelAttribute("theComment") Comment comment, 
+			Principal principal, 
+			Model model, 
+			Project project,
+			RedirectAttributes redirectAttributes)
+	{
+		// Gets the info of current logged user - MANDATORY for all paths
+    	String username = principal.getName();
+        model.addAttribute("currentUser", userService.findByUsername(username));
+		
+        // Gets the key of current ticket
+        String currentTicketKey = ticketService.findTicketById(ticketId).getTicketKey();
+        
+           		
+        // Successfully updated comment info
+        commentService.updateComment(comment);
+        
+		return "redirect:/ticket/"+currentTicketKey;
+	}
 	
 	
 }

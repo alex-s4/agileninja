@@ -43,10 +43,10 @@ span.close-lc:hover, span.close-lc:focus {
 }
 
 input.input-txtfield, textarea.form-control-lc, select.issuePropDropdown {
-    border: none;
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
-    appearance:none;
+    border: 1px solid #fff;
+    /* -moz-appearance:none; 
+    -webkit-appearance:none; 
+    appearance:none; */
 }
 
 input.input-txtfield:hover, textarea.form-control-lc:hover, select.issuePropDropdown:hover {
@@ -59,4 +59,13 @@ select.issuePropDropdown:hover {
     -moz-appearance: revert; 
     -webkit-appearance: revert;
     appearance: revert;
+}
+
+button.edit-comment-btn {
+    height: fit-content;
+    /* display: none; */
+}
+
+.edit-comment-form {
+    display: none;
 }

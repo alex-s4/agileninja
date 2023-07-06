@@ -29,12 +29,12 @@
 	<div id="edit-mode-lc">
 
         <!-- START OF FORM TAG -->
-        <form:form method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
+        <form:form id="issuePropForm" method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
             
 
-            <h1>${theTicket.getTicketKey()}: <form:input class="input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
+            <h1>${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
             <h3>Description</h3>
-            <form:textarea class="form-control form-control-lc" path="ticketDescription" cols="75" />
+            <form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="75" />
             
             <div>
               <p><span>Type:</span>
@@ -76,12 +76,12 @@
             </div>
 
             <!-- HIDDEN FIELDS -->
-            <form:input path="reporter" value="${currentUser.getId()}" hidden="true"></form:input>
+            <form:input path="reporter" value="${theTicket.getReporter().getId()}" hidden="true"></form:input>
             <form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
-            <form:input path="project" value="${theTicket.getProject()}" hidden="true"></form:input>
+            <form:input path="project" value="${theTicket.getProject().getId()}" hidden="true"></form:input>
             <input type="hidden" name="_method" value="put">
 
-            <input type="submit" value="Update">
+            <!-- <input type="submit" value="Update"> -->
         </form:form>
         <!-- END OF FORM TAG -->
       
@@ -94,44 +94,70 @@
         <!-- COMMENT LIST -->
         <c:forEach var="theComment" items="${allComments}">
 
-              <div>
-                <h5>${theComment.getUser().getUsername()}&nbsp;<span>${theComment.getCreatedAt()}</span></h5>
-                <p>${theComment.getText()}</p>
+              <div class="comment-cont-lc">
+
+                  <div class="d-flex flex-row">
+                    <h5 class="me-1">${theComment.getUser().getUsername()}&nbsp;<span>${theComment.getCreatedAt()}</span></h5>
+                    <c:if test="${theComment.getUpdatedAt()!=null}">
+                      <i>- edited</i>
+                    </c:if>                
+                      <c:if test="${currentUser.equals(theComment.getUser())}">
+                        <button id="edit-cmt-btn${theComment.getId()}" class="ms-4 edit-comment-btn" type="button">Edit</button>
+                      </c:if>
+                  </div>
+
+                    <p>${theComment.getText()}</p>
+
+                    <!-- INSERT EDIT COMMENT FORM HERE -->
+                    <c:if test="${currentUser.equals(theComment.getUser())}">
+                    <form:form class="edit-comment-form" method="POST" action="/ticket/${theTicket.getId()}/comment/${theComment.getId()}/edit" modelAttribute="theComment${theComment.id}"> 
+                        
+                          <p><form:textarea path="text" cols="60" /></p>
+
+
+                          <input type="submit" value="Save">
+                          <button type="button" class="canc-btn">Cancel</button>
+
+                          <!-- FIXED FIELDS TO HIDE -->
+                          <form:input path="user" value="${theComment.getUser().getId()}" hidden="true"></form:input>
+                          <form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
+                          <input type="hidden" name="_method" value="put">
+
+                    </form:form>
+                    </c:if>
+                  
+                
               </div>
+            </c:forEach>
           
-          
-        </c:forEach>
-
-        <!-- NEW COMMENT FORM -->
-        <form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment"> 
-
         
-              <form:label path="text">Add Comment:</form:label>
-              <form:textarea path="text" cols="60" />
 
-              <!-- FIXED FIELDS TO HIDE -->
-              <form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
-              <form:input path="user" value="${currentUser.getId()}" hidden="true"></form:input>
+              <!-- NEW COMMENT FORM -->
+              <form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment"> 
+              
+                    <form:label path="text">Add Comment:</form:label>
+                    <p><form:textarea path="text" cols="60" /></p>
 
+                    <!-- FIXED FIELDS TO HIDE -->
+                    <form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
+                    <form:input path="user" value="${currentUser.getId()}" hidden="true"></form:input>
+                    <input type="submit" value="Add">
 
-
-              <input type="submit" value="Add">
-
-        </form:form>
-  
+              </form:form>
+      
   </div>
 
 
-
-
+ 
 
 
 
 
   <!-- JS FILE -->
-  <script src="/js/app.js"></script>
+  <!-- NOTE: INSERT THE JQUERY SCRIPT FIRST BEFORE THE LOCAL JS FILE -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="/js/app.js"></script>
     
   </body>
 </html>
