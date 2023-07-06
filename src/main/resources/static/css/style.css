@@ -43,16 +43,16 @@ span.close-lc:hover, span.close-lc:focus {
     cursor: pointer;
 }
 
-.input-txtfield {
-    width: 80vw;
-}
-
 input.input-txtfield, textarea.form-control-lc, select.issuePropDropdown {
     border: 1px solid #fff;
     width: auto;
     /* -moz-appearance:none; 
     -webkit-appearance:none; 
     appearance:none; */
+}
+
+input.input-txtfield {
+    width: 80vw;
 }
 
 input.input-txtfield:hover, textarea.form-control-lc:hover, select.issuePropDropdown:hover {
@@ -81,7 +81,7 @@ button.edit-comment-btn {
 }
 
 .filter-checkbox-cont {
-    margin-right: 25em;
+    margin-right: 35em;
 }
 
 .navbar {
@@ -90,6 +90,6 @@ button.edit-comment-btn {
 
 .alert {
     z-index: 100;
-    top: 1em;
-    right: 6em;
+    top: 7em;
+    right: 3em;
 }

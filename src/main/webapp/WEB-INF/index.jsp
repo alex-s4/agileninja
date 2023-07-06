@@ -47,10 +47,12 @@
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button> -->
 						
-
-			<div class="popup-modal-lc">
-				<p>${newProjSuccess}</p>
-			</div>
+			<c:if test="${newProjSuccess!=null}">
+				<div class="alert alert-info position-absolute" role="alert">
+					${newProjSuccess}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</c:if>
 
 			<!-- NEW PROJECT FORM -->
 			<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -164,91 +166,128 @@
 				</div>
 			</div>
 			
-			
+
 			<!-- FILTER SECTION -->
 			<div>
 					
-					<div class="d-flex flex-row justify-content-between filter-checkbox-cont">
+					<div class="d-flex flex-row filter-checkbox-cont">
 
 						<!-- 1. PROJECT FILTER -->
-						<div>
-							<h3>Project</h3>
-							<c:forEach var="project" items="${existingProjects}">
-								<div class="form-check">
-									<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
-									<label class="form-check-label-proj" for="proj${project.getId()}">
-										${project.getProjectName()} (${project.getProjectKey()})
-									</label>
-								</div>
-							</c:forEach>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Project</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<c:forEach var="project" items="${existingProjects}">
+										<div class="form-check">
+											<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
+											<label class="form-check-label-proj" for="proj${project.getId()}">
+												${project.getProjectName()} (${project.getProjectKey()})
+											</label>
+										</div>
+									</c:forEach>
+								</li>
+							</ul>
+							
 
 						</div>
 
 						<!-- 2. ISSUE TYPE FILTER -->
-						<div>
-							<h3>Type</h3>
-							<c:forEach var="type" items="${types}">
-								<div class="form-check">
-									<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
-									<label class="form-check-label-type" for="ty${type.getId()}">
-										${type.getIssueType()}
-									</label>
-								</div>
-							</c:forEach>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Type</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<c:forEach var="type" items="${types}">
+										<div class="form-check">
+											<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
+											<label class="form-check-label-type" for="ty${type.getId()}">
+												${type.getIssueType()}
+											</label>
+										</div>
+									</c:forEach>
+								</li>
+							</ul>
 						</div>
 
 						<!-- 3. ISSUE STATUS FILTER -->
-						<div>
-							<h3>Status</h3>
-							<c:forEach var="status" items="${statuses}">
-								<div class="form-check">
-									<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
-									<label class="form-check-label-status" for="st${status.getId()}">
-										${status.getIssueStatus()}
-									</label>
-								</div>
-							</c:forEach>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Status</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<c:forEach var="status" items="${statuses}">
+										<div class="form-check">
+											<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
+											<label class="form-check-label-status" for="st${status.getId()}">
+												${status.getIssueStatus()}
+											</label>
+										</div>
+									</c:forEach>
+								</li>
+							</ul>
 						</div>
 
 						<!-- 4. ISSUE PRIORITY FILTER -->
-						<div>
-							<h3>Priority</h3>
-							<c:forEach var="priority" items="${priorities}">
-								<div class="form-check">
-									<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
-									<label class="form-check-label-priority" for="pr${priority.getId()}">
-										${priority.getIssuePriority()}
-									</label>
-								</div>
-							</c:forEach>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Priority</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<c:forEach var="priority" items="${priorities}">
+										<div class="form-check">
+											<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
+											<label class="form-check-label-priority" for="pr${priority.getId()}">
+												${priority.getIssuePriority()}
+											</label>
+										</div>
+									</c:forEach>
+								</li>
+							</ul>
 						</div>
 
 						<!-- 5. ISSUE SEVERITY FILTER -->
-						<div>
-							<h3>Severity</h3>
-							<c:forEach var="severity" items="${severities}">
-								<div class="form-check">
-									<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
-									<label class="form-check-label-severity" for="sv${severity.getId()}">
-										${severity.getIssueSeverity()}
-									</label>
-								</div>
-							</c:forEach>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Severity</span>
+							</button>
+							<ul class="dropdown-menu">
+								<c:forEach var="severity" items="${severities}">
+									<li>
+										<div class="form-check">
+											<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
+											<label class="form-check-label-severity" for="sv${severity.getId()}">
+												${severity.getIssueSeverity()}
+											</label>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
 						</div>
 
 						<!-- 6. ISSUE ASSIGNEE FILTER -->
-						<div>
-							<h3>Assignee</h3>
+						<div class="input-group mb-3">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span>Assignee</span>
+							</button>
+							<ul class="dropdown-menu">
 							<c:forEach var="user" items="${allUsers}">
-								<!-- <c:if test="${user.getTicketsAssigned().size()!=0}"> -->
-									<div class="form-check">
-										<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
-										<label class="form-check-label-assignee" for="as${user.getId()}">
-											${user.getUsername()}
-										</label>
-									</div>
-								<!-- </c:if> -->
+								<li>
+									<!-- <c:if test="${user.getTicketsAssigned().size()!=0}"> -->
+										<div class="form-check">
+											<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
+											<label class="form-check-label-assignee" for="as${user.getId()}">
+												${user.getUsername()}
+											</label>
+										</div>
+									<!-- </c:if> -->
+								</li>
 							</c:forEach>
+							</ul>
 						</div>
 
 

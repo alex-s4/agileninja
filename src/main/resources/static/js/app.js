@@ -1,6 +1,7 @@
 var regFormRole = document.querySelector("#regform-roles")
 
 
+
 // This will change form when role was changed in registration page
 if(window.location.href=="http://localhost:8080/registration")
 {
@@ -150,6 +151,7 @@ $(".edit-comment-btn").click(function(){
     var charLengthCommentInput = editCommentForm.find("textarea").html().length * 2
 
     editCommentForm.css("display", "block")
+    $(this).closest("div").next().css("display", "none")
 
     editCommentForm.find("textarea").focus()
     editCommentForm.find("textarea")[0].setSelectionRange(charLengthCommentInput,charLengthCommentInput)
@@ -160,4 +162,11 @@ $(".edit-comment-btn").click(function(){
 // Form will be replaced back by the comment text display upon click of "cancel" button
 cancelEditCmntBtn.click(function(){
     $(this).closest(".edit-comment-form").css("display", "none")
+    var commentContent = $(this).parent().prev()
+    
+    commentContent.css("display", "initial")
+    
+    // console.log($(this).parent().prev().html())
+    
+    
 })

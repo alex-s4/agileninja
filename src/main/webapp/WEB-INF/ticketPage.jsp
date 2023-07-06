@@ -175,7 +175,7 @@
 
                   <h1>${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
                   <h3>Description</h3>
-                  <form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="75" />
+                  <form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="75" rows="10" />
                   
                   <div>
                     <p><span>Type:</span>
