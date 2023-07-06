@@ -12,23 +12,47 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-	<h1>Login</h1>
-	<p>${errorMessage}</p>
-	<p>${logoutMessage}</p>
-    <form method="POST" action="/login">
-        <p>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username"/>
-        </p>
-        <p>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password"/>
-        </p>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="submit" value="Login!"/>
-        <a href="/registration">Register!</a>
-    </form>
 
+    <!-- NAVIGATIONAL BAR (NON-LOGGED) -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
+		<div class="container-fluid">
+				<a class="navbar-brand" href="/">
+					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+					<a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+					<a class="nav-link" href="#">Products</a>
+					<a class="nav-link" href="#">Pricing</a>
+					<a class="nav-link disabled">Disabled</a>
+					</div>
+				</div>
+		
+		</div>
+	  </nav>
+
+    <main class="main-content px-5">
+            <h1>Login</h1>
+            <p>${errorMessage}</p>
+            <p>${logoutMessage}</p>
+            <form method="POST" action="/login">
+                <p>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"/>
+                </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password"/>
+                </p>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="submit" value="Login!"/>
+                <a href="/registration">Register!</a>
+            </form>
+    </main>
 
 
     <!-- JS FILE -->

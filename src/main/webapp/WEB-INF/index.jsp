@@ -17,17 +17,18 @@
 	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
+					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-					<a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
-					<a class="nav-link" href="#">Features</a>
-					<a class="nav-link" href="#">Pricing</a>
-					<a class="nav-link disabled">Disabled</a>
+						<button class="new-proj-btn btn btn-primary me-2" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button>
+						<button class="new-proj-btn btn btn-primary me-3" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button>
+						<a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+						<a class="nav-link" href="#">Profile</a>
+						
 					</div>
 				</div>
 
@@ -43,8 +44,8 @@
 	<main class="main-content px-5">
 			<h1>Hi ${currentUser.getFirstName()}</h1>
 			
-			<button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button>
-			<button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button>
+			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->
+			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button> -->
 						
 
 			<div class="popup-modal-lc">
@@ -157,7 +158,7 @@
 			<!-- FILTER SECTION -->
 			<div>
 					
-					<div class="d-flex flex-row filter-checkbox-cont">
+					<div class="d-flex flex-row justify-content-between filter-checkbox-cont">
 
 						<!-- 1. PROJECT FILTER -->
 						<div>

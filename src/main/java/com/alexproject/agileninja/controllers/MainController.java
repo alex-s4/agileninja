@@ -164,7 +164,7 @@ public class MainController {
         	{
         		List<String> issueSevAsList = Arrays.asList(issueSevParam.split("\\s*,\\s*")); 
         		for(String issueSevSeparated : issueSevAsList) {
-                	System.out.println(issueSevSeparated);
+                	// System.out.println(issueSevSeparated);
                 	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
                 }
         	}
@@ -258,7 +258,9 @@ public class MainController {
         redirectAttributes.addFlashAttribute("newTktSuccess", "Ticket Succesfully Created!");
 		ticketService.createTicket(ticket);
         
-		return "redirect:/";
+		String createdTicketKey = ticket.getTicketKey();
+		
+		return "redirect:/ticket/" + createdTicketKey;
 	}
 	
 	@GetMapping("/ticket/{ticketKey}")
