@@ -93,7 +93,7 @@
         <!-- JUMBOTRON -->
         <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
             <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">The Future of Project Management</h1>
+                <h1 class="display-5 fw-bold">We build things that helps build things</h1>
                 <p class="col-md-8 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni quae quisquam odio.</p>
                 <button type="button" class="btn btn-primary me-3 btn-lg reg-btn">Know more!</button>
             </div>
