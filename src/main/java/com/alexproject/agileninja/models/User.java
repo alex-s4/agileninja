@@ -17,6 +17,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,20 +33,20 @@ public class User {
     private Long id;
 	
 	// @NotEmpty(message="Username is required!")
-    // @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
-    // @Size(min=1, message="Please enter your first name.")
+    @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
+    @Size(min=1, message="Please enter your first name.")
     private String firstName;
     
     // @NotEmpty(message="Username is required!")
-    // @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
-    // @Size(min=1, message="Please enter your last name.")
+    @Pattern(regexp="[A-Za-z]*$", message="Name must contain letters only")
+    @Size(min=1, message="Please enter your last name.")
     private String lastName;
     
     @Size(min=3, message="Username must have at least 3 characters")
     private String username;
     
     // @NotEmpty(message="Email is required!")
-    // @Email(message="Please enter a valid email!")
+    @Email(message="Please enter a valid email!")
     private String email;
     
     // private String role;

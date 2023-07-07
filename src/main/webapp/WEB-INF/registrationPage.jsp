@@ -53,31 +53,32 @@
 				<form:form id="userRegistration" method="POST" action="/registration" modelAttribute="user">
 				
 				<p><form:errors path="user.*"/></p>
+				<p>${registrationMessageError}</p>
 					<p>
 						<form:label path="firstName">First Name:</form:label>
-						<form:input path="firstName"/>
+						<form:input path="firstName" pattern="^[A-Za-z]+$" title="First Name must contain letters only" required="true"/>
 					</p>
 					<p>
 						<form:label path="lastName">Last Name:</form:label>
-						<form:input path="lastName"/>
+						<form:input path="lastName"  pattern="^[A-Za-z]+$" title="Last Name must contain letters only" required="true"/>
 					</p>
 					<p>
 						<form:label path="email">Email:</form:label>
-						<form:input path="email"/>
+						<form:input type="email" path="email" required="true"/>
 					</p>
 					<p>
 						<form:label path="username">Username:*</form:label>
-						<form:input path="username"/>
+						<form:input path="username" pattern="[^\s]+" title="No space characters" required="true"/>
 					</p>
 					<p>
-						<form:label path="password">Password:*</form:label>
+						<form:label path="password" required="true">Password:*</form:label>
 						<form:password path="password"/>
 					</p>
 					<p>
-						<form:label path="confirm">Password Confirmation:*</form:label>
+						<form:label path="confirm" required="true">Password Confirmation:*</form:label>
 						<form:password path="confirm"/>
 					</p>
-					<p>* - Required</p>
+					<p>All fields are required</p>
 					<input for="userRegistration" type="submit" value="Register!"/>
 				</form:form>
 			</div>

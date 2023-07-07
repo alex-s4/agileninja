@@ -47,6 +47,7 @@ public class Users {
 		userValidator.validate(user, result);
 		
 		if(result.hasErrors()) {
+			System.out.println("test");
 			return "registrationPage.jsp";
 		}
 		else {
@@ -84,6 +85,7 @@ public class Users {
 				return "registrationPage.jsp";
 			} else {
 				userService.saveUserWithAdminRole(user);
+				redirectAttributes.addFlashAttribute("registrationMessageSuccess", "Admin account created successfully");
 				return "redirect:/login";
 			}
 		}

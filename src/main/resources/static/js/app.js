@@ -1,32 +1,31 @@
-var regFormRole = document.querySelector("#regform-roles")
+var regFormRole = $("#regform-roles")
 
 
 
 // This will change form when role was changed in registration page
-if(window.location.href=="http://localhost:8080/registration")
-{
-    if(regFormRole.value=="user"){
-        console.log()
-        document.querySelector("#admin-regForm").style.display = "none";
-        document.querySelector("#user-regForm").style.display = "block";
-    } else if (regFormRole.value=="admin"){
-        document.querySelector("#user-regForm").style.display = "none";
-        document.querySelector("#admin-regForm").style.display = "block";
-    }
+// if(window.location.href=="http://localhost:8080/registration")
+// {
+//     if(regFormRole.value=="user"){
+//         console.log()
+//         document.querySelector("#admin-regForm").style.display = "none";
+//         document.querySelector("#user-regForm").style.display = "block";
+//     } else if (regFormRole.value=="admin"){
+//         document.querySelector("#user-regForm").style.display = "none";
+//         document.querySelector("#admin-regForm").style.display = "block";
+//     }
     
-    regFormRole.addEventListener("change", function(){
-        console.log(regFormRole.value)
-        if(regFormRole.value=="user"){
-            console.log()
-            document.querySelector("#admin-regForm").style.display = "none";
-            document.querySelector("#user-regForm").style.display = "block";
-        } else if (regFormRole.value=="admin"){
-            document.querySelector("#user-regForm").style.display = "none";
-            document.querySelector("#admin-regForm").style.display = "block";
-        }
-    })
-
-}
+//     regFormRole.addEventListener("change", function(){
+//         console.log(regFormRole.value)
+//         if(regFormRole.value=="user"){
+//             console.log()
+//             document.querySelector("#admin-regForm").style.display = "none";
+//             document.querySelector("#user-regForm").style.display = "block";
+//         } else if (regFormRole.value=="admin"){
+//             document.querySelector("#user-regForm").style.display = "none";
+//             document.querySelector("#admin-regForm").style.display = "block";
+//         }
+//     })
+// }
 
 
 $('input[type="checkbox"]').click(function () {

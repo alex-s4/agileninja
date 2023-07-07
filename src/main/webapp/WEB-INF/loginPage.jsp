@@ -51,6 +51,12 @@
                 </div>
             </c:if>
 
+            <c:if test="${registrationMessageSuccess!=null}">
+                <div class="alert alert-success position-absolute" role="alert">
+                    ${registrationMessageSuccess}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if>
 
             <form method="POST" action="/login">
                 <p>
