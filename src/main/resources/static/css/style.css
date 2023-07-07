@@ -4,8 +4,12 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #f8f9fa;
+}
 
 main.main-content {
+    background-color: white;
     padding-top: 7em;
 }
 
@@ -52,7 +56,7 @@ input.input-txtfield, textarea.form-control-lc, select.issuePropDropdown {
 }
 
 input.input-txtfield {
-    width: 80vw;
+    width: 60vw;
 }
 
 input.input-txtfield:hover, textarea.form-control-lc:hover, select.issuePropDropdown:hover {
@@ -68,8 +72,18 @@ select.issuePropDropdown:hover {
 }
 
 button.edit-comment-btn {
-    height: fit-content;
+    /* height: fit-content; */
+    border: none;
     display: none;
+    --bs-btn-padding-y: 0em; 
+    --bs-btn-margin-y: 0em; 
+    --bs-btn-padding-x: .5rem; 
+    --bs-btn-font-size: .75rem;
+}
+
+button.edit-comment-btn:hover {
+    background-color: unset;
+    color: var(--bs-btn-hover-border-color);
 }
 
 .edit-comment-form {
@@ -91,5 +105,5 @@ button.edit-comment-btn {
 .alert {
     z-index: 100;
     top: 7em;
-    right: 3em;
+    right: 5em;
 }

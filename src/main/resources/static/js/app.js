@@ -82,12 +82,16 @@ $('input[type="checkbox"]').click(function () {
     
     // CREATES A QUERY PARAMETER
     // IMPORTANT: As much as possible, do not rename your request parameter as same as member variable of an object to avoid type error 
-    var queryParam = 'proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
+    var queryParam = '?proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
                     + '&status=' + checkedValuesStatus.join(',') + '&prio=' + checkedValuesPriority.join(',')
                     + '&severity=' + checkedValuesSeverity.join(',') + '&assigned=' + checkedValuesAssignee.join(','); // create query param
 
     
-    window.location.href="http://localhost:8080/?"+queryParam;
+    //window.location.href="http://localhost:8080/?"+queryParam;
+
+    var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
+    window.history.replaceState({path:currentURL},'',currentURL)
+
 });
 
 

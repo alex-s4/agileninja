@@ -40,9 +40,9 @@
 		</div>
 	</nav>
 
-	<main class="main-content px-5">
+	<main class="main-content px-5 mx-5">
 
-		<!-- NEW PROJECT FORM -->
+		<!-- NEW PROJECT MODAL FORM -->
 				<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -83,150 +83,212 @@
 				</div>
 				
 
-				<!-- NEW TICKET FORM -->
-				<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Ticket</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		<!-- NEW TICKET MODAL FORM -->
+		<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Ticket</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+						<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
+							<p><form:errors path="ticket.*"/></p>
+				
+							<p>
+								<form:label path="project">Project*</form:label>
+								<form:select path="project">
+									<form:option value="-" label="--Please Select a Project--"/>
+									<form:options items="${existingProjects}" itemValue="id" itemLabel="projectName"/>
+								</form:select>
+							</p>
+							<p>
+								<form:label path="ticketName">Title</form:label>
+								<form:input path="ticketName" type="text"/>
+							</p>
+							<p>
+								<form:label path="assignee">Assignee</form:label>
+								<form:select path="assignee">
+									<c:forEach var="user" items="${allUsers}">
+										<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
+									</c:forEach>
+								</form:select>
+							</p>
+							<p>
+								<form:label path="ticketSeverity">Severity</form:label>
+								<form:select path="ticketSeverity">
+									<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
+								</form:select>
+							</p>
+							<p>
+								<form:label path="ticketPriority">Priority</form:label>
+								<form:select path="ticketPriority">
+									<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
+								</form:select>
+							</p>
+							<p>
+								<form:label path="ticketType">Type</form:label>
+								<form:select path="ticketType">
+									<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
+								</form:select>
+							</p>
+							<p>
+								<form:label path="ticketDescription">Description</form:label>
+								<form:textarea path="ticketDescription"></form:textarea>
+							</p>
+							<p>* - Required</p>
+							<!-- Hidden Field/s -->
+							<form:input path="reporter" type="text" value="${currentUser.getId()}" hidden="true" />
+							<form:input path="ticketStatus" value="${backlog.getId()}" hidden="true"/>
+
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+								<input for="ticketCreation" class="btn btn-primary" type="submit" value="Create"/>
 							</div>
 
-							<div class="modal-body">
-								<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
-									<p><form:errors path="ticket.*"/></p>
-						
-									<p>
-										<form:label path="project">Project*</form:label>
-										<form:select path="project">
-											<form:option value="-" label="--Please Select a Project--"/>
-											<form:options items="${existingProjects}" itemValue="id" itemLabel="projectName"/>
-										</form:select>
-									</p>
-									<p>
-										<form:label path="ticketName">Title</form:label>
-										<form:input path="ticketName" type="text"/>
-									</p>
-									<p>
-										<form:label path="assignee">Assignee</form:label>
-										<form:select path="assignee">
-											<c:forEach var="user" items="${allUsers}">
-												<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
-											</c:forEach>
-										</form:select>
-									</p>
-									<p>
-										<form:label path="ticketSeverity">Severity</form:label>
-										<form:select path="ticketSeverity">
-											<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
-										</form:select>
-									</p>
-									<p>
-										<form:label path="ticketPriority">Priority</form:label>
-										<form:select path="ticketPriority">
-											<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
-										</form:select>
-									</p>
-									<p>
-										<form:label path="ticketType">Type</form:label>
-										<form:select path="ticketType">
-											<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
-										</form:select>
-									</p>
-									<p>
-										<form:label path="ticketDescription">Description</form:label>
-										<form:textarea path="ticketDescription"></form:textarea>
-									</p>
-									<p>* - Required</p>
-									<!-- Hidden Field/s -->
-									<form:input path="reporter" type="text" value="${currentUser.getId()}" hidden="true" />
-									<form:input path="ticketStatus" value="${backlog.getId()}" hidden="true"/>
-
-
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-										<input for="ticketCreation" class="btn btn-primary" type="submit" value="Create"/>
-									</div>
-
-								</form:form>
-							</div>
-						</div>
+						</form:form>
 					</div>
 				</div>
-
-			<!-- BREADCRUMB -->
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-				<li class="breadcrumb-item"><a href="/?proj=${theTicket.getProject().getProjectKey()}&type=&status=&prio=&severity=&assigned=">${theTicket.getProject().getProjectName()}</a></li>
-				<li class="breadcrumb-item active" aria-current="page">${theTicket.getTicketKey()}</li>
-				</ol>
-			</nav>
-
-
-
-
-			<!-- DISPLAY/EDIT FORM 2 in 1 -->
-			<div id="edit-mode-lc">
-
-				<!-- START OF FORM TAG -->
-				<form:form id="issuePropForm" method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
-					
-
-					<h1>${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
-					<h3>Description</h3>
-					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="75" rows="10" />
-					
-					<div>
-						<p><span>Type:</span>
-						<form:select class="issuePropDropdown" path="ticketType">
-							<form:options items="${types}" itemValue="id" itemLabel="issueType" />
-						</form:select>
-						</p>
-						<p><span>Status:</span>
-						<form:select class="issuePropDropdown" path="ticketStatus">
-							<form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
-						</form:select>
-						</p>
-						<p><span>Priority:</span>
-						<form:select class="issuePropDropdown" path="ticketPriority">
-							<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
-						</form:select>
-						</p>
-						<p><span>Severity:</span>
-						<form:select class="issuePropDropdown" path="ticketSeverity">
-							<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
-						</form:select>
-						</p>
-					</div>
-					<hr>
-					<div>
-						<p><span>Created By:</span>${theTicket.getReporter().getUsername()}</p>
-
-						<p><span>Assignee:</span>
-						<form:select class="issuePropDropdown" path="assignee">
-							<form:options items="${allUsers}" itemValue="id" itemLabel="username" />
-						</form:select>
-						</p>
-
-					</div>
-					<hr>
-					<div>
-						<p><span>Created:</span>${theTicket.getCreatedAt()}</p>
-						<p><span>Modified:</span>${theTicket.getUpdatedAt()}</p>
-					</div>
-
-					<!-- HIDDEN FIELDS -->
-					<form:input path="reporter" value="${theTicket.getReporter().getId()}" hidden="true"></form:input>
-					<form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
-					<form:input path="project" value="${theTicket.getProject().getId()}" hidden="true"></form:input>
-					<input type="hidden" name="_method" value="put">
-
-					<!-- <input type="submit" value="Update"> -->
-				</form:form>
-				<!-- END OF FORM TAG -->
-				
 			</div>
+		</div>
+
+
+
+
+		<!-- BREADCRUMB -->
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+			<li class="breadcrumb-item"><a href="/?proj=${theTicket.getProject().getProjectKey()}&type=&status=&prio=&severity=&assigned=">${theTicket.getProject().getProjectName()}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">${theTicket.getTicketKey()}</li>
+			</ol>
+		</nav>
+
+
+
+
+		<!-- DISPLAY/EDIT FORM 2 in 1 -->
+		<div id="edit-mode-lc">
+
+			<!-- START OF FORM TAG -->
+			<form:form id="issuePropForm" method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
+				
+			<div class="d-flex flex-row">
+
+				<div>
+					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
+					<h3>Description</h3>
+					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" />
+				</div>
+
+				<div>
+					<div>
+						<table>
+							<tr>
+								<td><p>Type:</p></td>
+								<td>
+									<p>
+									<form:select class="issuePropDropdown" path="ticketType">
+										<form:options items="${types}" itemValue="id" itemLabel="issueType" />
+									</form:select>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td><p>Status:</p></td>
+								<td>
+									<p>
+									<form:select class="issuePropDropdown" path="ticketStatus">
+										<form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
+									</form:select>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td><p>Priority:</p></td>
+								<td>
+									<p>
+										<form:select class="issuePropDropdown" path="ticketPriority">
+											<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
+										</form:select>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td><p>Severity:</p></td>
+								<td>
+									<p>
+										<form:select class="issuePropDropdown" path="ticketSeverity">
+											<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
+										</form:select>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<hr>
+
+					<div>
+
+						<table>
+							<tr>
+								<td>
+									<p class="me-2">Created By:</p>
+								</td>
+								<td>
+									<!-- TO DO: REPLACE "USERNAME" TO "FIRSTNAME" + "LASTNAME" -->
+									<p class="ms-1">${theTicket.getReporter().getUsername()}</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Assignee:</p>
+								</td>
+								<td>
+									<p>
+									<form:select class="issuePropDropdown" path="assignee">
+										<form:options items="${allUsers}" itemValue="id" itemLabel="username" />
+									</form:select>
+									</p>
+								</td>
+							</tr>
+						</table>
+
+					</div>
+
+					<hr>
+					<div>
+						<table>
+							<tr>
+								<td><p>Created:</p></td>
+								<td><p class="ms-2">${theTicket.getCreatedAt()}</p></td>
+							</tr>
+							<tr>
+								<td><p>Modified:</p></td>
+								<td><p class="ms-2">${theTicket.getUpdatedAt()}</p></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+				<!-- HIDDEN FIELDS -->
+				<form:input path="reporter" value="${theTicket.getReporter().getId()}" hidden="true"></form:input>
+				<form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
+				<form:input path="project" value="${theTicket.getProject().getId()}" hidden="true"></form:input>
+				<input type="hidden" name="_method" value="put">
+
+				<!-- <input type="submit" value="Update"> -->
+			</form:form>
+			<!-- END OF FORM TAG -->
+			
+		</div>
+
+
+
 
 			<!-- COMMENT SECTION -->
 			<div class="comment-section-lc">
@@ -243,7 +305,11 @@
 								<i>- edited</i>
 							</c:if>                
 								<c:if test="${currentUser.equals(theComment.getUser())}">
-								<button id="edit-cmt-btn${theComment.getId()}" class="ms-4 edit-comment-btn" type="button">Edit</button>
+								<button id="edit-cmt-btn${theComment.getId()}" class="ms-4 edit-comment-btn btn btn-outline-primary btn-sm" type="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+									<path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+								  	</svg>
+								</button>
 								</c:if>
 							</div>
 
@@ -256,8 +322,8 @@
 									<p><form:textarea path="text" cols="60" /></p>
 
 
-									<input type="submit" value="Save">
-									<button type="button" class="canc-btn">Cancel</button>
+									<input type="submit" value="Save" class="btn btn-primary btn-sm">
+									<button type="button" class="btn btn-secondary btn-sm canc-btn">Cancel</button>
 
 									<!-- FIXED FIELDS TO HIDE -->
 									<form:input path="user" value="${theComment.getUser().getId()}" hidden="true"></form:input>
@@ -274,9 +340,9 @@
 				
 
 						<!-- NEW COMMENT FORM -->
-						<form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment"> 
+						<form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment" class="mt-3"> 
 						
-							<form:label path="text">Add Comment:</form:label>
+							<form:label path="text"><h6>Add Comment:</h6></form:label>
 							<p><form:textarea path="text" cols="60" /></p>
 
 							<!-- FIXED FIELDS TO HIDE -->

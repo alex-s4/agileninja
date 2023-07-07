@@ -34,7 +34,7 @@
 		</div>
 	  </nav>
 
-    <main class="main-content px-5">
+    <main class="main-content px-5 mx-5">
             <h1>Login</h1>
             
             <c:if test="${errorMessage!=null}">

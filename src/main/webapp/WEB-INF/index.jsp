@@ -41,7 +41,7 @@
 	
 	
 	<!-- MAIN CONTENT -->
-	<main class="main-content px-5">
+	<main class="main-content px-5 mx-5">
 			<h1>Hi ${currentUser.getFirstName()}</h1>
 			
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->

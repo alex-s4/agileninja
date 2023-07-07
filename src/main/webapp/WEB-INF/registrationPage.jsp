@@ -34,7 +34,7 @@
 		</div>
 	  </nav>
 
-	<main class="main-content px-5">
+	<main class="main-content px-5 mx-5">
 
 			<div class="input-group mb-3">
 				<label class="input-group-text" for="regform-roles">
