@@ -25,57 +25,85 @@
 
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link" href="#">Products</a>
+						<a class="nav-link" href="#">About</a>
+						<a class="nav-link" href="#">Our Products</a>
 						<a class="nav-link" href="#">Pricing</a>
 						<a class="nav-link" href="#">Documentation</a>
 					</div>
 				</div>
 		
+                <button type="button" class="btn btn-primary me-3 btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">Login</button>
+                <button type="button" class="btn btn-warning me-3 btn-lg reg-btn">Register for FREE</button>
 		</div>
 	  </nav>
 
     <main class="main-content px-5 mx-5 me-5">
-            <h1>Login</h1>
-            
-            <c:if test="${errorMessage!=null}">
-                <div class="alert alert-danger position-absolute" role="alert">
-                    ${errorMessage}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        
+        <!-- LOGIN FORM MODAL -->
+        <div class="modal fade" id="staticBackdropLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/login">
+                            <p>
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username"/>
+                            </p>
+                            <p>
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password"/>
+                            </p>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <div class="modal-footer">
+                            <input type="submit" value="Login!"/>
+                            <a href="/registration">Register!</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </c:if>
+            </div>
+        </div>
 
-            <c:if test="${logoutMessage!=null}">
-                <div class="alert alert-success position-absolute" role="alert">
-                    ${logoutMessage}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </c:if>
+        <!-- POP UP MESSAGES -->
+        <c:if test="${errorMessage!=null}">
+            <div class="alert alert-danger position-absolute" role="alert">
+                ${errorMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 
-            <c:if test="${registrationMessageSuccess!=null}">
-                <div class="alert alert-success position-absolute" role="alert">
-                    ${registrationMessageSuccess}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </c:if>
+        <c:if test="${logoutMessage!=null}">
+            <div class="alert alert-success position-absolute" role="alert">
+                ${logoutMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 
-            <form method="POST" action="/login">
-                <p>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
-                </p>
-                <p>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/>
-                </p>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input type="submit" value="Login!"/>
-                <a href="/registration">Register!</a>
-            </form>
+        <c:if test="${registrationMessageSuccess!=null}">
+            <div class="alert alert-success position-absolute" role="alert">
+                ${registrationMessageSuccess}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
+
+        <!-- JUMBOTRON -->
+        <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">The Future of Project Management</h1>
+                <p class="col-md-8 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni quae quisquam odio.</p>
+                <button type="button" class="btn btn-primary me-3 btn-lg reg-btn">Know more!</button>
+            </div>
+        </div>
+        
     </main>
 
 
     <!-- FOOTER -->
-	<footer class="footer-distributed pt-4">
+	<footer class="footer-distributed pt-4 mt-5">
 		<div class="footer-left">
 			<h3><img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="footer-brand-img"></h3>
 			<p class="footer-links">

@@ -1,6 +1,8 @@
 var regFormRole = $("#regform-roles")
 
-
+$(".reg-btn").click(()=>{
+    window.location.href = window.location.protocol + "//" + window.location.host + "/registration"
+})
 
 
 $('input[type="checkbox"], #btn-clear-filter').click(function () {

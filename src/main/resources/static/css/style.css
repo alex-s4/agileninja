@@ -114,6 +114,17 @@ ul.dropdown-menu {
     width: auto;
 }
 
+.jbt-main-bkg {
+    background-color: #22222231;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), #dfedfacc), url("/img/christina-wocintechchat-com-rg1y72eKw6o-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    /* opacity: ; */
+}
+
+
+
 /* .filter-count-type, .filter-count-proj, .filter-count-stat, .filter-count-prio, .filter-count-sev, .filter-count-ass {
     display: none;
 } */
