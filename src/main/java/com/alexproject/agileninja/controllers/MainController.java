@@ -186,26 +186,59 @@ public class MainController {
             {
             	if(pKeyParam.isBlank() || pKeyParam==null) {
                 	filteredProjects.addAll(allProjects);
-                } 
+//                	model.addAttribute("filterProjSize", "All");
+                } else {
+                	model.addAttribute("filterProjSize", filteredProjects.size());
+                }
                 if (issueTypeParam.isBlank() || issueTypeParam==null) {
                 	filteredTypes.addAll(allTypes);
-                } 
+//                	model.addAttribute("filterTypeSize", "All");
+                } else {
+                	model.addAttribute("filterTypeSize", filteredTypes.size());
+                }
                 if (issueStatParam.isBlank() || issueStatParam==null) {
                 	filteredStatuses.addAll(allStatus);
+//                	model.addAttribute("filterStatSize", "All");
+                } else {
+                	model.addAttribute("filterStatSize", filteredStatuses.size());
                 }
                 if (issuePrioParam.isBlank() || issuePrioParam==null) {
                 	filteredPriorities.addAll(allPriorities);
+//                	model.addAttribute("filterPrioSize", "All");
+                } else {
+                	model.addAttribute("filterPrioSize", filteredPriorities.size());
                 }
                 if (issueSevParam.isBlank() || issueSevParam==null) {
-                	filteredSeverity.addAll(allSeverities);	
+                	filteredSeverity.addAll(allSeverities);
+//                	model.addAttribute("filterSevSize", "All");
+                } else {
+                	model.addAttribute("filterSevSize", filteredSeverity.size());
                 }
                 if(issueAssignedParam.isBlank() || issueAssignedParam==null) {
                 	filteredAssignee.addAll(allUsers);
+//                	model.addAttribute("filterAssSize", "All");
+                } else {
+                	model.addAttribute("filterAssSize", filteredAssignee.size());
                 }
+                
                 model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee));
+                
+                
+            	//model.addAttribute("filterAssSize", filteredAssignee.size());
+                
+                	
+                
             }
             // Normal fetching of data if no parameters were blank
             else {
+            	
+            	model.addAttribute("filterProjSize", filteredProjects.size());
+            	model.addAttribute("filterTypeSize", filteredTypes.size());
+            	model.addAttribute("filterStatSize", filteredStatuses.size());
+            	model.addAttribute("filterPrioSize", filteredPriorities.size());
+            	model.addAttribute("filterSevSize", filteredSeverity.size());
+            	model.addAttribute("filterAssSize", filteredAssignee.size());
+            	
             	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee)); 
             }
             

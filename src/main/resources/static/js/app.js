@@ -2,38 +2,13 @@ var regFormRole = $("#regform-roles")
 
 
 
-// This will change form when role was changed in registration page
-// if(window.location.href=="http://localhost:8080/registration")
-// {
-//     if(regFormRole.value=="user"){
-//         console.log()
-//         document.querySelector("#admin-regForm").style.display = "none";
-//         document.querySelector("#user-regForm").style.display = "block";
-//     } else if (regFormRole.value=="admin"){
-//         document.querySelector("#user-regForm").style.display = "none";
-//         document.querySelector("#admin-regForm").style.display = "block";
-//     }
-    
-//     regFormRole.addEventListener("change", function(){
-//         console.log(regFormRole.value)
-//         if(regFormRole.value=="user"){
-//             console.log()
-//             document.querySelector("#admin-regForm").style.display = "none";
-//             document.querySelector("#user-regForm").style.display = "block";
-//         } else if (regFormRole.value=="admin"){
-//             document.querySelector("#user-regForm").style.display = "none";
-//             document.querySelector("#admin-regForm").style.display = "block";
-//         }
-//     })
-// }
 
-
-$('input[type="checkbox"]').click(function () {
-    
+$('input[type="checkbox"], #btn-clear-filter').click(function () {
+        
     // Get values from Project ("proj") Filter
     // get checked values
     var checkedProj = $('input[type="checkbox"].form-check-input-proj:checked');
-    var checkedValuesProj = [];
+    var checkedValuesProj = []
     checkedProj.each(function (i) {
         checkedValuesProj.push(checkedProj[i].value); // add checked values to our temporary list
     });
@@ -79,7 +54,61 @@ $('input[type="checkbox"]').click(function () {
     
     
     // console.log(checkedValuesAssignee.join(','))
-    
+
+    // PROJ FILTER COUNT
+    if(checkedValuesProj==0){
+        $(".filter-count-proj").html("")
+    }
+    if(checkedValuesProj!=0){
+        console.log(checkedValuesProj.length)
+        $(".filter-count-proj").html(checkedValuesProj.length)
+    }
+
+    // TYPE FILTER COUNT
+    if(checkedValuesType==0){
+        $(".filter-count-type").html("")
+    }
+    if(checkedValuesType!=0){
+        console.log(checkedValuesProj.length)
+        $(".filter-count-type").html(checkedValuesType.length)
+    }
+
+    // STATUS FILTER COUNT
+    if(checkedValuesStatus==0){
+        $(".filter-count-stat").html("")
+    }
+    if(checkedValuesStatus!=0){
+        console.log(checkedValuesStatus.length)
+        $(".filter-count-stat").html(checkedValuesStatus.length)
+    }
+
+    // PRIORITY FILTER COUNT
+    if(checkedValuesPriority==0){
+        $(".filter-count-prio").html("")
+    }
+    if(checkedValuesPriority!=0){
+        console.log(checkedValuesPriority.length)
+        $(".filter-count-prio").html(checkedValuesPriority.length)
+    }
+
+    // SEVERITY FILTER COUNT
+    if(checkedValuesSeverity==0){
+        $(".filter-count-sev").html("")
+    }
+    if(checkedValuesSeverity!=0){
+        console.log(checkedValuesSeverity.length)
+        $(".filter-count-sev").html(checkedValuesSeverity.length)
+    }
+
+    // ASSIGNEE FILTER COUNT
+    if(checkedValuesAssignee==0){
+        $(".filter-count-ass").html("")
+    }
+    if(checkedValuesAssignee!=0){
+        console.log(checkedValuesAssignee.length)
+        $(".filter-count-ass").html(checkedValuesAssignee.length)
+    }
+
     // CREATES A QUERY PARAMETER
     // IMPORTANT: As much as possible, do not rename your request parameter as same as member variable of an object to avoid type error 
     var queryParam = '?proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
@@ -91,17 +120,43 @@ $('input[type="checkbox"]').click(function () {
 
     var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
     window.history.replaceState({path:currentURL},'',currentURL)
+    
 
+
+
+    $("#btn-clear-filter").click(function(){
+        queryParam="?proj=&type=&status=&prio=&severity=&assigned="
+        currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
+        window.location.href=currentURL
+        $('input[type="checkbox"]').prop('checked', false)
+    })
+    
 });
+
+$("#btn-submit-filter").click(function(){
+    window.location.href = document.URL;
+}
+)
+
+// $("#btn-clear-filter").click(()=>{
+//     console.log($('input[type="checkbox"]'))
+
+//     $('input[type="checkbox"]').prop('checked', false)
+//     trackFilter()
+// })
 
 
 // Persist checkbox checked state after page reload
 var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
 var $checkboxes = $(".filter-checkbox-cont :checkbox");
 
+var dropdownValues = JSON.parse(localStorage.getItem('checkboxValues')) || {};
+var dropdowns = $(".input-group.dropdown-menu");
+
 $checkboxes.on("change", function(){
     $checkboxes.each(function(){
       checkboxValues[this.id] = this.checked;
+      
     });
     localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
   });
@@ -109,7 +164,6 @@ $checkboxes.on("change", function(){
   $.each(checkboxValues, function(key, value) {
     $("#" + key).prop('checked', value);
   });
-
 
 
 
@@ -173,3 +227,35 @@ cancelEditCmntBtn.click(function(){
     
     
 })
+
+
+
+
+
+
+
+
+// This will change form when role was changed in registration page
+// if(window.location.href=="http://localhost:8080/registration")
+// {
+//     if(regFormRole.value=="user"){
+//         console.log()
+//         document.querySelector("#admin-regForm").style.display = "none";
+//         document.querySelector("#user-regForm").style.display = "block";
+//     } else if (regFormRole.value=="admin"){
+//         document.querySelector("#user-regForm").style.display = "none";
+//         document.querySelector("#admin-regForm").style.display = "block";
+//     }
+    
+//     regFormRole.addEventListener("change", function(){
+//         console.log(regFormRole.value)
+//         if(regFormRole.value=="user"){
+//             console.log()
+//             document.querySelector("#admin-regForm").style.display = "none";
+//             document.querySelector("#user-regForm").style.display = "block";
+//         } else if (regFormRole.value=="admin"){
+//             document.querySelector("#user-regForm").style.display = "none";
+//             document.querySelector("#admin-regForm").style.display = "block";
+//         }
+//     })
+// }

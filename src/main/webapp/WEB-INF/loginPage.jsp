@@ -14,7 +14,7 @@
 <body>
 
     <!-- NAVIGATIONAL BAR (NON-LOGGED) -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
+	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
 					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
@@ -34,7 +34,7 @@
 		</div>
 	  </nav>
 
-    <main class="main-content px-5 mx-5">
+    <main class="main-content px-5 mx-5 me-5">
             <h1>Login</h1>
             
             <c:if test="${errorMessage!=null}">
@@ -72,6 +72,50 @@
                 <a href="/registration">Register!</a>
             </form>
     </main>
+
+
+    <!-- FOOTER -->
+	<footer class="footer-distributed pt-4">
+		<div class="footer-left">
+			<h3><img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="footer-brand-img"></h3>
+			<p class="footer-links">
+			<a href="#" class="link-1">Home</a>
+			<a href="#">Blog</a>
+			<a href="#">Pricing</a>
+			<a href="#">About</a>
+			<a href="#">FAQ</a>
+			<a href="#">Contact</a>
+			</p>
+			<p class="footer-company-name">Dojo Dev Technologies © 2023</p>
+		</div>
+		<div class="footer-center">
+			<div>
+			<i class="fa fa-map-marker"></i>
+			<p><span>123 Baywalk Boulevard</span> Manila, PH</p>
+			</div>
+			<div>
+			<i class="fa fa-phone"></i>
+			<p>+63.555.555.5555</p>
+			</div>
+			<div>
+			<i class="fa fa-envelope"></i>
+			<p><a href="mailto:support@dojodev.com">support@dojodev.com</a></p>
+			</div>
+		</div>
+		<div class="footer-right">
+			<p class="footer-company-about">
+			<span>About the company</span>
+			Agile Ninja is a multi-purpose project management and ticketing tool where teams collaborate on projects and
+			organize tasks in a productive way.
+			</p>
+			<div class="footer-icons">
+			<a href="#"><i class="fa fa-facebook"></i></a>
+			<a href="#"><i class="fa fa-twitter"></i></a>
+			<a href="#"><i class="fa fa-linkedin"></i></a>
+			<a href="#"><i class="fa fa-github"></i></a>
+			</div>
+		</div>
+	</footer>
 
 
     <!-- JS FILE -->

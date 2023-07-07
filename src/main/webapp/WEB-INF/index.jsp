@@ -14,7 +14,7 @@
 <body>
 
 	<!-- NAVIGATIONAL BAR -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
+	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
 					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
@@ -41,7 +41,7 @@
 	
 	
 	<!-- MAIN CONTENT -->
-	<main class="main-content px-5 mx-5">
+	<main class="main-content px-5 mx-5  mb-5">
 			<h1>Hi ${currentUser.getFirstName()}</h1>
 			
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->
@@ -170,129 +170,141 @@
 			<!-- FILTER SECTION -->
 			<div>
 					
-					<div class="d-flex flex-row filter-checkbox-cont">
-
-						<!-- 1. PROJECT FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Project</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<c:forEach var="project" items="${existingProjects}">
-										<div class="form-check">
-											<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
-											<label class="form-check-label-proj" for="proj${project.getId()}">
-												${project.getProjectName()} (${project.getProjectKey()})
-											</label>
-										</div>
-									</c:forEach>
-								</li>
-							</ul>
+					<div class="d-flex flex-column filter-checkbox-cont">
+						<div class="d-flex flex-row justify-content-start">
 							
-
-						</div>
-
-						<!-- 2. ISSUE TYPE FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Type</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<c:forEach var="type" items="${types}">
-										<div class="form-check">
-											<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
-											<label class="form-check-label-type" for="ty${type.getId()}">
-												${type.getIssueType()}
-											</label>
-										</div>
-									</c:forEach>
-								</li>
-							</ul>
-						</div>
-
-						<!-- 3. ISSUE STATUS FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Status</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<c:forEach var="status" items="${statuses}">
-										<div class="form-check">
-											<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
-											<label class="form-check-label-status" for="st${status.getId()}">
-												${status.getIssueStatus()}
-											</label>
-										</div>
-									</c:forEach>
-								</li>
-							</ul>
-						</div>
-
-						<!-- 4. ISSUE PRIORITY FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Priority</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<c:forEach var="priority" items="${priorities}">
-										<div class="form-check">
-											<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
-											<label class="form-check-label-priority" for="pr${priority.getId()}">
-												${priority.getIssuePriority()}
-											</label>
-										</div>
-									</c:forEach>
-								</li>
-							</ul>
-						</div>
-
-						<!-- 5. ISSUE SEVERITY FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Severity</span>
-							</button>
-							<ul class="dropdown-menu">
-								<c:forEach var="severity" items="${severities}">
+							<!-- 1. PROJECT FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span class="me-2">Project</span>
+									<span class="badge text-bg-dark filter-count-proj">${filterProjSize}</span>
+								</button>
+								<ul class="dropdown-menu">
 									<li>
-										<div class="form-check">
-											<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
-											<label class="form-check-label-severity" for="sv${severity.getId()}">
-												${severity.getIssueSeverity()}
-											</label>
-										</div>
+										<c:forEach var="project" items="${existingProjects}">
+											<div class="form-check">
+												<input class="form-check-input-proj" type="checkbox" value="${project.getProjectKey()}" id="proj${project.getId()}">
+												<label class="form-check-label-proj" for="proj${project.getId()}">
+													${project.getProjectName()} (${project.getProjectKey()})
+												</label>
+											</div>
+										</c:forEach>
+									</li>
+								</ul>
+								
+
+							</div>
+
+							<!-- 2. ISSUE TYPE FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span>Type</span>
+									<span class="badge text-bg-secondary filter-count-type">${filterTypeSize}</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<c:forEach var="type" items="${types}">
+											<div class="form-check">
+												<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
+												<label class="form-check-label-type" for="ty${type.getId()}">
+													${type.getIssueType()}
+												</label>
+											</div>
+										</c:forEach>
+									</li>
+								</ul>
+							</div>
+
+							<!-- 3. ISSUE STATUS FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span>Status</span>
+									<span class="badge text-bg-secondary filter-count-stat">${filterStatSize}</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<c:forEach var="status" items="${statuses}">
+											<div class="form-check">
+												<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
+												<label class="form-check-label-status" for="st${status.getId()}">
+													${status.getIssueStatus()}
+												</label>
+											</div>
+										</c:forEach>
+									</li>
+								</ul>
+							</div>
+
+							<!-- 4. ISSUE PRIORITY FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span>Priority</span>
+									<span class="badge text-bg-secondary filter-count-prio">${filterPrioSize}</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<c:forEach var="priority" items="${priorities}">
+											<div class="form-check">
+												<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
+												<label class="form-check-label-priority" for="pr${priority.getId()}">
+													${priority.getIssuePriority()}
+												</label>
+											</div>
+										</c:forEach>
+									</li>
+								</ul>
+							</div>
+
+							<!-- 5. ISSUE SEVERITY FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span>Severity</span>
+									<span class="badge text-bg-secondary filter-count-sev">${filterSevSize}</span>
+								</button>
+								<ul class="dropdown-menu">
+									<c:forEach var="severity" items="${severities}">
+										<li>
+											<div class="form-check">
+												<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
+												<label class="form-check-label-severity" for="sv${severity.getId()}">
+													${severity.getIssueSeverity()}
+												</label>
+											</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+
+							<!-- 6. ISSUE ASSIGNEE FILTER -->
+							<div class="input-group mb-3 me-2">
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<span>Assignee</span>
+									<span class="badge text-bg-secondary filter-count-ass">${filterAssSize}</span>
+								</button>
+								<ul class="dropdown-menu">
+								<c:forEach var="user" items="${allUsers}">
+									<li>
+										
+											<div class="form-check">
+												<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
+												<label class="form-check-label-assignee" for="as${user.getId()}">
+													${user.getUsername()}
+												</label>
+											</div>
+										
 									</li>
 								</c:forEach>
-							</ul>
+								</ul>
+							</div>
+
 						</div>
 
-						<!-- 6. ISSUE ASSIGNEE FILTER -->
-						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<span>Assignee</span>
-							</button>
-							<ul class="dropdown-menu">
-							<c:forEach var="user" items="${allUsers}">
-								<li>
-									<!-- <c:if test="${user.getTicketsAssigned().size()!=0}"> -->
-										<div class="form-check">
-											<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
-											<label class="form-check-label-assignee" for="as${user.getId()}">
-												${user.getUsername()}
-											</label>
-										</div>
-									<!-- </c:if> -->
-								</li>
-							</c:forEach>
-							</ul>
+						<div>
+							<button class="btn btn-primary btn-sm" id="btn-submit-filter">Apply Filter</button>
+							<!-- <button class="btn btn-outline-secondary btn-sm" id="btn-clear-filter">Clear Filter</button> -->
 						</div>
-
-
 					</div>
-					<!-- <button class="submit" id="btn-submit-filter">find</button> -->
+					
 				
 			</div>
 
@@ -327,8 +339,51 @@
 					</tbody>
 				</table>
 			</div>
+		</main>
 
-	</main>
+		<!-- FOOTER -->
+		<footer class="footer-distributed pt-4">
+			<div class="footer-left">
+				<h3><img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="footer-brand-img"></h3>
+				<p class="footer-links">
+				<a href="#" class="link-1">Home</a>
+				<a href="#">Blog</a>
+				<a href="#">Pricing</a>
+				<a href="#">About</a>
+				<a href="#">FAQ</a>
+				<a href="#">Contact</a>
+				</p>
+				<p class="footer-company-name">Dojo Dev Technologies © 2023</p>
+			</div>
+			<div class="footer-center">
+				<div>
+				<i class="fa fa-map-marker"></i>
+				<p><span>123 Baywalk Boulevard</span> Manila, PH</p>
+				</div>
+				<div>
+				<i class="fa fa-phone"></i>
+				<p>+63.555.555.5555</p>
+				</div>
+				<div>
+				<i class="fa fa-envelope"></i>
+				<p><a href="mailto:support@dojodev.com">support@dojodev.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+				<span>About the company</span>
+				Agile Ninja is a multi-purpose project management and ticketing tool where teams collaborate on projects and
+				organize tasks in a productive way.
+				</p>
+				<div class="footer-icons">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a>
+				</div>
+			</div>
+		</footer>
+	
 
 	
 	<!-- JS SCRIPT -->
