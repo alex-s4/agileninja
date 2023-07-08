@@ -94,7 +94,7 @@
         <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">We build things that helps build things</h1>
-                <p class="col-md-8 fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni quae quisquam odio.</p>
+                <p class="col-md-8 fs-4">In Agile Ninja, we have the ability to get things done incrementally and respond to change.</p>
                 <button type="button" class="btn btn-primary me-3 btn-lg reg-btn">Know more!</button>
             </div>
         </div>
