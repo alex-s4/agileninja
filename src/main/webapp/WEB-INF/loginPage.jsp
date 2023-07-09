@@ -97,12 +97,89 @@
         <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">We build things that helps build things</h1>
-                <p class="col-md-8 fs-4">In Agile Ninja, we have the ability to get things done incrementally and respond to change.</p>
-                <button type="button" class="btn btn-primary me-3 btn-lg reg-btn">Know more!</button>
+                <p class="col-md-8 fs-4">In Agile Ninja&trade;, we have the ability to get things done incrementally and respond to change.</p>
+                <button type="button" class="btn btn-info mt-4 me-3 btn-lg reg-btn">Know more!</button>
             </div>
         </div>
+
+        <div class="d-flex align-items-center">
+            <div class="p-4 col-md-6 me-5 mb-4 rounded-3 border border-secondary">
+                <div class="h-100 p-4 text-dark me-2">
+                <h1 class="mb-3">What is Agile Ninja?</h1>
+                <p class="fs-5">
+                    Agile Ninja is a multi-purpose <strong>project management</strong> and <strong>ticketing tool</strong> where teams collaborate on projects and organize tasks in a productive and efficient way.
+                    It strictly follows the principles of <a class="fw-bold" href="https://www.agilealliance.org/agile101/">Agile</a> and <a class="fw-bold" href="https://www.scrum.org/learning-series/what-is-scrum">Scrum</a> methodologies.
+                </p>
+                <!-- <button class="btn btn-primary" type="button">Try Now</button> -->
+                </div>
+            </div>
+            
+            <img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="img-fluid img-landing">
+        </div>
+            
+
         
+        
+
+        <p class="h2 my-4 text-center">The Manifesto for Agile Software Development</p>
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://st4.depositphotos.com/1001201/39308/i/450/depositphotos_393085710-stock-photo-teamwork-of-partners-concept-of.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Individuals and interactions</h5>
+                          <p class="card-text fst-italic">over processes and tools</p>
+                          
+                        </div>
+                      </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://media.istockphoto.com/id/1075599562/photo/programmer-working-with-program-code.jpg?s=612x612&w=0&k=20&c=n3Vw5SMbMCWW1YGG6lnTfrwndNQ8B_R4Vw-BN7LkqpA=" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Working software</h5>
+                          <p class="card-text fst-italic">over comprehensive documentation</p>
+                          
+                        </div>
+                      </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://st.depositphotos.com/2309453/4248/i/450/depositphotos_42483789-stock-photo-smiling-young-man-shaking-hands.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Customer collaboration</h5>
+                          <p class="card-text fst-italic">over contract negotiation</p>
+                          
+                        </div>
+                      </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://static7.depositphotos.com/1129853/676/i/450/depositphotos_6769050-stock-photo-process-arrow.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Responding to change</h5>
+                          <p class="card-text fst-italic">over following a plan</p>
+                          
+                        </div>
+                      </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        
+        
+        
+
+
+
+
     </main>
+
+
 
 
     <!-- FOOTER -->
