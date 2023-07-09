@@ -264,6 +264,7 @@ public class MainController {
         model.addAttribute("currentUser", userService.findByUsername(username));
 		
         
+        
         // Successfully Created a Project
         redirectAttributes.addFlashAttribute("newProjSuccess", "Project Succesfully Created!");
 		projectService.createProject(project);
@@ -298,6 +299,8 @@ public class MainController {
 	
 	@GetMapping("/ticket/{ticketKey}")
 	public String ticketPage(@PathVariable String ticketKey,
+			@Valid @ModelAttribute("newComment") Comment comment,
+			BindingResult result,
 			Principal principal, 
 			Model model, 
 			Project project,
@@ -331,13 +334,18 @@ public class MainController {
         // New Comment form
 		model.addAttribute("newComment", new Comment());
 		
+		if(result.getFieldError()!=null) {
+			model.addAttribute("commentErrorMsg", result.getFieldError().getDefaultMessage());
+		}
+		
+		
 		// Gets all the comments from the current ticket
 		List<Comment> getTicketComments = theTicket.getComments();
 		model.addAttribute("allComments", getTicketComments);
         
-		for(Comment comment : getTicketComments) {
-			String aCommentModel = "theComment" + comment.getId();
-			model.addAttribute(aCommentModel, commentService.findCommentById(comment.getId()));
+		for(Comment theComment : getTicketComments) {
+			String aCommentModel = "theComment" + theComment.getId();
+			model.addAttribute(aCommentModel, commentService.findCommentById(theComment.getId()));
 		}
 		
 		
@@ -371,19 +379,35 @@ public class MainController {
 			Model model, 
 			Project project,
 			Ticket ticket,
-			Comment comment,
+			@Valid @ModelAttribute("newComment") Comment comment,
+			BindingResult result,
 			RedirectAttributes redirectAttributes)
 	{
 		// Gets the info of current logged user - MANDATORY for all paths
     	String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
+
         
         // Gets the key of current ticket
         String currentTicketKey = ticketService.findTicketById(ticketId).getTicketKey();
         
+        model.addAttribute("bindingResult", result);
+        
+        if(result.hasErrors()) 
+        {
+        	redirectAttributes.addFlashAttribute("commentErrorMsg", result.getFieldError().getDefaultMessage());
+        	// System.out.println(result.getFieldError().getDefaultMessage());
+        	System.out.println(result.getFieldError().getDefaultMessage());
+        	
+        	return "redirect:/ticket/"+currentTicketKey;
+        }
         // Successfully created a comment and redirect back to current page
-		commentService.createComment(comment);
-		return "redirect:/ticket/"+currentTicketKey;
+        else {
+        	commentService.createComment(comment);
+    		return "redirect:/ticket/"+currentTicketKey;
+        }
+        
+		
 	}
 	
 	@PutMapping("/ticket/{ticketId}/comment/{id}/edit")

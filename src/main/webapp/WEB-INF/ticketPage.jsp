@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${theTicket.getTicketKey()}</title>
+<script src="https://kit.fontawesome.com/cda43cd265.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -15,7 +16,7 @@
 
   
 	<!-- NAVIGATIONAL BAR -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top px-5">
+	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
 					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
@@ -42,50 +43,49 @@
 
 	<main class="main-content px-5 mx-5 mb-5">
 
-		<!-- NEW PROJECT MODAL FORM -->
-				<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<!-- MODAL CONTENT -->
-							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Project</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<form:form id="projectCreation" method="POST" action="/project/new" modelAttribute="newProject">
-									
-									<p><form:errors path="project.*"/></p>
-
-									<p>
-										<form:label path="projectName">Project Name *</form:label>
-										<form:input path="projectName" required="true"/>
-									</p>
-									<p>
-										<form:label path="projectKey">Project Key *</form:label>
-										<form:input path="projectKey" minlength="2" maxlength="3" style="text-transform:uppercase" required="true"/>
-									</p>
-									
-									<p>* - Required</p>
-									
-									<!-- Hidden Field/s -->
-									<form:input path="projectOwner" value="${currentUser.getId()}" hidden="true"/>
-									
-									<div class="modal-footer">
-										<!-- <a href="#" onclick="closeFormNewProj()">cancel</a> -->
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-										<input class="btn btn-primary" for="projectCreation" type="submit" value="Create"/>
-									</div>
-								</form:form>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				
-
-		<!-- NEW TICKET MODAL FORM -->
-		<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<!-- NEW PROJECT FORM -->
+		<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- MODAL CONTENT -->
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Project</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form:form id="projectCreation" method="POST" action="/project/new" modelAttribute="newProject">
+							
+							<p><form:errors path="project.*"/></p>
+
+							<p>
+								<form:label path="projectName" class="me-1">Project Name</form:label> 
+								<form:input path="projectName" placeholder="Most Awesome Project" required="true" class="ps-1"/>
+							</p>
+							<p>
+								<form:label path="projectKey" class="me-1">Project Key</form:label> 
+								<i class="tooltip-lc fa-sharp fa-solid fa-circle-info me-3"><span class="tooltiptext-lc p-2 px-4">Choose a descriptive prefix for your project’s issue keys to recognize work from this project.</span></i>
+								<form:input path="projectKey" minlength="2" maxlength="3" style="text-transform:uppercase" required="true" placeholder="MAP"/>
+							</p>
+											
+							<!-- Hidden Field/s -->
+							<form:input path="projectOwner" value="${currentUser.getId()}" hidden="true"/>
+							
+							<div class="modal-footer">
+								<!-- <a href="#" onclick="closeFormNewProj()">cancel</a> -->
+								<button type="button" class="btn btn-link" data-bs-dismiss="modal">Cancel</button>
+								<input class="btn btn-primary" for="projectCreation" type="submit" value="Create"/>
+							</div>
+						</form:form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- NEW TICKET FORM -->
+		<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="staticBackdropLabel">Create new Ticket</h1>
@@ -96,55 +96,61 @@
 						<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
 							<p><form:errors path="ticket.*"/></p>
 				
-							<p>
-								<form:label path="project">Project*</form:label>
-								<form:select path="project">
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="project">Project</form:label>
+								<form:select path="project" class="form-select">
 									<form:option value="-" label="--Please Select a Project--"/>
 									<form:options items="${existingProjects}" itemValue="id" itemLabel="projectName"/>
 								</form:select>
-							</p>
-							<p>
-								<form:label path="ticketName">Title</form:label>
-								<form:input path="ticketName" type="text"/>
-							</p>
-							<p>
-								<form:label path="assignee">Assignee</form:label>
-								<form:select path="assignee">
+							</div>
+
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="ticketName">Title</form:label>
+								<form:input class="form-control" path="ticketName" type="text"/>
+							</div>
+
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="assignee">Assignee</form:label>
+								<form:select class="form-select" path="assignee">
 									<c:forEach var="user" items="${allUsers}">
 										<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
 									</c:forEach>
 								</form:select>
-							</p>
-							<p>
-								<form:label path="ticketSeverity">Severity</form:label>
-								<form:select path="ticketSeverity">
+							</div>
+
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="ticketSeverity">Severity</form:label>
+								<form:select class="form-select" path="ticketSeverity">
 									<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
 								</form:select>
-							</p>
-							<p>
-								<form:label path="ticketPriority">Priority</form:label>
-								<form:select path="ticketPriority">
+							</div>
+
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="ticketPriority">Priority</form:label>
+								<form:select class="form-select" path="ticketPriority">
 									<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
 								</form:select>
-							</p>
-							<p>
-								<form:label path="ticketType">Type</form:label>
-								<form:select path="ticketType">
+							</div>
+
+							<div class="input-group mb-3">
+								<form:label class="input-group-text" path="ticketType">Type</form:label>
+								<form:select class="form-select" path="ticketType">
 									<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
 								</form:select>
-							</p>
-							<p>
+							</div>
+
+							<div class="form-floating">
+								<form:textarea class="form-control" placeholder="Make your ticket descriptive" path="ticketDescription" style="height: 150px"></form:textarea>
 								<form:label path="ticketDescription">Description</form:label>
-								<form:textarea path="ticketDescription"></form:textarea>
-							</p>
-							<p>* - Required</p>
+							</div>
+							
 							<!-- Hidden Field/s -->
 							<form:input path="reporter" type="text" value="${currentUser.getId()}" hidden="true" />
 							<form:input path="ticketStatus" value="${backlog.getId()}" hidden="true"/>
 
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
 								<input for="ticketCreation" class="btn btn-primary" type="submit" value="Create"/>
 							</div>
 
@@ -180,7 +186,8 @@
 				<div>
 					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
 					<h3>Description</h3>
-					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" />
+					
+					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" required="true"/>
 				</div>
 
 				<div>
@@ -190,7 +197,7 @@
 								<td><p>Type:</p></td>
 								<td>
 									<p>
-									<form:select class="issuePropDropdown" path="ticketType">
+									<form:select class="issuePropDropdown dropdwn-type" path="ticketType">
 										<form:options items="${types}" itemValue="id" itemLabel="issueType" />
 									</form:select>
 									</p>
@@ -200,7 +207,7 @@
 								<td><p>Status:</p></td>
 								<td>
 									<p>
-									<form:select class="issuePropDropdown" path="ticketStatus">
+									<form:select class="issuePropDropdown dropdwn-stat" path="ticketStatus">
 										<form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
 									</form:select>
 									</p>
@@ -210,7 +217,7 @@
 								<td><p>Priority:</p></td>
 								<td>
 									<p>
-										<form:select class="issuePropDropdown" path="ticketPriority">
+										<form:select class="issuePropDropdown dropdwn-prio" path="ticketPriority">
 											<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
 										</form:select>
 									</p>
@@ -220,7 +227,7 @@
 								<td><p>Severity:</p></td>
 								<td>
 									<p>
-										<form:select class="issuePropDropdown" path="ticketSeverity">
+										<form:select class="issuePropDropdown dropdwn-sev" path="ticketSeverity">
 											<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
 										</form:select>
 									</p>
@@ -294,6 +301,7 @@
 			<div class="comment-section-lc">
 
 				<h3>Comments: (${allComments.size()})</h3>
+				<hr>
 				<!-- COMMENT LIST -->
 				<c:forEach var="theComment" items="${allComments}">
 
@@ -323,8 +331,10 @@
 
 
 									<input type="submit" value="Save" class="btn btn-primary btn-sm">
-									<button type="button" class="btn btn-secondary btn-sm canc-btn">Cancel</button>
-
+									<button type="button" class="btn btn-outline-dark btn-sm canc-btn">Cancel</button>
+									
+										
+									
 									<!-- FIXED FIELDS TO HIDE -->
 									<form:input path="user" value="${theComment.getUser().getId()}" hidden="true"></form:input>
 									<form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
@@ -340,7 +350,7 @@
 				
 
 						<!-- NEW COMMENT FORM -->
-						<form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment" class="mt-3"> 
+						<form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment" class="mt-4"> 
 						
 							<form:label path="text"><h6>Add Comment:</h6></form:label>
 							<p><form:textarea path="text" cols="60" /></p>
@@ -348,8 +358,14 @@
 							<!-- FIXED FIELDS TO HIDE -->
 							<form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
 							<form:input path="user" value="${currentUser.getId()}" hidden="true"></form:input>
-							<input type="submit" value="Add">
-
+							<input type="submit" class="btn btn-sm btn-outline-primary" value="Add" >
+							<!-- POPUP ERROR -->
+							<c:if test="${commentErrorMsg!=null}">
+								<div class="alert alert-danger position-absolute" role="alert">
+									${commentErrorMsg}
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</c:if>
 						</form:form>
 				
 			</div>

@@ -171,14 +171,22 @@ $checkboxes.on("change", function(){
 
 // Ticket Page: Auto-update when select dropdown is changed or text fields loses focus
   $('.issuePropDropdown').change(function(){
-    console.log("test")
     $('form#issuePropForm').submit()
+    console.log(this[0].getAttribute("value"))
   })
 
   $('.issuePropInputText').blur(function(){
-    console.log("test")
     $('form#issuePropForm').submit()
   })
+
+
+
+
+
+
+
+
+
 
 
 
@@ -229,6 +237,8 @@ cancelEditCmntBtn.click(function(){
     
     
 })
+
+
 
 
 

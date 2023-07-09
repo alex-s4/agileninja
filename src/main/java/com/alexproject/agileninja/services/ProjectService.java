@@ -16,6 +16,9 @@ public class ProjectService {
 	
 	// Create
 	public Project createProject(Project project) {
+		
+		// Force Project Key to be uppercase to avoid as much error
+		project.setProjectKey(project.getProjectKey().toUpperCase());
 		return projectRepository.save(project);
 	}
 	

@@ -8,6 +8,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Login Page</title>
+    <script src="https://kit.fontawesome.com/cda43cd265.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -49,18 +50,20 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="/login">
-                            <p>
-                                <label for="username">Username</label>
-                                <input type="text" id="username" name="username"/>
-                            </p>
-                            <p>
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password"/>
-                            </p>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text"><label for="username">Username</label></span>
+                                <input class="form-control" type="text" id="username" name="username"/>
+                            </div>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text"><label for="password">Password</label></span>
+                                <input class="form-control" type="password" id="password" name="password"/>
+                            </div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="modal-footer">
-                            <input type="submit" value="Login!"/>
-                            <a href="/registration">Register!</a>
+                            <input class="btn btn-lg btn-primary" type="submit" value="Login!"/>
+                            <a href="/registration">Sign up</a>
                             </div>
                         </form>
                     </div>
@@ -134,7 +137,7 @@
 			<p class="footer-company-about">
 			<span>About the company</span>
 			Agile Ninja is a multi-purpose project management and ticketing tool where teams collaborate on projects and
-			organize tasks in a productive way.
+			organize tasks in a productive and efficient way.
 			</p>
 			<div class="footer-icons">
 			<a href="#"><i class="fa fa-facebook"></i></a>
