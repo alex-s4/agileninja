@@ -102,8 +102,8 @@
             </div>
         </div>
 
-        <div class="d-flex align-items-center">
-            <div class="p-4 col-md-6 me-5 mb-4 rounded-3 border border-secondary">
+        <div class="d-flex align-items-center mb-2">
+            <div class="p-4 col-md-6 me-5 mb-4 rounded-3">
                 <div class="h-100 p-4 text-dark me-2">
                 <h1 class="mb-3">What is Agile Ninja?</h1>
                 <p class="fs-5">
@@ -113,15 +113,16 @@
                 <!-- <button class="btn btn-primary" type="button">Try Now</button> -->
                 </div>
             </div>
-            
-            <img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="img-fluid img-landing">
+            <div class="p-4">
+                <img src="/img/landingpic-2-removebg.png" alt="Landing Pics" class="img-fluid img-landing">
+            </div>
         </div>
             
 
-        
+        <hr class="my-5">
         
 
-        <p class="h2 my-4 text-center">The Manifesto for Agile Software Development</p>
+        <p class="h2 my-5 text-center">The Manifesto for Agile Software Development</p>
 
         <div class="container text-center">
             <div class="row">
@@ -213,8 +214,8 @@
 		<div class="footer-right">
 			<p class="footer-company-about">
 			<span>About the company</span>
-			Agile Ninja is a multi-purpose project management and ticketing tool where teams collaborate on projects and
-			organize tasks in a productive and efficient way.
+			Founded in 2023, Dojo Dev Technologies (DDT) provides the software industry to efficiently deliver their products. 
+            DDT is aligned with Agile and Scrum principles actually doing more work with half the time spent.
 			</p>
 			<div class="footer-icons">
 			<a href="#"><i class="fa fa-facebook"></i></a>

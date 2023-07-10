@@ -378,8 +378,8 @@
 			<div class="footer-right">
 				<p class="footer-company-about">
 				<span>About the company</span>
-				Agile Ninja is a multi-purpose project management and ticketing tool where teams collaborate on projects and
-				organize tasks in a productive way.
+				Founded in 2023, Dojo Dev Technologies (DDT) provides the software industry to efficiently deliver their products. 
+            	DDT is aligned with Agile and Scrum principles actually doing more work with half the time spent.
 				</p>
 				<div class="footer-icons">
 				<a href="#"><i class="fa fa-facebook"></i></a>
