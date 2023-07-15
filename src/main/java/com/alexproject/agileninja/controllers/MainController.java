@@ -396,7 +396,6 @@ public class MainController {
         if(result.hasErrors()) 
         {
         	redirectAttributes.addFlashAttribute("commentErrorMsg", result.getFieldError().getDefaultMessage());
-        	// System.out.println(result.getFieldError().getDefaultMessage());
         	System.out.println(result.getFieldError().getDefaultMessage());
         	
         	return "redirect:/ticket/"+currentTicketKey;

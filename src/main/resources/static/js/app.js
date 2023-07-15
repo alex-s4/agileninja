@@ -1,5 +1,3 @@
-var regFormRole = $("#regform-roles")
-
 $(".reg-btn").click(()=>{
     window.location.href = window.location.protocol + "//" + window.location.host + "/registration"
 })
@@ -238,9 +236,12 @@ cancelEditCmntBtn.click(function(){
     
 })
 
+console.log($("#regform-roles").val())
 
-
-
+$("#regform-roles").change(()=>{
+    console.log($("#regform-roles").val())
+    console.log($("#regform-roles").attr("action"))
+})
 
 
 

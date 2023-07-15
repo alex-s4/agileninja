@@ -13,6 +13,10 @@ img.img-landing {
   height: fit-content;
 }
 
+div#admin-regForm {
+  width: 45vw;
+}
+
 div.modal-lc {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

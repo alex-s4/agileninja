@@ -39,84 +39,54 @@
 
 	<main class="main-content px-5 mx-5 mb-5">
 
-			<div class="input-group mb-3">
+			<!-- <div class="input-group mb-3">
 				<label class="input-group-text" for="regform-roles">
 					Choose a role
 				</label>
 				<select id="regform-roles">
-					<!-- <option selected>-- Choose a role --</option> -->
 					<option value="user" selected>User</option>
 					<option value="admin">Administrator</option>
 				</select>
-			</div>
+			</div> -->
 			
-			<div id="user-regForm">
-				<h1>Register as User!</h1>
-				
-				<form:form id="userRegistration" method="POST" action="/registration" modelAttribute="user">
-				
-				<p><form:errors path="user.*"/></p>
-				<p>${registrationMessageError}</p>
-					<p>
-						<form:label path="firstName">First Name:</form:label>
-						<form:input path="firstName" pattern="^[A-Za-z]+$" title="First Name must contain letters only" required="true"/>
-					</p>
-					<p>
-						<form:label path="lastName">Last Name:</form:label>
-						<form:input path="lastName"  pattern="^[A-Za-z]+$" title="Last Name must contain letters only" required="true"/>
-					</p>
-					<p>
-						<form:label path="email">Email:</form:label>
-						<form:input type="email" path="email" required="true"/>
-					</p>
-					<p>
-						<form:label path="username">Username:*</form:label>
-						<form:input path="username" pattern="[^\s]+" title="No space characters" required="true"/>
-					</p>
-					<p>
-						<form:label path="password" required="true">Password:*</form:label>
-						<form:password path="password"/>
-					</p>
-					<p>
-						<form:label path="confirm" required="true">Password Confirmation:*</form:label>
-						<form:password path="confirm"/>
-					</p>
-					<p>All fields are required</p>
-					<input for="userRegistration" type="submit" value="Register!"/>
-				</form:form>
-			</div>
+			
 			
 			<div id="admin-regForm">
-				<h1>Register as Administrator!</h1>
+				<h2 class="mb-4">Registration</h2>
+				<h5>Create an Admin Account for your Organization</h5>
 				<form:form id="adminRegistration" method="POST" action="/registrationAdmin" modelAttribute="user">
 				<p><form:errors path="user.*"/></p>
 				<p>${registrationMessageError}</p>
-					<p>
-						<form:label path="firstName">First Name:</form:label>
-						<form:input path="firstName"/>
-					</p>
-					<p>
-						<form:label path="lastName">Last Name:</form:label>
-						<form:input path="lastName"/>
-					</p>
-					<p>
-						<form:label path="email">Email:</form:label>
-						<form:input path="email"/>
-					</p>
-					<p>
-						<form:label path="username">Username:*</form:label>
-						<form:input path="username"/>
-					</p>
-					<p>
-						<form:label path="password">Password:*</form:label>
-						<form:password path="password"/>
-					</p>
-					<p>
-						<form:label path="confirm">Password Confirmation:*</form:label>
-						<form:password path="confirm"/>
-					</p>
-					<p>* - Required</p>
-					<input type="submit" for="adminRegistration" value="Register as Admin!"/>
+					
+
+					<div class="row g-3 mb-3">
+						<div class="col">
+							<form:input path="firstName" class="form-control" placeholder="First Name" aria-label="First name"/>
+						</div>
+						<div class="col">
+							<form:input path="lastName" class="form-control" placeholder="Last Name" aria-label="Last name"/>
+						</div>
+					</div>
+	
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Email</span>
+						<form:input path="email" class="form-control" placeholder="your@example.com" aria-label="Email" aria-describedby="basic-addon1"/>
+					</div>
+					
+					<div class="mb-3">
+						<form:input path="username" class="form-control" placeholder="Username" aria-label="Username"/>
+					</div>
+
+					<div class="row g-3 mb-3">
+						<div class="col">
+							<form:password path="password" class="form-control" placeholder="Password" aria-label="Password"/>
+						</div>
+						<div class="col">
+							<form:password path="confirm" class="form-control" placeholder="Confirm Password" aria-label="Confirm"/>
+						</div>
+					</div>					
+					
+					<input type="submit" for="adminRegistration" value="Register!" class="btn btn-lg btn-info"/>
 				</form:form>
 			</div>
 	</main>
@@ -171,7 +141,8 @@
 
 	<!-- JS SCRIPT -->
 	<!-- NOTE: INSERT THE JQUERY SCRIPT FIRST BEFORE THE LOCAL JS FILE -->
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="/js/app.js"></script>
 </body>
