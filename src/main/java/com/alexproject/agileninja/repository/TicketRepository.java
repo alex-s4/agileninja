@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.alexproject.agileninja.models.Priority;
@@ -16,7 +17,7 @@ import com.alexproject.agileninja.models.Type;
 import com.alexproject.agileninja.models.User;
 
 @Repository
-public interface TicketRepository extends CrudRepository<Ticket, Long> {
+public interface TicketRepository extends CrudRepository<Ticket, Long>, PagingAndSortingRepository<Ticket, Long> {
 
 	List<Ticket> findAll();
 	
