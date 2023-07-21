@@ -1,5 +1,6 @@
 package com.alexproject.agileninja.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class Project {
     
     @OneToMany(mappedBy="project", fetch=FetchType.LAZY)
     private List<Ticket> tickets;
+    
+    
+    
     
     @PrePersist
     protected void onCreate(){
@@ -101,6 +105,8 @@ public class Project {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+	
+	
     
     
     

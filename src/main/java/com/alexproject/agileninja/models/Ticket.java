@@ -1,5 +1,6 @@
 package com.alexproject.agileninja.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -96,8 +97,6 @@ public class Ticket {
     @JoinColumn(name="assignedUser_id")
 	private User assignee;
     
-	
-	
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
@@ -199,7 +198,20 @@ public class Ticket {
 	public void setTicketKey(String ticketKey) {
 		this.ticketKey = ticketKey;
 	}
-    
-    
+	
+	// Formatted Date and Time
+	private static final String DATE_AND_TIME_PATTERN = "dd-MMM-yyyy h:mm a";
+	
+	public String getCreatedAtFormatted() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
+		String formattedDate = simpleDateFormat.format(createdAt);
+		return formattedDate;
+	}
+	
+	public String getUpdatedAtFormatted() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
+		String formattedDate = simpleDateFormat.format(updatedAt);
+		return formattedDate;
+	}
     
 }

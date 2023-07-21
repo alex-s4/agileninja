@@ -1,6 +1,7 @@
 package com.alexproject.agileninja.controllers;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -100,9 +101,8 @@ public class MainController {
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         
-        // TICKET FILTERING:
-        
-        // Returns all tickets if all parameters are empty or null
+        // TICKET FILTERING: 
+        // Returns all tickets if all parameters are empty or null (no parameter)
         if((pKeyParam == null || pKeyParam.isEmpty()) && (issueTypeParam == null || issueTypeParam.isEmpty()) && (issueStatParam == null || issueStatParam.isEmpty()) && 
         	(issuePrioParam == null || issuePrioParam.isEmpty()) && (issueSevParam == null || issueSevParam.isEmpty()) && (issueAssignedParam == null || issueAssignedParam.isEmpty()))
         {

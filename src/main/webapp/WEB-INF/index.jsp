@@ -341,7 +341,12 @@
 							<td>${ticket.getTicketStatus().getIssueStatus()}</td>
 							<td>${ticket.getTicketPriority().getIssuePriority()}</td>
 							<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
-							<td>${ticket.getUpdatedAt()}</td>
+							<c:if test="${ticket.getUpdatedAt()!=null}">
+								<td>${ticket.getUpdatedAtFormatted()}</td>
+							</c:if>
+							<c:if test="${ticket.getUpdatedAt()==null}">
+								<td>${ticket.getCreatedAtFormatted()}</td>
+							</c:if>
 							<td>${ticket.getAssignee().getUsername()}</td>
 						</tr>
 						</c:forEach>
