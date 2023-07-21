@@ -201,6 +201,7 @@ public class Ticket {
 	
 	// Formatted Date and Time
 	private static final String DATE_AND_TIME_PATTERN = "dd-MMM-yyyy h:mm a";
+	private static final String DATE_PATTERN = "dd-MMM-yyyy";
 	
 	public String getCreatedAtFormatted() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
@@ -210,6 +211,18 @@ public class Ticket {
 	
 	public String getUpdatedAtFormatted() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
+		String formattedDate = simpleDateFormat.format(updatedAt);
+		return formattedDate;
+	}
+	
+	public String getCreatedAtFormattedDateOnly() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+		String formattedDate = simpleDateFormat.format(createdAt);
+		return formattedDate;
+	}
+	
+	public String getUpdatedAtFormattedDateOnly() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
 		String formattedDate = simpleDateFormat.format(updatedAt);
 		return formattedDate;
 	}

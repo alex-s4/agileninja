@@ -1,5 +1,6 @@
 package com.alexproject.agileninja.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -89,6 +90,21 @@ public class Comment {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	// Formatted Date and Time
+	private static final String DATE_AND_TIME_PATTERN = "dd-MMM-yyyy h:mm a";
+	
+	public String getCreatedAtFormatted() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
+		String formattedDate = simpleDateFormat.format(createdAt);
+		return formattedDate;
+	}
+	
+	public String getUpdatedAtFormatted() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_AND_TIME_PATTERN);
+		String formattedDate = simpleDateFormat.format(updatedAt);
+		return formattedDate;
 	}
     
     

@@ -83,7 +83,6 @@
 			</div>
 		</div>
 		
-
 		<!-- NEW TICKET FORM -->
 		<div id="staticBackdropNewTick" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -163,9 +162,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!-- BREADCRUMB -->
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -174,9 +170,6 @@
 			<li class="breadcrumb-item active" aria-current="page">${theTicket.getTicketKey()}</li>
 			</ol>
 		</nav>
-
-
-
 
 		<!-- DISPLAY/EDIT FORM 2 in 1 -->
 		<div id="edit-mode-lc">
@@ -274,11 +267,11 @@
 						<table>
 							<tr>
 								<td><p>Created:</p></td>
-								<td><p class="ms-2">${theTicket.getCreatedAt()}</p></td>
+								<td><p class="ms-2">${theTicket.getCreatedAtFormatted()}</p></td>
 							</tr>
 							<tr>
 								<td><p>Modified:</p></td>
-								<td><p class="ms-2">${theTicket.getUpdatedAt()}</p></td>
+								<td><p class="ms-2">${theTicket.getUpdatedAtFormatted()}</p></td>
 							</tr>
 						</table>
 					</div>
@@ -311,7 +304,7 @@
 						<div class="comment-cont-lc">
 
 							<div class="d-flex flex-row">
-							<h5 class="me-1">${theComment.getUser().getUsername()}&nbsp;<span>${theComment.getCreatedAt()}</span></h5>
+							<h5 class="me-1">${theComment.getUser().getUsername()}&nbsp;<span>${theComment.getCreatedAtFormatted()}</span></h5>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
 								<i>- edited</i>
 							</c:if>                

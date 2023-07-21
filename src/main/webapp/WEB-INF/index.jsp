@@ -342,10 +342,10 @@
 							<td>${ticket.getTicketPriority().getIssuePriority()}</td>
 							<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
 							<c:if test="${ticket.getUpdatedAt()!=null}">
-								<td>${ticket.getUpdatedAtFormatted()}</td>
+								<td>${ticket.getUpdatedAtFormattedDateOnly()}</td>
 							</c:if>
 							<c:if test="${ticket.getUpdatedAt()==null}">
-								<td>${ticket.getCreatedAtFormatted()}</td>
+								<td>${ticket.getCreatedAtFormattedDateOnly()}</td>
 							</c:if>
 							<td>${ticket.getAssignee().getUsername()}</td>
 						</tr>
