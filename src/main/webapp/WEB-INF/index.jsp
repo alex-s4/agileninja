@@ -337,7 +337,7 @@
 						<tr>
 							<td>${ticket.getTicketKey()}</td>
 							<td>${ticket.getTicketType().getIssueType()}</td>
-							<td><a href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketName()}</a></td>
+							<td><a target="_blank" href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketName()}</a></td>
 							<td>${ticket.getTicketStatus().getIssueStatus()}</td>
 							<td>${ticket.getTicketPriority().getIssuePriority()}</td>
 							<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
