@@ -190,7 +190,7 @@
 					<div>
 						<table>
 							<tr>
-								<td><p>Type:</p></td>
+								<td><p class="tkt-object">Type:</p></td>
 								<td>
 									<p>
 									<form:select class="issuePropDropdown dropdwn-type" path="ticketType">
@@ -200,7 +200,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p>Status:</p></td>
+								<td><p class="tkt-object">Status:</p></td>
 								<td>
 									<p>
 									<form:select class="issuePropDropdown dropdwn-stat" path="ticketStatus">
@@ -210,7 +210,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p>Priority:</p></td>
+								<td><p class="tkt-object">Priority:</p></td>
 								<td>
 									<p>
 										<form:select class="issuePropDropdown dropdwn-prio" path="ticketPriority">
@@ -220,7 +220,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p>Severity:</p></td>
+								<td><p class="tkt-object">Severity:</p></td>
 								<td>
 									<p>
 										<form:select class="issuePropDropdown dropdwn-sev" path="ticketSeverity">
@@ -239,7 +239,7 @@
 						<table>
 							<tr>
 								<td>
-									<p class="me-2">Created By:</p>
+									<p class="me-2 tkt-object">Created By:</p>
 								</td>
 								<td>
 									<!-- TO DO: REPLACE "USERNAME" TO "FIRSTNAME" + "LASTNAME" -->
@@ -248,7 +248,7 @@
 							</tr>
 							<tr>
 								<td>
-									<p>Assignee:</p>
+									<p class="tkt-object">Assignee:</p>
 								</td>
 								<td>
 									<p>
@@ -266,11 +266,11 @@
 					<div>
 						<table>
 							<tr>
-								<td><p>Created:</p></td>
+								<td><p class="tkt-object">Created:</p></td>
 								<td><p class="ms-2">${theTicket.getCreatedAtFormatted()}</p></td>
 							</tr>
 							<tr>
-								<td><p>Modified:</p></td>
+								<td><p class="tkt-object">Modified:</p></td>
 								<td><p class="ms-2">${theTicket.getUpdatedAtFormatted()}</p></td>
 							</tr>
 						</table>
@@ -301,10 +301,11 @@
 				<!-- COMMENT LIST -->
 				<c:forEach var="theComment" items="${allComments}">
 
-						<div class="comment-cont-lc">
+						<div class="comment-cont-lc pb-4">
 
 							<div class="d-flex flex-row">
-							<h5 class="me-1">${theComment.getUser().getUsername()}&nbsp;<span>${theComment.getCreatedAtFormatted()}</span></h5>
+							<p class="fs-6 me-1"><strong>${theComment.getUser().getUsername()}&nbsp;</strong></p>
+							<span class="cmt-date-and-time-lc">${theComment.getCreatedAtFormatted()}</span>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
 								<i>- edited</i>
 							</c:if>                
@@ -339,7 +340,6 @@
 							</form:form>
 							</c:if>
 							
-						
 						</div>
 					</c:forEach>
 					

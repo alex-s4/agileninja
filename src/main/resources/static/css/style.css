@@ -131,6 +131,14 @@ ul.dropdown-menu {
     /* opacity: ; */
 }
 
+.tkt-object {
+  font-weight: 700;
+}
+
+span.cmt-date-and-time-lc {
+  color: #6b6b6b
+}
+
 
 
 /* .filter-count-type, .filter-count-proj, .filter-count-stat, .filter-count-prio, .filter-count-sev, .filter-count-ass {
