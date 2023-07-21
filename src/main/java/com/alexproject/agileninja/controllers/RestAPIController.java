@@ -1,22 +1,27 @@
 package com.alexproject.agileninja.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alexproject.agileninja.models.Ticket;
+import com.alexproject.agileninja.services.TicketService;
 
 @RestController
 public class RestAPIController {
 	
+	@Autowired
+	TicketService ticketService;
 	
-	@GetMapping("/issues")
-	public String issueFilter(@RequestParam(value="proj",required=false) String pKeyParam,
-    		@RequestParam(value="type", required=false) String issueTypeParam,
-    		@RequestParam(value="status", required=false) String issueStatParam,
-    		@RequestParam(value="prio", required=false) String issuePrioParam,
-    		@RequestParam(value="severity", required=false) String issueSevParam,
-    		@RequestParam(value="assigned", required=false) String issueAssignedParam)
+	@GetMapping("/api/issues")
+	public List<Ticket> issueFilter()
 	{
-		return "You searched for " + pKeyParam;
+		return ticketService.findAllTickets();
 	}
 
 }

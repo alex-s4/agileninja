@@ -2,7 +2,12 @@ package com.alexproject.agileninja.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.alexproject.agileninja.models.Priority;
@@ -16,14 +21,15 @@ import com.alexproject.agileninja.repository.ProjectRepository;
 import com.alexproject.agileninja.repository.TicketRepository;
 
 @Service
+@Transactional
 public class TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
-	
 	@Autowired
 	private ProjectRepository projectRepository;
 
+	private static final int PAGE_SIZE = 10;
 	
 	// Create
 	public Ticket createTicket(Ticket ticket)
@@ -82,19 +88,28 @@ public class TicketService {
 											  List<Type> filteredTypes, 
 											  List<Status> filteredStatus,
 											  List<Priority> filteredPriority,
-											  List<Severity> filteredSeverity)
-	{
-		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity);
-	}
-	
-	public List<Ticket> findTicketsByProjects(List<Project> filteredProjects, 
-											  List<Type> filteredTypes, 
-											  List<Status> filteredStatus,
-											  List<Priority> filteredPriority,
 											  List<Severity> filteredSeverity,
 											  List<User> filteredAssignee)
 	{
 		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee);
 	}
+	
+	
+	// Returns all tickets by specified projects and set number of tickets per page
+	public Page<Ticket> findTicketsByProjectsPerPage(List<Project> filteredProjects, 
+											  List<Type> filteredTypes, 
+											  List<Status> filteredStatus,
+											  List<Priority> filteredPriority,
+											  List<Severity> filteredSeverity,
+											  List<User> filteredAssignee,
+											  int pageNumber)
+	{
+		PageRequest pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, Sort.Direction.ASC, "ticketKey");
+		Page<Ticket> tickets = ticketRepository.findAll(pageRequest);
+		
+		return ticketRepository.findAll(pageRequest);
+	}
+	
+	
 	
 }

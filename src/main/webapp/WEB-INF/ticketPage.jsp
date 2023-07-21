@@ -101,7 +101,9 @@
 								<form:label class="input-group-text" path="project">Project</form:label>
 								<form:select path="project" class="form-select">
 									<form:option value="-" label="--Please Select a Project--"/>
-									<form:options items="${existingProjects}" itemValue="id" itemLabel="projectName"/>
+									<c:forEach var="aProject" items="${existingProjects}">
+										<form:option value="${aProject.getId()}"><c:out value="${aProject.getProjectName()} (${aProject.getProjectKey()})" /></form:option>
+									</c:forEach>
 								</form:select>
 							</div>
 
