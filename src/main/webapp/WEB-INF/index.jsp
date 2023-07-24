@@ -44,7 +44,7 @@
 	
 	<!-- MAIN CONTENT -->
 	<main class="main-content px-5 mx-5  mb-5">
-			<h1>Hi ${currentUser.getFirstName()}</h1>
+			<h2>Search for issues</h2>
 			
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->
 			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button> -->
@@ -297,7 +297,7 @@
 											<div class="form-check">
 												<input class="form-check-input-assignee" type="checkbox" value="${user.getUsername()}" id="as${user.getId()}">
 												<label class="form-check-label-assignee" for="as${user.getId()}">
-													${user.getUsername()}
+													${user.getFirstName()} ${user.getLastName()}
 												</label>
 											</div>
 										
@@ -347,7 +347,7 @@
 							<c:if test="${ticket.getUpdatedAt()==null}">
 								<td>${ticket.getCreatedAtFormattedDateOnly()}</td>
 							</c:if>
-							<td>${ticket.getAssignee().getUsername()}</td>
+							<td>${ticket.getAssignee().getFirstName()} ${ticket.getAssignee().getLastName()}</td>
 						</tr>
 						</c:forEach>
 					</tbody>

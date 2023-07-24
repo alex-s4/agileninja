@@ -94,6 +94,10 @@ button.edit-comment-btn:hover {
     display: none;
 }
 
+.edited-label-lc > span {
+  color: rgba(161, 0, 0, 0.836);
+}
+
 .navbar-img {
     width: 12em;
 }

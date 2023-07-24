@@ -183,7 +183,7 @@
 					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
 					<h3>Description</h3>
 					
-					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" required="true"/>
+					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" required="true" placeholder="(description is empty)" aria-placeholder="(description is empty)"/>
 				</div>
 
 				<div>
@@ -243,7 +243,7 @@
 								</td>
 								<td>
 									<!-- TO DO: REPLACE "USERNAME" TO "FIRSTNAME" + "LASTNAME" -->
-									<p class="ms-1">${theTicket.getReporter().getUsername()}</p>
+									<p class="ms-1">${theTicket.getReporter().getFirstName()} ${theTicket.getReporter().getLastName()}</p>
 								</td>
 							</tr>
 							<tr>
@@ -253,7 +253,12 @@
 								<td>
 									<p>
 									<form:select class="issuePropDropdown" path="assignee">
-										<form:options items="${allUsers}" itemValue="id" itemLabel="username" />
+										<form:options items="${allUsers}" itemValue="id" itemLabel="fullName" />
+
+										<!-- <c:forEach var="user" items="${allUsers}">
+											<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
+										</c:forEach> -->
+
 									</form:select>
 									</p>
 								</td>
@@ -311,10 +316,10 @@
 						<div class="comment-cont-lc pb-4">
 
 							<div class="d-flex flex-row">
-							<p class="fs-6 me-1"><strong>${theComment.getUser().getUsername()}&nbsp;</strong></p>
+							<p class="fs-6 me-1"><strong>${theComment.getUser().getFirstName()} ${theComment.getUser().getLastName()}&nbsp;</strong></p>
 							<span class="cmt-date-and-time-lc">${theComment.getCreatedAtFormatted()}</span>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
-								<i class="ms-2 edited-label-lc">- edited</i>
+								<i class="ms-2 edited-label-lc">- <span>edited</span></i>
 							</c:if>                
 								<c:if test="${currentUser.equals(theComment.getUser())}">
 								<button id="edit-cmt-btn${theComment.getId()}" class="ms-4 edit-comment-btn btn btn-outline-primary btn-sm" type="button">

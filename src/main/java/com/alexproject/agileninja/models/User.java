@@ -183,5 +183,11 @@ public class User {
 		this.username = username;
 	}
     
+	
+	// Custom methods
+	public String getFullName() {
+		String fullName = getFirstName() + " " + getLastName();
+		return fullName;
+	}
     
 }
