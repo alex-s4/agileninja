@@ -40,7 +40,6 @@ public class Ticket {
     @NotEmpty(message="Ticket name should not be empty")
     private String ticketName;
     
-    @Size(min=1, message="Please insert description")
     private String ticketDescription;
     
     private String ticketKey;

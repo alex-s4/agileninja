@@ -65,7 +65,7 @@
 							<p>
 								<form:label path="projectKey" class="me-1">Project Key</form:label> 
 								<i class="tooltip-lc fa-sharp fa-solid fa-circle-info me-3"><span class="tooltiptext-lc p-2 px-4">Choose a descriptive prefix for your project’s issue keys to recognize work from this project.</span></i>
-								<form:input path="projectKey" minlength="2" maxlength="3" style="text-transform:uppercase" required="true" placeholder="MAP"/>
+								<form:input class="ps-1" path="projectKey" minlength="2" maxlength="3" style="text-transform:uppercase" required="true" placeholder="MAP" />
 							</p>
 											
 							<!-- Hidden Field/s -->
@@ -271,7 +271,14 @@
 							</tr>
 							<tr>
 								<td><p class="tkt-object">Modified:</p></td>
-								<td><p class="ms-2">${theTicket.getUpdatedAtFormatted()}</p></td>
+								<td>
+									<c:if test="${theTicket.getUpdatedAt()!=null}">
+										<p class="ms-2">${theTicket.getUpdatedAtFormatted()}</p>
+									</c:if>
+									<c:if test="${theTicket.getUpdatedAt()==null}">
+										<p class="ms-2">${theTicket.getCreatedAtFormatted()}</p>
+									</c:if>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -307,7 +314,7 @@
 							<p class="fs-6 me-1"><strong>${theComment.getUser().getUsername()}&nbsp;</strong></p>
 							<span class="cmt-date-and-time-lc">${theComment.getCreatedAtFormatted()}</span>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
-								<i>- edited</i>
+								<i class="ms-2 edited-label-lc">- edited</i>
 							</c:if>                
 								<c:if test="${currentUser.equals(theComment.getUser())}">
 								<button id="edit-cmt-btn${theComment.getId()}" class="ms-4 edit-comment-btn btn btn-outline-primary btn-sm" type="button">
