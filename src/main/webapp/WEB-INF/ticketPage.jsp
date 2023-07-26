@@ -46,7 +46,7 @@
 
 		<!-- NEW PROJECT FORM -->
 		<div id="staticBackdropNewProj" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- MODAL CONTENT -->
 					<div class="modal-header">
