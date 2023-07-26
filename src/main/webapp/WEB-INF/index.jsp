@@ -111,8 +111,8 @@
 					
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="project">Project</form:label>
-									<form:select path="project" class="form-select">
-										<form:option value="-" label="--Please Select a Project--"/>
+									<form:select path="project" class="form-select"  required="true">
+										<form:option value="" label="-- Please Select a Project --" selected="true" disabled="true" />
 										<c:forEach var="aProject" items="${existingProjects}">
 											<form:option value="${aProject.getId()}"><c:out value="${aProject.getProjectName()} (${aProject.getProjectKey()})" /></form:option>
 										</c:forEach>
@@ -121,12 +121,12 @@
 
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketName">Title</form:label>
-									<form:input class="form-control" path="ticketName" type="text"/>
+									<form:input class="form-control" path="ticketName" type="text" required="true"/>
 								</div>
 
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="assignee">Assignee</form:label>
-									<form:select class="form-select" path="assignee">
+									<form:select class="form-select" path="assignee" required="true">
 										<c:forEach var="user" items="${allUsers}">
 											<form:option value="${user.getId()}"><c:out value="${user.firstName} ${user.lastName} (${user.getUsername()})"/></form:option>
 										</c:forEach>
