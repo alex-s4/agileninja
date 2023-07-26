@@ -171,11 +171,20 @@ $checkboxes.on("change", function(){
   $('.issuePropDropdown').change(function(){
     $('form#issuePropForm').submit()
     console.log(this[0].getAttribute("value"))
+    console.log("test")
   })
 
   $('.issuePropInputText').blur(function(){
     $('form#issuePropForm').submit()
   })
+  $('.issuePropInputText').on("input", function(e){
+    var target = e.target
+
+    // Count the current number of chars in Ticket Name field
+    var tktNameCurrentLength = target.value.length;
+
+    console.log(tktNameCurrentLength)
+})
 
 
 

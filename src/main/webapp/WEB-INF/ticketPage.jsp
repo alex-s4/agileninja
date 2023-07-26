@@ -180,10 +180,10 @@
 			<div class="d-flex flex-row">
 
 				<div>
-					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}"/></h1>
+					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield" path="ticketName" value="${theTicket.getTicketName()}" required="true" /></h1>
 					<h3>Description</h3>
 					
-					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" required="true" placeholder="(description is empty)" aria-placeholder="(description is empty)"/>
+					<form:textarea class="issuePropInputText form-control form-control-lc" path="ticketDescription" cols="125" rows="10" placeholder="(description is empty)" aria-placeholder="(description is empty)"/>
 				</div>
 
 				<div>
