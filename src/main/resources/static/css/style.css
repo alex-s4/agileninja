@@ -153,6 +153,10 @@ a.header-current-user-wholename {
   text-decoration: underline;
 } */
 
+.serif-font1{
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .landingpg-subjumbotron{
   background-color: #FFF8E8;
 }

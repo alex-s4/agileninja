@@ -97,7 +97,7 @@
         <!-- JUMBOTRON -->
         <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
             <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">We build things that helps build things</h1>
+                <h1 class="display-5 fw-bold landing-prod-slogan">We build things that helps build things</h1>
                 <p class="col-md-8 fs-4">In Agile Ninja&trade;, we have the ability to get things done and respond to change.</p>
                 <button type="button" class="btn btn-info mt-4 me-3 btn-lg reg-btn">Know more!</button>
             </div>
@@ -126,7 +126,7 @@
 
             
             <div class="container text-center py-3">
-            <p class="h2 mt-4 mb-5 text-center">The Manifesto for Agile Software Development</p>
+            <p class="h2 mt-4 mb-5 text-center serif-font1">The Manifesto for Agile Software Development</p>
             <div class="row">
                     <div class="col">
                         <div class="card" style="width: 18rem;">
