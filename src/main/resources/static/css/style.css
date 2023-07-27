@@ -143,6 +143,16 @@ span.cmt-date-and-time-lc {
   color: #6b6b6b
 }
 
+a.header-current-user-wholename {
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+/* a.header-current-user-wholename:hover {
+  text-decoration: underline;
+} */
+
 
 
 /* .filter-count-type, .filter-count-proj, .filter-count-stat, .filter-count-prio, .filter-count-sev, .filter-count-ass {

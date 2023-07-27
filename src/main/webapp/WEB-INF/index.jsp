@@ -34,9 +34,12 @@
 					</div>
 				</div>
 
+				<div class="me-5">
+					<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
+				</div>
 				<form id="logoutForm" method="POST" action="/logout">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<input class="btn btn-secondary" type="submit" value="Logout!" />
+					<button class="btn btn-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout!</button>
 				</form>
 		</div>
 	  </nav>
@@ -45,9 +48,6 @@
 	<!-- MAIN CONTENT -->
 	<main class="main-content px-5 mx-5  mb-5">
 			<h2>Search for issues</h2>
-			
-			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewProj()">New Project</button> -->
-			<!-- <button class="new-proj-btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="openFormNewTkt()">New Ticket</button> -->
 						
 			<c:if test="${newProjSuccess!=null}">
 				<div class="alert alert-info position-absolute" role="alert">
@@ -84,7 +84,6 @@
 								<form:input path="projectOwner" value="${currentUser.getId()}" hidden="true"/>
 								
 								<div class="modal-footer">
-									<!-- <a href="#" onclick="closeFormNewProj()">cancel</a> -->
 									<button type="button" class="btn btn-link" data-bs-dismiss="modal">Cancel</button>
 									<input class="btn btn-primary" for="projectCreation" type="submit" value="Create"/>
 								</div>

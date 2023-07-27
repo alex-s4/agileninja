@@ -35,9 +35,13 @@
 					</div>
 				</div>
 
+				
+				<div class="me-5">
+					<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
+				</div>
 				<form id="logoutForm" method="POST" action="/logout">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<input class="btn btn-secondary" type="submit" value="Logout!" />
+					<button class="btn btn-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout!</button>
 				</form>
 		</div>
 	</nav>
