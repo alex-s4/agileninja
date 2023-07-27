@@ -13,8 +13,8 @@ img.img-landing {
   height: fit-content;
 }
 
-div#admin-regForm {
-  width: 45vw;
+div#admin-regForm > div {
+  width: 50vw;
 }
 
 div.modal-lc {

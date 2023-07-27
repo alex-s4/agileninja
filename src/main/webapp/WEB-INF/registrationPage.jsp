@@ -51,43 +51,47 @@
 			
 			
 			
-			<div id="admin-regForm">
-				<h2 class="mb-4">Registration</h2>
-				<h5>Create an Admin Account for your Organization</h5>
-				<form:form id="adminRegistration" method="POST" action="/registrationAdmin" modelAttribute="user">
-				<p><form:errors path="user.*"/></p>
-				<p>${registrationMessageError}</p>
-					
-
-					<div class="row g-3 mb-3">
-						<div class="col">
-							<form:input path="firstName" class="form-control" placeholder="First Name" aria-label="First name"/>
-						</div>
-						<div class="col">
-							<form:input path="lastName" class="form-control" placeholder="Last Name" aria-label="Last name"/>
-						</div>
-					</div>
+			<div id="admin-regForm" class="d-flex justify-content-center mt-5">
+				<div class="p-4 bg-secondary bg-opacity-10 rounded-3 border border-dark border-2">
+					<h2 class="mb-4"><i class="fa-solid fa-user-plus ms-1 me-3"></i>Registration</h2>
+					<h5>Create an Admin Account for your Organization</h5>
+					<form:form id="adminRegistration" method="POST" action="/registrationAdmin" modelAttribute="user">
+					<p><form:errors path="user.*"/></p>
+					<p>${registrationMessageError}</p>
+						
 	
-					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">Email</span>
-						<form:input path="email" class="form-control" placeholder="your@example.com" aria-label="Email" aria-describedby="basic-addon1"/>
-					</div>
-					
-					<div class="mb-3">
-						<form:input path="username" class="form-control" placeholder="Username" aria-label="Username"/>
-					</div>
+						<div class="row g-3 mb-3">
+							<div class="col">
+								<form:input path="firstName" class="form-control" placeholder="First Name" aria-label="First name"/>
+							</div>
+							<div class="col">
+								<form:input path="lastName" class="form-control" placeholder="Last Name" aria-label="Last name"/>
+							</div>
+						</div>
+		
+						<div class="input-group mb-3">
+							<span class="input-group-text" id="basic-addon1">Email</span>
+							<form:input path="email" class="form-control" placeholder="your@example.com" aria-label="Email" aria-describedby="basic-addon1"/>
+						</div>
+						
+						<div class="mb-3">
+							<form:input path="username" class="form-control" placeholder="Username" aria-label="Username"/>
+						</div>
+	
+						<div class="row g-3 mb-3">
+							<div class="col">
+								<form:password path="password" class="form-control" placeholder="Password" aria-label="Password"/>
+							</div>
+							<div class="col">
+								<form:password path="confirm" class="form-control" placeholder="Confirm Password" aria-label="Confirm"/>
+							</div>
+						</div>					
+						
+						<input type="submit" for="adminRegistration" value="Register!" class="btn btn-lg btn-info me-4"/>
+						<a href="/">back to Main Page</a>
+					</form:form>
 
-					<div class="row g-3 mb-3">
-						<div class="col">
-							<form:password path="password" class="form-control" placeholder="Password" aria-label="Password"/>
-						</div>
-						<div class="col">
-							<form:password path="confirm" class="form-control" placeholder="Confirm Password" aria-label="Confirm"/>
-						</div>
-					</div>					
-					
-					<input type="submit" for="adminRegistration" value="Register!" class="btn btn-lg btn-info"/>
-				</form:form>
+				</div>
 			</div>
 	</main>
 

@@ -26,8 +26,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj">New Project</button>
-						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick">New Ticket</button>
+						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
+						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
 						<a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
 						<a class="nav-link" href="#">Profile</a>
 						
@@ -308,7 +308,7 @@
 						</div>
 
 						<div>
-							<button class="btn btn-primary btn-sm" id="btn-submit-filter">Apply Filter</button>
+							<button class="btn btn-primary btn-sm" id="btn-submit-filter"><i class="fa-solid fa-filter me-2"></i>Apply Filter</button>
 							<!-- <button class="btn btn-outline-secondary btn-sm" id="btn-clear-filter">Clear Filter</button> -->
 						</div>
 					</div>
@@ -321,14 +321,14 @@
 				<table class="table table-hover">
 					<thead>
 						<tr class="table-secondary">
-							<th scope="col">Key</th>
-							<th scope="col">Type</th>
-							<th scope="col">Issue Name</th>
-							<th scope="col">Status</th>
-							<th scope="col">Priority</th>
-							<th scope="col">Severity</th>
-							<th scope="col">Modified</th>
-							<th scope="col">Assigned to</th>
+							<th scope="col">Key <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Type <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Issue Name <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Status <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Priority <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Severity <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Modified <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Assigned to <i class="fa-solid fa-sort ms-2"></i></th>
 						</tr>
 					</thead>
 					<tbody>

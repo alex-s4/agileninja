@@ -27,8 +27,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj">New Project</button>
-						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick">New Ticket</button>
+						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
+						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
 						<a class="nav-link" href="/dashboard">Dashboard</a>
 						<a class="nav-link" href="#">Profile</a>
 						

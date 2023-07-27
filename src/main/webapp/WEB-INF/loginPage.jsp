@@ -126,7 +126,7 @@
 
             
             <div class="container text-center py-3">
-            <p class="h2 mt-4 mb-5 text-center serif-font1">The Manifesto for Agile Software Development</p>
+            <p class="h2 mt-4 mb-5 text-center serif-font1 fw-bold">The Manifesto for Agile Software Development</p>
             <div class="row">
                     <div class="col">
                         <div class="card" style="width: 18rem;">
