@@ -339,7 +339,7 @@
 									<p><form:textarea path="text" cols="60" /></p>
 
 
-									<input type="submit" value="Save" class="btn btn-primary btn-sm">
+									<input type="submit" value="Save" class="btn btn-primary btn-sm edit-cmt-submit-btn">
 									<button type="button" class="btn btn-outline-dark btn-sm canc-btn">Cancel</button>
 									
 										

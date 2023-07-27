@@ -222,7 +222,16 @@ $(".tkt-new-comment").on("input", function(e){
 
 })
 
+$(".edit-comment-form").on("input", function(e){
+    var editCommentCurrentLength = e.target.value.length;
 
+    if(editCommentCurrentLength>0){
+        $(".edit-cmt-submit-btn").removeAttr("disabled")
+        // console.log("empty")
+    } else if (editCommentCurrentLength==0){
+        $(".edit-cmt-submit-btn").attr("disabled", "true")
+    }
+})
 
 
 
