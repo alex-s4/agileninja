@@ -168,24 +168,53 @@ $checkboxes.on("change", function(){
 
 
 // Ticket Page: Auto-update when select dropdown is changed or text fields loses focus
-  $('.issuePropDropdown').change(function(){
+$('.issuePropDropdown').change(function(){
     $('form#issuePropForm').submit()
     console.log(this[0].getAttribute("value"))
     console.log("test")
-  })
-
-  $('.issuePropInputText').blur(function(){
-    $('form#issuePropForm').submit()
-  })
-  $('.issuePropInputText').on("input", function(e){
-    var target = e.target
-
-    // Count the current number of chars in Ticket Name field
-    var tktNameCurrentLength = target.value.length;
-
-    console.log(tktNameCurrentLength)
 })
 
+
+// Count the current number of chars in Ticket Name field
+// var currentLength = $('.issuePropInputText').attr("value").length;
+// console.log(currentLength)
+
+$('.input-tkt-name').on("input", function(e){
+    var target = e.target
+    var tktNameCurrentLength = target.value.length;
+    var tktDescCurrentLength = $('.input-tkt-desc').val().length
+    
+    $('.input-tkt-name').blur(function(e){
+        // Prevents ticket name to be submitted when blank
+        // console.log(tktNameCurrentLength)
+        if(tktNameCurrentLength!=0 && tktDescCurrentLength!=0){
+            
+            $('form#issuePropForm').submit()
+        }
+        
+    })
+    
+    // console.log(tktNameCurrentLength)
+})
+
+$(".input-tkt-desc").blur(function(){
+    var tktNameCurrentLength = $('.input-tkt-name').val().length
+    var tktDescCurrentLength = $('.input-tkt-desc').val().length
+
+    // Prevent empty ticket form fields to be submitted when blank
+    if(tktNameCurrentLength!=0){
+        console.log("test")
+        $('form#issuePropForm').submit()
+    }
+})
+
+
+
+
+
+// $("body").on("mouseup", function(){
+//     console.log("click")
+// })
 
 
 
@@ -245,7 +274,7 @@ cancelEditCmntBtn.click(function(){
     
 })
 
-console.log($("#regform-roles").val())
+// console.log($("#regform-roles").val())
 
 $("#regform-roles").change(()=>{
     console.log($("#regform-roles").val())
