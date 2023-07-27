@@ -153,7 +153,13 @@ a.header-current-user-wholename {
   text-decoration: underline;
 } */
 
+.landingpg-subjumbotron{
+  background-color: #FFF8E8;
+}
 
+.landingpg-subsubjumbotron {
+  background-color: #EAE0DF;
+}
 
 /* .filter-count-type, .filter-count-proj, .filter-count-stat, .filter-count-prio, .filter-count-sev, .filter-count-ass {
     display: none;

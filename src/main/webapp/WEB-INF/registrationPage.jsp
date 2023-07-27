@@ -125,7 +125,7 @@
 			<p class="footer-company-about">
 			<span>About the company</span>
 			Founded in 2023, Dojo Dev Technologies (DDT) provides the software industry to efficiently deliver their products. 
-            DDT is aligned with Agile and Scrum principles actually doing more work with half the time spent.
+            DDT is aligned with Agile and Scrum principles.
 			</p>
 			<div class="footer-icons">
 			<a href="#"><i class="fa fa-facebook"></i></a>
