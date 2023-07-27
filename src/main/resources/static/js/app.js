@@ -209,12 +209,21 @@ $(".input-tkt-desc").blur(function(){
 })
 
 
+// Prevent Button to enable when comment field is empty
+$(".tkt-new-comment").on("input", function(e){
+    var newCommentCurrentLength = e.target.value.length;
+
+    if(newCommentCurrentLength>0){
+        $(".new-cmt-submit-btn").removeAttr("disabled")
+        // console.log("empty")
+    } else if (newCommentCurrentLength==0){
+        $(".new-cmt-submit-btn").attr("disabled", "true")
+    }
+
+})
 
 
 
-// $("body").on("mouseup", function(){
-//     console.log("click")
-// })
 
 
 

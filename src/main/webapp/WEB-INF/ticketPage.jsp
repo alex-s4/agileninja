@@ -361,12 +361,12 @@
 						<form:form method="POST" action="/ticket/${theTicket.getId()}/comment/new" modelAttribute="newComment" class="mt-4"> 
 						
 							<form:label path="text"><h6>Add Comment:</h6></form:label>
-							<p><form:textarea path="text" cols="60" /></p>
+							<p><form:textarea class="tkt-new-comment" path="text" cols="60" /></p>
 
 							<!-- FIXED FIELDS TO HIDE -->
 							<form:input path="ticket" value="${theTicket.getId()}" hidden="true"></form:input>
 							<form:input path="user" value="${currentUser.getId()}" hidden="true"></form:input>
-							<input type="submit" class="btn btn-sm btn-outline-primary" value="Add" >
+							<input type="submit" class="btn btn-sm btn-outline-primary new-cmt-submit-btn" value="Add" disabled>
 							<!-- POPUP ERROR -->
 							<c:if test="${commentErrorMsg!=null}">
 								<div class="alert alert-danger position-absolute" role="alert">
