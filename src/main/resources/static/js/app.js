@@ -282,17 +282,21 @@ $(".edit-comment-btn").click(function(){
 
 // Form will be replaced back by the comment text display upon click of "cancel" button
 cancelEditCmntBtn.click(function(){
-    $(this).closest(".edit-comment-form").css("display", "none")
     var commentContent = $(this).parent().prev()
+    var editCommentForm = $(this).closest(".edit-comment-form")
+    
+    editCommentForm.css("display", "none")
+    
+    // Restore current edit comment field value when cancel button is clicked
+    $('.edit-cmt-textcontent').val(commentContent.html())
     
     commentContent.css("display", "initial")
     
-    // console.log($(this).parent().prev().html())
     
     
 })
 
-// console.log($("#regform-roles").val())
+
 
 $("#regform-roles").change(()=>{
     console.log($("#regform-roles").val())

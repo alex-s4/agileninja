@@ -336,7 +336,7 @@
 							<c:if test="${currentUser.equals(theComment.getUser())}">
 							<form:form class="edit-comment-form" method="POST" action="/ticket/${theTicket.getId()}/comment/${theComment.getId()}/edit" modelAttribute="theComment${theComment.id}"> 
 								
-									<p><form:textarea path="text" cols="60" /></p>
+									<p><form:textarea path="text" cols="60" class="edit-cmt-textcontent" /></p>
 
 
 									<input type="submit" value="Save" class="btn btn-primary btn-sm edit-cmt-submit-btn">
