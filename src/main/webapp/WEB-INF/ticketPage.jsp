@@ -13,7 +13,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="bg-light">
 
   
 	<!-- NAVIGATIONAL BAR -->
@@ -195,8 +195,9 @@
 						<table>
 							<tr>
 								<td><p class="tkt-object"><i class="fa-solid fa-magnifying-glass me-2 width-18-lc text-center"></i>Type:</p></td>
-								<td>
+								<td class="ps-3">
 									<p>
+										${theTicket.getTicketType().getIconCode()}
 									<form:select class="issuePropDropdown dropdwn-type" path="ticketType">
 										<form:options items="${types}" itemValue="id" itemLabel="issueType" />
 									</form:select>
@@ -205,8 +206,9 @@
 							</tr>
 							<tr>
 								<td><p class="tkt-object"><i class="fa-solid fa-file-circle-check me-2 width-18-lc text-center"></i>Status:</p></td>
-								<td>
+								<td class="ps-3">
 									<p>
+										${theTicket.getTicketStatus().getIconCode()}
 									<form:select class="issuePropDropdown dropdwn-stat" path="ticketStatus">
 										<form:options items="${statuses}" itemValue="id" itemLabel="issueStatus" />
 									</form:select>
@@ -215,8 +217,9 @@
 							</tr>
 							<tr>
 								<td><p class="tkt-object"><i class="fa-solid fa-arrow-up me-2 width-18-lc text-center"></i>Priority:</p></td>
-								<td>
+								<td class="ps-3">
 									<p>
+										${theTicket.getTicketPriority().getIconCode()}
 										<form:select class="issuePropDropdown dropdwn-prio" path="ticketPriority">
 											<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority" />
 										</form:select>
@@ -225,8 +228,9 @@
 							</tr>
 							<tr>
 								<td><p class="tkt-object"><i class="fa-solid fa-exclamation me-2 width-18-lc text-center"></i>Severity:</p></td>
-								<td>
+								<td class="ps-3">
 									<p>
+										${theTicket.getTicketSeverity().getIconCode()}
 										<form:select class="issuePropDropdown dropdwn-sev" path="ticketSeverity">
 											<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity" />
 										</form:select>
@@ -339,7 +343,7 @@
 						<div class="comment-cont-lc pb-4">
 
 							<div class="d-flex flex-row mb-2">
-							<a href="#" class="fs-6 me-1"><i class="fa-solid fa-user-ninja me-2"></i><strong>${theComment.getUser().getFirstName()} ${theComment.getUser().getLastName()}&nbsp;</strong></a>
+							<a href="#" class="fs-6 me-2"><i class="fa-solid fa-user-ninja me-2"></i><strong>${theComment.getUser().getFirstName()} ${theComment.getUser().getLastName()}</strong></a>
 							<span class="cmt-date-and-time-lc">${theComment.getCreatedAtFormatted()}</span>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
 								<i class="ms-2 edited-label-lc">- <span>edited</span></i>

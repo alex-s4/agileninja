@@ -26,6 +26,8 @@ public class Type {
 	@OneToMany(mappedBy="ticketType", fetch=FetchType.LAZY)
 	private List<Ticket> tickets;
 	
+	private String iconCode;
+	
 	public Type() {}
 
 	public Long getId() {
@@ -51,7 +53,18 @@ public class Type {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
+	public String getIconCode() {
+		return iconCode;
+	}
+
+	public void setIconCode(String iconCode) {
+		this.iconCode = iconCode;
+	}
 	
+	public String getIconAndTypeName() {
+		return iconCode + issueType;
+	}
 	
 	
 }

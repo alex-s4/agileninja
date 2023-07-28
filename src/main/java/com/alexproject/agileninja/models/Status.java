@@ -22,6 +22,8 @@ public class Status {
 	@NotEmpty(message="Issue Status is required")
 	private String issueStatus;
 	
+	private String iconCode;
+	
 	// One to Many relationship with ticket
 	@OneToMany(mappedBy="ticketStatus", fetch=FetchType.LAZY)
 	private List<Ticket> tickets;
@@ -51,6 +53,16 @@ public class Status {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
+	public String getIconCode() {
+		return iconCode;
+	}
+
+	public void setIconCode(String iconCode) {
+		this.iconCode = iconCode;
+	}
 	
-	
+	public String getIconAndStatusName() {
+		return iconCode + issueStatus;
+	}
 }

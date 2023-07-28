@@ -22,6 +22,8 @@ public class Severity {
 	@NotEmpty(message="Issue Severity is required")
 	private String issueSeverity;
 	
+	private String iconCode;
+	
 	// One to Many relationship with ticket
 	@OneToMany(mappedBy="ticketSeverity", fetch=FetchType.LAZY)
 	private List<Ticket> tickets;
@@ -50,6 +52,18 @@ public class Severity {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	public String getIconCode() {
+		return iconCode;
+	}
+
+	public void setIconCode(String iconCode) {
+		this.iconCode = iconCode;
+	}
+	
+	public String getIconAndSeverityName() {
+		return iconCode + issueSeverity;
 	}
 	
 	

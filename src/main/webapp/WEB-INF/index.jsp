@@ -13,7 +13,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="bg-light">
 
 	<!-- NAVIGATIONAL BAR -->
 	<nav class="navbar navbar-expand-lg fixed-top px-5">
@@ -47,7 +47,7 @@
 	
 	<!-- MAIN CONTENT -->
 	<main class="main-content px-5 mx-5  mb-5">
-			<h2>Search for issues</h2>
+			<h2 class="mb-3"><i class="fa-solid fa-magnifying-glass me-3"></i>Search for issues</h2>
 						
 			<c:if test="${newProjSuccess!=null}">
 				<div class="alert alert-info position-absolute" role="alert">
@@ -108,6 +108,7 @@
 							<form:form id="ticketCreation" method="POST" action="/ticket/new" modelAttribute="newTicket">
 								<p><form:errors path="ticket.*"/></p>
 					
+								<!-- PROJECT SELECT DROPDOWN FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="project">Project</form:label>
 									<form:select path="project" class="form-select"  required="true">
@@ -118,11 +119,13 @@
 									</form:select>
 								</div>
 
+								<!-- TITLE TEXT FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketName">Title</form:label>
 									<form:input class="form-control" path="ticketName" type="text" required="true"/>
 								</div>
 
+								<!-- ASSIGNEE SELECT DROPDOWN FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="assignee">Assignee</form:label>
 									<form:select class="form-select" path="assignee" required="true">
@@ -132,6 +135,7 @@
 									</form:select>
 								</div>
 
+								<!-- SEVERITY SELECT DROPDOWN FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketSeverity">Severity</form:label>
 									
@@ -139,27 +143,29 @@
 										<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
 									</form:select>
 
-									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc">
+									<!-- <i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc">
 										<span class="tooltiptext-lc p-2 px-4">Some Text Here</span>
-									</i>
+									</i> -->
 								</div>
 
+								<!-- PRIORITY SELECT DROPDOWN FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketPriority">Priority</form:label>
 									<form:select class="form-select" path="ticketPriority">
 										<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
 									</form:select>
 
-									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i>
+									<!-- <i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i> -->
 								</div>
 
+								<!-- TYPE SELECT DROPDOWN FIELD -->
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketType">Type</form:label>
 									<form:select class="form-select" path="ticketType">
 										<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
 									</form:select>
 
-									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i>
+									<!-- <i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i> -->
 								</div>
 
 								<div class="form-floating">
@@ -223,8 +229,8 @@
 										<c:forEach var="type" items="${types}">
 											<div class="form-check">
 												<input class="form-check-input-type" type="checkbox" value="${type.getIssueType()}" id="ty${type.getId()}">
-												<label class="form-check-label-type" for="ty${type.getId()}">
-													${type.getIssueType()}
+												<label class="form-check-label-type ms-2" for="ty${type.getId()}">
+													${type.getIconAndTypeName()}
 												</label>
 											</div>
 										</c:forEach>
@@ -243,8 +249,8 @@
 										<c:forEach var="status" items="${statuses}">
 											<div class="form-check">
 												<input class="form-check-input-status" type="checkbox" value="${status.getIssueStatus()}" id="st${status.getId()}">
-												<label class="form-check-label-status" for="st${status.getId()}">
-													${status.getIssueStatus()}
+												<label class="form-check-label-status ms-2" for="st${status.getId()}">
+													${status.getIconAndStatusName()}
 												</label>
 											</div>
 										</c:forEach>
@@ -263,8 +269,8 @@
 										<c:forEach var="priority" items="${priorities}">
 											<div class="form-check">
 												<input class="form-check-input-priority" type="checkbox" value="${priority.getIssuePriority()}" id="pr${priority.getId()}">
-												<label class="form-check-label-priority" for="pr${priority.getId()}">
-													${priority.getIssuePriority()}
+												<label class="form-check-label-priority ms-2" for="pr${priority.getId()}">
+													${priority.getIconAndPriorityName()}
 												</label>
 											</div>
 										</c:forEach>
@@ -283,8 +289,8 @@
 										<li>
 											<div class="form-check">
 												<input class="form-check-input-severity" type="checkbox" value="${severity.getIssueSeverity()}" id="sv${severity.getId()}">
-												<label class="form-check-label-severity" for="sv${severity.getId()}">
-													${severity.getIssueSeverity()}
+												<label class="form-check-label-severity ms-2" for="sv${severity.getId()}">
+													${severity.getIconAndSeverityName()}
 												</label>
 											</div>
 										</li>
@@ -317,7 +323,7 @@
 						</div>
 
 						<div>
-							<button class="btn btn-primary btn-sm" id="btn-submit-filter"><i class="fa-solid fa-filter me-2"></i>Apply Filter</button>
+							<button class="btn btn-success btn-sm" id="btn-submit-filter"><i class="fa-solid fa-filter me-2"></i>Apply</button>
 							<!-- <button class="btn btn-outline-secondary btn-sm" id="btn-clear-filter">Clear Filter</button> -->
 						</div>
 					</div>
@@ -344,11 +350,11 @@
 						<c:forEach var="ticket" items="${ticketsByProject}">
 						<tr>
 							<td>${ticket.getTicketKey()}</td>
-							<td>${ticket.getTicketType().getIssueType()}</td>
+							<td>${ticket.getTicketType().getIconAndTypeName()}</td>
 							<td><a target="_blank" href="/ticket/${ticket.getTicketKey()}">${ticket.getTicketName()}</a></td>
-							<td>${ticket.getTicketStatus().getIssueStatus()}</td>
-							<td>${ticket.getTicketPriority().getIssuePriority()}</td>
-							<td>${ticket.getTicketSeverity().getIssueSeverity()}</td>
+							<td>${ticket.getTicketStatus().getIconAndStatusName()}</td>
+							<td>${ticket.getTicketPriority().getIconAndPriorityName()}</td>
+							<td>${ticket.getTicketSeverity().getIconAndSeverityName()}</td>
 							<c:if test="${ticket.getUpdatedAt()!=null}">
 								<td>${ticket.getUpdatedAtFormattedDateOnly()}</td>
 							</c:if>

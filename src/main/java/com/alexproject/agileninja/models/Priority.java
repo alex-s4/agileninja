@@ -22,6 +22,8 @@ public class Priority {
 	@NotEmpty(message="Issue Priority is required")
 	private String issuePriority;
 	
+	private String iconCode;
+	
 	// One to Many relationship with ticket
 	@OneToMany(mappedBy="ticketPriority", fetch=FetchType.LAZY)
 	private List<Ticket> tickets;
@@ -51,6 +53,16 @@ public class Priority {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
+	public String getIconCode() {
+		return iconCode;
+	}
+
+	public void setIconCode(String iconCode) {
+		this.iconCode = iconCode;
+	}
 	
-	
+	public String getIconAndPriorityName() {
+		return iconCode + issuePriority;
+	}
 }
