@@ -43,6 +43,8 @@ public class Ticket {
     
     private String ticketKey;
     
+    private String fileUrl="";
+    
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="project_id")
     private Project project;
@@ -196,7 +198,14 @@ public class Ticket {
 	public void setTicketKey(String ticketKey) {
 		this.ticketKey = ticketKey;
 	}
-	
+	public String getFileUrl() {
+		return fileUrl;
+	}
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+
 	// Formatted Date and Time
 	private static final String DATE_AND_TIME_PATTERN = "dd-MMM-yyyy h:mm a";
 	private static final String DATE_PATTERN = "dd-MMM-yyyy";

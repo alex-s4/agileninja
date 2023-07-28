@@ -179,7 +179,7 @@
 		<div id="edit-mode-lc">
 
 			<!-- START OF FORM TAG -->
-			<form:form id="issuePropForm" method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket">
+			<form:form id="issuePropForm" method="POST" action="/ticket/${theTicket.getId()}/edit" modelAttribute="theTicket" enctype="multipart/form-data">
 				
 			<div class="d-flex flex-row">
 
@@ -294,13 +294,30 @@
 				</div>
 			</div>
 
-				<!-- HIDDEN FIELDS -->
-				<form:input path="reporter" value="${theTicket.getReporter().getId()}" hidden="true"></form:input>
-				<form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
-				<form:input path="project" value="${theTicket.getProject().getId()}" hidden="true"></form:input>
-				<input type="hidden" name="_method" value="put">
 
-				<!-- <input type="submit" value="Update"> -->
+
+			<!-- UPLOAD FILE INPUT FIELD - DO NOT REMOVE, THIS IS FOR FUTURE DEVELOPMENT -->
+			<!-- <div class="input-group mb-3">
+				<label class="input-group-text" for="fileUrl">Upload</label>
+				<form:input path="fileUrl" type="file" class="form-control"></form:input>
+			</div> -->
+
+
+			<!-- <c:if test="${theTicket.getFileUrl()!=null}">
+				<img src="/${theTicket.getFileUrl()}" alt="Some Image">
+			</c:if> -->
+			
+
+
+
+			<!-- HIDDEN FIELDS -->
+			<form:input path="reporter" value="${theTicket.getReporter().getId()}" hidden="true"></form:input>
+			<form:input path="ticketKey" value="${theTicket.getTicketKey()}" hidden="true"></form:input>
+			<form:input path="project" value="${theTicket.getProject().getId()}" hidden="true"></form:input>
+			<input type="hidden" name="_method" value="put">
+
+			<!-- <input type="submit" value="Update"> -->
+
 			</form:form>
 			<!-- END OF FORM TAG -->
 			

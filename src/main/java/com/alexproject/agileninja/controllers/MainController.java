@@ -1,7 +1,6 @@
 package com.alexproject.agileninja.controllers;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alexproject.agileninja.models.Comment;
@@ -29,6 +29,7 @@ import com.alexproject.agileninja.models.Ticket;
 import com.alexproject.agileninja.models.Type;
 import com.alexproject.agileninja.models.User;
 import com.alexproject.agileninja.services.CommentService;
+import com.alexproject.agileninja.services.FileService;
 import com.alexproject.agileninja.services.PriorityService;
 import com.alexproject.agileninja.services.ProjectService;
 import com.alexproject.agileninja.services.SeverityService;
@@ -56,6 +57,8 @@ public class MainController {
 	private TicketService ticketService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private FileService fileService;
 	
 	
 	// Render App's Home Page
@@ -354,7 +357,7 @@ public class MainController {
 	
 	
 	@PutMapping("/ticket/{ticketId}/edit")
-	public String updateTicket (@Valid @ModelAttribute("ticketId") Ticket ticket, BindingResult resultTicket,
+	public String updateTicket (@Valid @ModelAttribute("ticketId") Ticket ticket, BindingResult resultTicket, @RequestParam("fileUrl") MultipartFile incomingFile,
 								@PathVariable Long ticketId, Principal principal, Model model, RedirectAttributes redirectAttributes)
 	{
 		// Gets the info of current logged user - MANDATORY for all paths
@@ -364,7 +367,7 @@ public class MainController {
         // Gets the key of current ticket
         String currentTicketKey = ticketService.findTicketById(ticketId).getTicketKey();
         
-        
+        ticket.setFileUrl(fileService.save(incomingFile));
         
         // Successfully updated ticket info
         ticketService.updateTicket(ticket);
