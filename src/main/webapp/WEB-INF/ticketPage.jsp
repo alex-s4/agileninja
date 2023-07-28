@@ -194,7 +194,7 @@
 					<div>
 						<table>
 							<tr>
-								<td><p class="tkt-object">Type:</p></td>
+								<td><p class="tkt-object"><i class="fa-solid fa-magnifying-glass me-2 width-18-lc text-center"></i>Type:</p></td>
 								<td>
 									<p>
 									<form:select class="issuePropDropdown dropdwn-type" path="ticketType">
@@ -204,7 +204,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p class="tkt-object">Status:</p></td>
+								<td><p class="tkt-object"><i class="fa-solid fa-file-circle-check me-2 width-18-lc text-center"></i>Status:</p></td>
 								<td>
 									<p>
 									<form:select class="issuePropDropdown dropdwn-stat" path="ticketStatus">
@@ -214,7 +214,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p class="tkt-object">Priority:</p></td>
+								<td><p class="tkt-object"><i class="fa-solid fa-arrow-up me-2 width-18-lc text-center"></i>Priority:</p></td>
 								<td>
 									<p>
 										<form:select class="issuePropDropdown dropdwn-prio" path="ticketPriority">
@@ -224,7 +224,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><p class="tkt-object">Severity:</p></td>
+								<td><p class="tkt-object"><i class="fa-solid fa-exclamation me-2 width-18-lc text-center"></i>Severity:</p></td>
 								<td>
 									<p>
 										<form:select class="issuePropDropdown dropdwn-sev" path="ticketSeverity">
@@ -243,7 +243,7 @@
 						<table>
 							<tr>
 								<td>
-									<p class="me-2 tkt-object">Created By:</p>
+									<p class="me-2 tkt-object"><i class="fa-solid fa-square-pen me-2 width-18-lc text-center"></i>Created By:</p>
 								</td>
 								<td>
 									<!-- TO DO: REPLACE "USERNAME" TO "FIRSTNAME" + "LASTNAME" -->
@@ -252,7 +252,7 @@
 							</tr>
 							<tr>
 								<td>
-									<p class="tkt-object">Assignee:</p>
+									<p class="tkt-object"><i class="fa-solid fa-user me-2 width-18-lc text-center"></i>Assignee:</p>
 								</td>
 								<td>
 									<p>
@@ -297,15 +297,17 @@
 
 
 			<!-- UPLOAD FILE INPUT FIELD - DO NOT REMOVE, THIS IS FOR FUTURE DEVELOPMENT -->
-			<!-- <div class="input-group mb-3">
-				<label class="input-group-text" for="fileUrl">Upload</label>
-				<form:input path="fileUrl" type="file" class="form-control"></form:input>
-			</div> -->
 
-
-			<!-- <c:if test="${theTicket.getFileUrl()!=null}">
+			
+			<div class="input-group mb-3">
+				<!-- <label class="input-group-text" for="fileUrl">Upload</label> -->
+				<form:input path="fileUrl" type="file" class="form-control" hidden="true"></form:input>
+			</div>
+			
+			
+			<c:if test="${theTicket.getFileUrl()!=null}">
 				<img src="/${theTicket.getFileUrl()}" alt="Some Image">
-			</c:if> -->
+			</c:if>
 			
 
 
@@ -329,15 +331,15 @@
 			<!-- COMMENT SECTION -->
 			<div class="comment-section-lc">
 
-				<h3>Comments: (${allComments.size()})</h3>
+				<h3><i class="fa-solid fa-pen-to-square me-3"></i>Comments: (${allComments.size()})</h3>
 				<hr>
 				<!-- COMMENT LIST -->
 				<c:forEach var="theComment" items="${allComments}">
 
 						<div class="comment-cont-lc pb-4">
 
-							<div class="d-flex flex-row">
-							<p class="fs-6 me-1"><strong>${theComment.getUser().getFirstName()} ${theComment.getUser().getLastName()}&nbsp;</strong></p>
+							<div class="d-flex flex-row mb-2">
+							<a href="#" class="fs-6 me-1"><i class="fa-solid fa-user-ninja me-2"></i><strong>${theComment.getUser().getFirstName()} ${theComment.getUser().getLastName()}&nbsp;</strong></a>
 							<span class="cmt-date-and-time-lc">${theComment.getCreatedAtFormatted()}</span>
 							<c:if test="${theComment.getUpdatedAt()!=null}">
 								<i class="ms-2 edited-label-lc">- <span>edited</span></i>

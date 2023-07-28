@@ -134,9 +134,14 @@
 
 								<div class="input-group mb-3">
 									<form:label class="input-group-text" path="ticketSeverity">Severity</form:label>
+									
 									<form:select class="form-select" path="ticketSeverity">
 										<form:options items="${severities}" itemValue="id" itemLabel="issueSeverity"/>
 									</form:select>
+
+									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc">
+										<span class="tooltiptext-lc p-2 px-4">Some Text Here</span>
+									</i>
 								</div>
 
 								<div class="input-group mb-3">
@@ -144,6 +149,8 @@
 									<form:select class="form-select" path="ticketPriority">
 										<form:options items="${priorities}" itemValue="id" itemLabel="issuePriority"/>
 									</form:select>
+
+									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i>
 								</div>
 
 								<div class="input-group mb-3">
@@ -151,6 +158,8 @@
 									<form:select class="form-select" path="ticketType">
 										<form:options items="${types}" itemValue="id" itemLabel="issueType"/>
 									</form:select>
+
+									<i class="fa-sharp fa-solid fa-circle-info ms-2 my-auto tooltip-lc"></i>
 								</div>
 
 								<div class="form-floating">
