@@ -361,7 +361,7 @@
 							<c:if test="${ticket.getUpdatedAt()==null}">
 								<td>${ticket.getCreatedAtFormattedDateOnly()}</td>
 							</c:if>
-							<td>${ticket.getAssignee().getFirstName()} ${ticket.getAssignee().getLastName()}</td>
+							<td><i class="fa-solid fa-user-ninja me-2"></i>${ticket.getAssignee().getFirstName()} ${ticket.getAssignee().getLastName()}</td>
 						</tr>
 						</c:forEach>
 					</tbody>
