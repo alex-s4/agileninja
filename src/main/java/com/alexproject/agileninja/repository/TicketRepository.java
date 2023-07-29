@@ -18,7 +18,10 @@ import com.alexproject.agileninja.models.User;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Long>, PagingAndSortingRepository<Ticket, Long> {
+	
+	public static final String ROW_COUNT = "15";
 
+	@Query("SELECT t FROM Ticket t ORDER BY t.ticketKey ASC")
 	List<Ticket> findAll();
 	
 	Optional<Ticket> findTicketById(Long id);
@@ -37,23 +40,29 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>, PagingAn
 	
 	List<Ticket> findTicketByProjectIn(List<Project> projects);
 	
-	@Query("SELECT t FROM Ticket t WHERE "
-			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
-			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5")
-	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
-								 List<Type> filteredTypes,
-								 List<Status> filteredStatus,
-								 List<Priority> filteredPriority,
-								 List<Severity> filteredSeverity);
 	
 	@Query("SELECT t FROM Ticket t WHERE "
 			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
-			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5 AND t.assignee in ?6")
+			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5 AND t.assignee in ?6 ORDER BY t.ticketKey ASC")
 	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
 								 List<Type> filteredTypes,
 								 List<Status> filteredStatus,
 								 List<Priority> filteredPriority,
 								 List<Severity> filteredSeverity,
 								 List<User> filteredAssignee);
+	
+//	@Query("SELECT t FROM Ticket t WHERE "
+//			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
+//			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5 AND t.assignee in ?6 ORDER BY ?7")
+//	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
+//								 List<Type> filteredTypes,
+//								 List<Status> filteredStatus,
+//								 List<Priority> filteredPriority,
+//								 List<Severity> filteredSeverity,
+//								 List<User> filteredAssignee,
+//								 String tableColumn);
+	
+	
+	
 	
 }

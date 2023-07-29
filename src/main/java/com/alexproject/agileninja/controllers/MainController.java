@@ -70,6 +70,7 @@ public class MainController {
     		@RequestParam(value="prio", required=false) String issuePrioParam,
     		@RequestParam(value="severity", required=false) String issueSevParam,
     		@RequestParam(value="assigned", required=false) String issueAssignedParam,
+    		@RequestParam(value="orderBy", required=false) String tableColumn,
     		Principal principal, 
     		Model model, 
     		Project project, 

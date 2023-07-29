@@ -94,21 +94,32 @@ public class TicketService {
 		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee);
 	}
 	
+//	public List<Ticket> findTicketsByProjects(List<Project> filteredProjects, 
+//			  List<Type> filteredTypes, 
+//			  List<Status> filteredStatus,
+//			  List<Priority> filteredPriority,
+//			  List<Severity> filteredSeverity,
+//			  List<User> filteredAssignee,
+//			  String tableColumn)
+//	{
+//	return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee, tableColumn);
+//	}
+	
 	
 	// Returns all tickets by specified projects and set number of tickets per page
-	public Page<Ticket> findTicketsByProjectsPerPage(List<Project> filteredProjects, 
-											  List<Type> filteredTypes, 
-											  List<Status> filteredStatus,
-											  List<Priority> filteredPriority,
-											  List<Severity> filteredSeverity,
-											  List<User> filteredAssignee,
-											  int pageNumber)
-	{
-		PageRequest pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, Sort.Direction.ASC, "ticketKey");
-		Page<Ticket> tickets = ticketRepository.findAll(pageRequest);
-		
-		return ticketRepository.findAll(pageRequest);
-	}
+//	public Page<Ticket> findTicketsByProjectsPerPage(List<Project> filteredProjects, 
+//											  List<Type> filteredTypes, 
+//											  List<Status> filteredStatus,
+//											  List<Priority> filteredPriority,
+//											  List<Severity> filteredSeverity,
+//											  List<User> filteredAssignee,
+//											  int pageNumber)
+//	{
+//		PageRequest pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, Sort.Direction.ASC, "ticketKey");
+//		Page<Ticket> tickets = ticketRepository.findAll(pageRequest);
+//		
+//		return ticketRepository.findAll(pageRequest);
+//	}
 	
 	
 	
