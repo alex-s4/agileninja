@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -190,42 +191,36 @@ public class MainController {
             {
             	if(pKeyParam.isBlank() || pKeyParam==null) {
                 	filteredProjects.addAll(allProjects);
-//                	model.addAttribute("filterProjSize", "All");
                 } else {
                 	model.addAttribute("filterProjSize", filteredProjects.size());
                 }
                 if (issueTypeParam.isBlank() || issueTypeParam==null) {
                 	filteredTypes.addAll(allTypes);
-//                	model.addAttribute("filterTypeSize", "All");
                 } else {
                 	model.addAttribute("filterTypeSize", filteredTypes.size());
                 }
                 if (issueStatParam.isBlank() || issueStatParam==null) {
                 	filteredStatuses.addAll(allStatus);
-//                	model.addAttribute("filterStatSize", "All");
                 } else {
                 	model.addAttribute("filterStatSize", filteredStatuses.size());
                 }
                 if (issuePrioParam.isBlank() || issuePrioParam==null) {
                 	filteredPriorities.addAll(allPriorities);
-//                	model.addAttribute("filterPrioSize", "All");
                 } else {
                 	model.addAttribute("filterPrioSize", filteredPriorities.size());
                 }
                 if (issueSevParam.isBlank() || issueSevParam==null) {
                 	filteredSeverity.addAll(allSeverities);
-//                	model.addAttribute("filterSevSize", "All");
                 } else {
                 	model.addAttribute("filterSevSize", filteredSeverity.size());
                 }
                 if(issueAssignedParam.isBlank() || issueAssignedParam==null) {
                 	filteredAssignee.addAll(allUsers);
-//                	model.addAttribute("filterAssSize", "All");
                 } else {
                 	model.addAttribute("filterAssSize", filteredAssignee.size());
                 }
                 
-                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee));
+                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketStatus")));
                 
                 
             	//model.addAttribute("filterAssSize", filteredAssignee.size());
@@ -243,7 +238,7 @@ public class MainController {
             	model.addAttribute("filterSevSize", filteredSeverity.size());
             	model.addAttribute("filterAssSize", filteredAssignee.size());
             	
-            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee)); 
+            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketStatus"))); 
             }
             
             

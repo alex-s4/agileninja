@@ -94,16 +94,17 @@ public class TicketService {
 		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee);
 	}
 	
-//	public List<Ticket> findTicketsByProjects(List<Project> filteredProjects, 
-//			  List<Type> filteredTypes, 
-//			  List<Status> filteredStatus,
-//			  List<Priority> filteredPriority,
-//			  List<Severity> filteredSeverity,
-//			  List<User> filteredAssignee,
-//			  String tableColumn)
-//	{
-//	return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee, tableColumn);
-//	}
+	public List<Ticket> findTicketsByProjects(List<Project> filteredProjects, 
+			  List<Type> filteredTypes, 
+			  List<Status> filteredStatus,
+			  List<Priority> filteredPriority,
+			  List<Severity> filteredSeverity,
+			  List<User> filteredAssignee,
+			  Sort sort)
+	{
+		System.out.println("sort meth");
+	return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee, sort);
+	}
 	
 	
 	// Returns all tickets by specified projects and set number of tickets per page

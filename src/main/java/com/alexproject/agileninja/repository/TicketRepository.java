@@ -3,9 +3,11 @@ package com.alexproject.agileninja.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.alexproject.agileninja.models.Priority;
@@ -51,16 +53,16 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>, PagingAn
 								 List<Severity> filteredSeverity,
 								 List<User> filteredAssignee);
 	
-//	@Query("SELECT t FROM Ticket t WHERE "
-//			+ "t.project in ?1 AND t.ticketType in ?2 AND t.ticketStatus in ?3 "
-//			+ "AND t.ticketPriority in ?4 AND t.ticketSeverity in ?5 AND t.assignee in ?6 ORDER BY ?7")
-//	List<Ticket> findByProjectIn(List<Project> filteredProjects, 
-//								 List<Type> filteredTypes,
-//								 List<Status> filteredStatus,
-//								 List<Priority> filteredPriority,
-//								 List<Severity> filteredSeverity,
-//								 List<User> filteredAssignee,
-//								 String tableColumn);
+	@Query("SELECT t FROM Ticket t WHERE "
+			+ "t.project in :projects AND t.ticketType in :types AND t.ticketStatus in :statuses "
+			+ "AND t.ticketPriority in :priorities AND t.ticketSeverity in :severities AND t.assignee in :assignees")
+	List<Ticket> findByProjectIn(@Param(value="projects") List<Project> filteredProjects, 
+								 @Param(value="types") List<Type> filteredTypes,
+								 @Param(value="statuses") List<Status> filteredStatus,
+								 @Param(value="priorities") List<Priority> filteredPriority,
+								 @Param(value="severities") List<Severity> filteredSeverity,
+								 @Param(value="assignees") List<User> filteredAssignee,
+								 Sort sort);
 	
 	
 	
