@@ -48,8 +48,10 @@
 	
 	<!-- MAIN CONTENT -->
 	<main class="main-content px-5 mx-5  mb-5">
+			
 			<h2 class="mb-3"><i class="fa-solid fa-magnifying-glass me-3"></i>Search for issues</h2>
-						
+				
+			
 			<c:if test="${newProjSuccess!=null}">
 				<div class="alert alert-info position-absolute" role="alert">
 					${newProjSuccess}
@@ -197,6 +199,8 @@
 					<div class="d-flex flex-row filter-checkbox-cont">
 						<div class="d-flex flex-row justify-content-start">
 							
+							<p class="dash-filter-text fw-bold fs-4 me-4">Filter:</p>
+
 							<!-- 1. PROJECT FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -222,8 +226,8 @@
 							<!-- 2. ISSUE TYPE FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-									<span>Type</span>
-									<span class="badge text-bg-secondary filter-count-type">${filterTypeSize}</span>
+									<span class="me-2">Type</span>
+									<span class="badge text-bg-dark filter-count-type">${filterTypeSize}</span>
 								</button>
 								<ul class="dropdown-menu">
 									<li>
@@ -242,8 +246,8 @@
 							<!-- 3. ISSUE STATUS FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-									<span>Status</span>
-									<span class="badge text-bg-secondary filter-count-stat">${filterStatSize}</span>
+									<span class="me-2">Status</span>
+									<span class="badge text-bg-dark filter-count-stat">${filterStatSize}</span>
 								</button>
 								<ul class="dropdown-menu">
 									<li>
@@ -262,8 +266,8 @@
 							<!-- 4. ISSUE PRIORITY FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-									<span>Priority</span>
-									<span class="badge text-bg-secondary filter-count-prio">${filterPrioSize}</span>
+									<span class="me-2">Priority</span>
+									<span class="badge text-bg-dark filter-count-prio">${filterPrioSize}</span>
 								</button>
 								<ul class="dropdown-menu">
 									<li>
@@ -282,8 +286,8 @@
 							<!-- 5. ISSUE SEVERITY FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-									<span>Severity</span>
-									<span class="badge text-bg-secondary filter-count-sev">${filterSevSize}</span>
+									<span class="me-2">Severity</span>
+									<span class="badge text-bg-dark filter-count-sev">${filterSevSize}</span>
 								</button>
 								<ul class="dropdown-menu">
 									<c:forEach var="severity" items="${severities}">
@@ -302,8 +306,8 @@
 							<!-- 6. ISSUE ASSIGNEE FILTER -->
 							<div class="input-group mb-3 me-2">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-									<span>Assignee</span>
-									<span class="badge text-bg-secondary filter-count-ass">${filterAssSize}</span>
+									<span class="me-2">Assignee</span>
+									<span class="badge text-bg-dark filter-count-ass">${filterAssSize}</span>
 								</button>
 								<ul class="dropdown-menu">
 								<c:forEach var="user" items="${allUsers}">

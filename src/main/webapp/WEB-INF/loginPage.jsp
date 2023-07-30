@@ -34,8 +34,8 @@
 					</div>
 				</div>
 		
-                <button type="button" class="btn btn-info px-4 me-3 btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">Login</button>
-                <button type="button" class="btn btn-warning px-3 me-3 btn-sm rounded-pill reg-btn">Join for FREE</button>
+                <button type="button" class="btn btn-info px-4 me-3 btn-sm rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">Log In</button>
+                <button type="button" class="btn btn-warning px-3 me-3 btn-sm rounded-pill reg-btn fw-semibold">Join for FREE</button>
 		</div>
 	  </nav>
 
