@@ -336,14 +336,14 @@
 				<table class="table table-hover">
 					<thead>
 						<tr class="table-secondary">
-							<th scope="col">Key <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Type <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Issue Name <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Status <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Priority <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Severity <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Modified <i class="fa-solid fa-sort ms-2"></i></th>
-							<th scope="col">Assigned to <i class="fa-solid fa-sort ms-2"></i></th>
+							<th scope="col">Key <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-key"></i></th>
+							<th scope="col">Type <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-type"></i></th>
+							<th scope="col">Issue Name <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-name"></i></th>
+							<th scope="col">Status <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-status"></i></th>
+							<th scope="col">Priority <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-priority"></i></th>
+							<th scope="col">Severity <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-severity"></i></th>
+							<th scope="col">Modified <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-modified"></i></th>
+							<th scope="col">Assigned to <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-assignee"></i></th>
 						</tr>
 					</thead>
 					<tbody>

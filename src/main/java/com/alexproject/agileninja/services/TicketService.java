@@ -42,6 +42,10 @@ public class TicketService {
 	{
 		return ticketRepository.findAll();
 	}
+	public List<Ticket> findAllTickets(Sort sort)
+	{
+		return ticketRepository.findAll(sort);
+	}
 	
 	public Ticket findTicketById(Long id)
 	{
@@ -102,8 +106,7 @@ public class TicketService {
 			  List<User> filteredAssignee,
 			  Sort sort)
 	{
-		System.out.println("sort meth");
-	return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee, sort);
+		return ticketRepository.findByProjectIn(filteredProjects, filteredTypes, filteredStatus, filteredPriority, filteredSeverity, filteredAssignee, sort);
 	}
 	
 	

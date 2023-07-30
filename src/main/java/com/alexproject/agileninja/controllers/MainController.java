@@ -105,13 +105,21 @@ public class MainController {
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
+        System.out.println(tableColumn);
         
         // TICKET FILTERING: 
         // Returns all tickets if all parameters are empty or null (no parameter)
         if((pKeyParam == null || pKeyParam.isEmpty()) && (issueTypeParam == null || issueTypeParam.isEmpty()) && (issueStatParam == null || issueStatParam.isEmpty()) && 
-        	(issuePrioParam == null || issuePrioParam.isEmpty()) && (issueSevParam == null || issueSevParam.isEmpty()) && (issueAssignedParam == null || issueAssignedParam.isEmpty()))
+        	(issuePrioParam == null || issuePrioParam.isEmpty()) && (issueSevParam == null || issueSevParam.isEmpty()) && (issueAssignedParam == null || issueAssignedParam.isEmpty())) 
+//        	&&(tableColumn == null || tableColumn.isEmpty()))
         {
-        	model.addAttribute("ticketsByProject", ticketService.findAllTickets());
+        	//model.addAttribute("ticketsByProject", ticketService.findAllTickets());
+        	
+        	if(tableColumn == null || tableColumn.isEmpty()) {
+            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by("ticketKey")));
+            } else {
+            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by(tableColumn)));
+            } 
         } 
         // Filters the ticket if parameter has values
         else 
@@ -220,11 +228,14 @@ public class MainController {
                 	model.addAttribute("filterAssSize", filteredAssignee.size());
                 }
                 
-                model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketStatus")));
+                if(tableColumn == null || tableColumn.isEmpty()) {
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketKey")));
+                } else {
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(tableColumn)));
+                }
+                	
                 
-                
-            	//model.addAttribute("filterAssSize", filteredAssignee.size());
-                
+                           
                 	
                 
             }
@@ -238,7 +249,11 @@ public class MainController {
             	model.addAttribute("filterSevSize", filteredSeverity.size());
             	model.addAttribute("filterAssSize", filteredAssignee.size());
             	
-            	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketStatus"))); 
+            	if(tableColumn == null || tableColumn.isEmpty()) {
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketKey")));
+                } else {
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(tableColumn)));
+                } 
             }
             
             

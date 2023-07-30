@@ -3,7 +3,7 @@ $(".reg-btn").click(()=>{
 })
 
 
-$('input[type="checkbox"], #btn-clear-filter').click(function () {
+$('input[type="checkbox"], #btn-clear-filter, .btn-lc-sorter').click(function (e) {
         
     // Get values from Project ("proj") Filter
     // get checked values
@@ -109,11 +109,54 @@ $('input[type="checkbox"], #btn-clear-filter').click(function () {
         $(".filter-count-ass").html(checkedValuesAssignee.length)
     }
 
+    var columnToSort = ""; 
+
+    // SORT TABLE COLUMN
+    // switch (e.target.id)
+    // {
+    //     case "sort-key":
+    //         columnToSort = "ticketKey"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         console.log(document.URL)
+    //         break;
+    //     case "sort-type":
+    //         columnToSort = "ticketType"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         console.log(document.URL)
+    //         break;
+    //     case "sort-name":
+    //         columnToSort = "ticketName"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    //     case "sort-status":
+    //         columnToSort = "ticketStatus"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    //     case "sort-priority":
+    //         columnToSort = "ticketPriority"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    //     case "sort-severity":
+    //         columnToSort = "ticketSeverity"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    //     case "sort-modified":
+    //         columnToSort = "updatedAt"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    //     case "sort-assignee":
+    //         columnToSort = "assignee"
+    //         window.history.replaceState({path:currentURL},'',currentURL)
+    //         break;
+    // }
+
     // CREATES A QUERY PARAMETER
     // IMPORTANT: As much as possible, do not rename your request parameter as same as member variable of an object to avoid type error 
     var queryParam = '?proj=' + checkedValuesProj.join(',') + '&type=' + checkedValuesType.join(',') 
                     + '&status=' + checkedValuesStatus.join(',') + '&prio=' + checkedValuesPriority.join(',')
-                    + '&severity=' + checkedValuesSeverity.join(',') + '&assigned=' + checkedValuesAssignee.join(','); // create query param
+                    + '&severity=' + checkedValuesSeverity.join(',') + '&assigned=' + checkedValuesAssignee.join(',')
+                    //+ '&orderBy='
+                    // creates query param
 
     
     //window.location.href="http://localhost:8080/?"+queryParam;
@@ -121,22 +164,21 @@ $('input[type="checkbox"], #btn-clear-filter').click(function () {
     var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
     window.history.replaceState({path:currentURL},'',currentURL)
     
+    
 
 
-
-    $("#btn-clear-filter").click(function(){
-        queryParam="?proj=&type=&status=&prio=&severity=&assigned="
-        currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
-        window.location.href=currentURL
-        $('input[type="checkbox"]').prop('checked', false)
-    })
+    // $("#btn-clear-filter").click(function(){
+    //     queryParam="?proj=&type=&status=&prio=&severity=&assigned="
+    //     currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryParam;
+    //     window.location.href=currentURL
+    //     $('input[type="checkbox"]').prop('checked', false)
+    // })
     
 });
 
 $("#btn-submit-filter").click(function(){
     window.location.href = document.URL;
-}
-)
+})
 
 // $("#btn-clear-filter").click(()=>{
 //     console.log($('input[type="checkbox"]'))
@@ -296,12 +338,60 @@ cancelEditCmntBtn.click(function(){
     
 })
 
-
-
-$("#regform-roles").change(()=>{
-    console.log($("#regform-roles").val())
-    console.log($("#regform-roles").attr("action"))
+$(".btn-lc-sorter").click(function(){
+    switch (this.id)
+    {
+        case "sort-key":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketKey"
+            break;
+        case "sort-type":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketType"
+            break;
+        case "sort-name":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketName"
+            break;
+        case "sort-status":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketStatus"
+            break;
+        case "sort-priority":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketPriority"
+            break;
+        case "sort-severity":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketSeverity"
+            break;
+        case "sort-modified":
+            // code here
+            window.location.href = document.URL + "&orderBy=updatedAt"
+            break;
+        // case "sort-assignee":
+        //     // code here
+        //     console.log(8)
+        //     break;
+    }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $("#regform-roles").change(()=>{
+//     console.log($("#regform-roles").val())
+//     console.log($("#regform-roles").attr("action"))
+// })
 
 
 

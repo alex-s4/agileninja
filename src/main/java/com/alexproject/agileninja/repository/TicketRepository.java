@@ -23,8 +23,8 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>, PagingAn
 	
 	public static final String ROW_COUNT = "15";
 
-	@Query("SELECT t FROM Ticket t ORDER BY t.ticketKey ASC")
 	List<Ticket> findAll();
+	List<Ticket> findAll(Sort sort);
 	
 	Optional<Ticket> findTicketById(Long id);
 	

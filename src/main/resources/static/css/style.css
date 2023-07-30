@@ -176,6 +176,10 @@ a.header-current-user-wholename {
   width: 18px;
 }
 
+.btn-lc-sorter {
+  cursor: pointer;
+}
+
 /* .filter-count-type, .filter-count-proj, .filter-count-stat, .filter-count-prio, .filter-count-sev, .filter-count-ass {
     display: none;
 } */
