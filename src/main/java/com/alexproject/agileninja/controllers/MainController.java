@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -72,6 +73,7 @@ public class MainController {
     		@RequestParam(value="severity", required=false) String issueSevParam,
     		@RequestParam(value="assigned", required=false) String issueAssignedParam,
     		@RequestParam(value="orderBy", required=false) String tableColumn,
+    		@RequestParam(value="orderIn", required=false) String colDirection,
     		Principal principal, 
     		Model model, 
     		Project project, 
@@ -105,7 +107,14 @@ public class MainController {
         // To ensure status of all newly created tickets are BACKLOG (id: 1)
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
-        System.out.println(tableColumn);
+        
+        
+        // Either Ascending (ASC) or Descending (DESC)
+        Direction orderIn = (colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        
+        System.out.println(colDirection);
+        System.out.println(orderIn);
+        
         
         // TICKET FILTERING: 
         // Returns all tickets if all parameters are empty or null (no parameter)
@@ -116,9 +125,9 @@ public class MainController {
         	//model.addAttribute("ticketsByProject", ticketService.findAllTickets());
         	
         	if(tableColumn == null || tableColumn.isEmpty()) {
-            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by("ticketKey")));
+            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by(orderIn, "ticketKey")));
             } else {
-            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by(tableColumn)));
+            	model.addAttribute("ticketsByProject", ticketService.findAllTickets(Sort.by(orderIn, tableColumn)));
             } 
         } 
         // Filters the ticket if parameter has values
@@ -229,9 +238,9 @@ public class MainController {
                 }
                 
                 if(tableColumn == null || tableColumn.isEmpty()) {
-                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketKey")));
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, "ticketKey")));
                 } else {
-                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(tableColumn)));
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, tableColumn)));
                 }
                 	
                 
@@ -250,9 +259,9 @@ public class MainController {
             	model.addAttribute("filterAssSize", filteredAssignee.size());
             	
             	if(tableColumn == null || tableColumn.isEmpty()) {
-                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by("ticketKey")));
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, "ticketKey")));
                 } else {
-                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(tableColumn)));
+                	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, tableColumn)));
                 } 
             }
             

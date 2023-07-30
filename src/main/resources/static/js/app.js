@@ -343,31 +343,31 @@ $(".btn-lc-sorter").click(function(){
     {
         case "sort-key":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketKey"
+            window.location.href = document.URL + "&orderBy=ticketKey&orderIn="
             break;
         case "sort-type":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketType"
+            window.location.href = document.URL + "&orderBy=ticketType&orderIn="
             break;
         case "sort-name":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketName"
+            window.location.href = document.URL + "&orderBy=ticketName&orderIn="
             break;
         case "sort-status":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketStatus"
+            window.location.href = document.URL + "&orderBy=ticketStatus&orderIn="
             break;
         case "sort-priority":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketPriority"
+            window.location.href = document.URL + "&orderBy=ticketPriority&orderIn="
             break;
         case "sort-severity":
             // code here
-            window.location.href = document.URL + "&orderBy=ticketSeverity"
+            window.location.href = document.URL + "&orderBy=ticketSeverity&orderIn="
             break;
         case "sort-modified":
             // code here
-            window.location.href = document.URL + "&orderBy=updatedAt"
+            window.location.href = document.URL + "&orderBy=updatedAt&orderIn="
             break;
         // case "sort-assignee":
         //     // code here
