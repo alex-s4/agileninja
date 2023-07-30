@@ -308,9 +308,9 @@
 			</div>
 			
 			
-			<c:if test="${theTicket.getFileUrl()!=null}">
+			<!-- <c:if test="${theTicket.getFileUrl()!=null || theTicket.getFileUrl().isEmpty()}">
 				<img src="/${theTicket.getFileUrl()}" alt="Some Image">
-			</c:if>
+			</c:if> -->
 			
 
 
