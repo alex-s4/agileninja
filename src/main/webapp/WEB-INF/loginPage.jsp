@@ -13,13 +13,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-light">
+<body class="landingpage">
 
     <!-- NAVIGATIONAL BAR (NON-LOGGED) -->
 	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
+					<img src="/img/agileninja-logo-2.png" alt="Agile Ninja Logo" class="navbar-img">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -34,8 +34,8 @@
 					</div>
 				</div>
 		
-                <button type="button" class="btn btn-primary me-3 btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">Login</button>
-                <button type="button" class="btn btn-warning me-3 btn-lg reg-btn">Register for FREE</button>
+                <button type="button" class="btn btn-info px-4 me-3 btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">Login</button>
+                <button type="button" class="btn btn-warning px-3 me-3 btn-sm rounded-pill reg-btn">Join for FREE</button>
 		</div>
 	  </nav>
 
@@ -95,11 +95,14 @@
         </c:if>
 
         <!-- JUMBOTRON -->
-        <div class="p-5 mb-4 rounded-3 jbt-main-bkg">
+        <div class="d-flex justify-content-between align-items-center p-5 mb-4 rounded-3 jbt-main-bkg">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold landing-prod-slogan">We build things that helps build things</h1>
-                <p class="col-md-8 fs-4">In Agile Ninja&trade;, we have the ability to get things done and respond to change.</p>
+                <p class="col-md-8 fs-4">In Agile Ninja&trade;, we are capable to get things done and respond to change.</p>
                 <button type="button" class="btn btn-info mt-4 me-3 btn-lg reg-btn">Know more!</button>
+            </div>
+            <div>
+                <i class="fa-solid fa-people-group landing-lg-icon me-5"></i>
             </div>
         </div>
 
@@ -113,7 +116,9 @@
                 </p>
                 <!-- <button class="btn btn-primary" type="button">Try Now</button> -->
                 </div>
+                
             </div>
+            
             <div class="p-4">
                 <img src="/img/landingpic-2-removebg.png" alt="Landing Pics" class="img-fluid img-landing">
             </div>

@@ -19,30 +19,30 @@
 	<!-- NAVIGATIONAL BAR -->
 	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
-				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav">
-						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
-						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
-						<a class="nav-link" href="/dashboard">Dashboard</a>
-						<a class="nav-link" href="#">Profile</a>
-						
-					</div>
+			<a class="navbar-brand" href="/">
+				<img src="/img/agileninja-logo-2.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<button type="button" class="new-proj-btn btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
+					<button type="button" class="new-proj-btn btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
+					<a class="nav-link" href="/dashboard">Dashboard</a>
+					<a class="nav-link" href="#">Profile</a>
+					
 				</div>
+			</div>
 
-				
-				<div class="me-5">
-					<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
-				</div>
-				<form id="logoutForm" method="POST" action="/logout">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<button class="btn btn-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout!</button>
-				</form>
+			
+			<div class="me-5">
+				<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
+			</div>
+			<form id="logoutForm" method="POST" action="/logout">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<button class="btn rounded-1 btn-outline-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i></button>
+			</form>
 		</div>
 	</nav>
 
@@ -183,14 +183,14 @@
 				
 			<div class="d-flex flex-row">
 
-				<div>
-					<h1 class="mb-3">${theTicket.getTicketKey()}: <form:input class="issuePropInputText input-txtfield input-tkt-name" path="ticketName" value="${theTicket.getTicketName()}" required="true"/></h1>
-					<h3>Description</h3>
-					
+				<div class="me-5">
+					<h1 class="mb-3"><i class="fa-solid fa-ticket me-3"></i><span class="tkt-page-key">${theTicket.getTicketKey()}:</span> <form:input class="issuePropInputText input-txtfield input-tkt-name ms-2 me-5" path="ticketName" value="${theTicket.getTicketName()}" required="true"/></h1>
+					<hr class="mb-4">
+					<h3><i class="fa-solid fa-file-lines me-3"></i>Description</h3>
 					<form:textarea class="issuePropInputText form-control form-control-lc input-tkt-desc" path="ticketDescription" cols="125" rows="10" placeholder="(description is empty)" aria-placeholder="(description is empty)"/>
 				</div>
 
-				<div>
+				<div class="border border-2 border-secondary border-opacity-50 rounded p-4">
 					<div>
 						<table>
 							<tr>
@@ -250,7 +250,6 @@
 									<p class="me-2 tkt-object"><i class="fa-solid fa-square-pen me-2 width-18-lc text-center"></i>Created By:</p>
 								</td>
 								<td>
-									<!-- TO DO: REPLACE "USERNAME" TO "FIRSTNAME" + "LASTNAME" -->
 									<p class="ms-1">${theTicket.getReporter().getFirstName()} ${theTicket.getReporter().getLastName()}</p>
 								</td>
 							</tr>

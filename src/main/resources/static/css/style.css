@@ -7,8 +7,12 @@
     font-family: 'Inter', sans-serif;
 }
 
+body.landingpage {
+  background: linear-gradient(90deg, rgba(225,223,255,1) 0%, rgba(215,255,255,1) 100%);
+}
+
 main.main-content {
-    padding-top: 7em;
+    padding-top: 5.5em;
     min-height: 95vh;
 }
 
@@ -67,7 +71,7 @@ input.input-txtfield, textarea.form-control-lc, select.issuePropDropdown {
 }
 
 input.input-txtfield {
-    width: 60vw;
+    width: 54vw;
 }
 
 input.input-txtfield:hover, textarea.form-control-lc:hover, select.issuePropDropdown:hover {
@@ -106,15 +110,23 @@ button.edit-comment-btn:hover {
 }
 
 .navbar-img {
-    width: 12em;
+    width: 9em;
+}
+
+.navbar-nav a.nav-link {
+  color: white;
 }
 
 .input-group .btn-outline-secondary {
     border: none;
 }
 
+.landing-lg-icon {
+  font-size: 16rem;
+}
+
 nav.navbar {
-    background-color: #dfedfa;;
+    background-color: #263749;
     z-index: 99;
 }
 
@@ -151,7 +163,8 @@ span.cmt-date-and-time-lc {
 }
 
 a.header-current-user-wholename {
-  font-weight: 700;
+  color: white;
+  font-weight: 400;
   font-size: 1.3rem;
   text-decoration: none;
 }
@@ -164,12 +177,12 @@ a.header-current-user-wholename {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.landingpg-subjumbotron{
+/* .landingpg-subjumbotron{
   background-color: #FFF8E8;
-}
+} */
 
 .landingpg-subsubjumbotron {
-  background-color: #EAE0DF;
+  background: white;
 }
 
 .width-18-lc {

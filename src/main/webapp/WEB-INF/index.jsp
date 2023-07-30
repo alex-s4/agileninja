@@ -18,29 +18,30 @@
 	<!-- NAVIGATIONAL BAR -->
 	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
-				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav">
-						<button type="button" class="new-proj-btn btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
-						<button type="button" class="new-proj-btn btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
-						<a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-						<a class="nav-link" href="#">Profile</a>
-						
-					</div>
+			<a class="navbar-brand" href="/">
+				<img src="/img/agileninja-logo-2.png" alt="Agile Ninja Logo" class="navbar-img pe-2">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<button type="button" class="new-proj-btn btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#staticBackdropNewProj"><i class="fa-solid fa-diagram-project me-2"></i>New Project</button>
+					<button type="button" class="new-proj-btn btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdropNewTick"><i class="fa-solid fa-ticket me-2"></i>New Ticket</button>
+					<a class="nav-link" href="/dashboard">Dashboard</a>
+					<a class="nav-link" href="#">Profile</a>
+					
 				</div>
+			</div>
 
-				<div class="me-5">
-					<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
-				</div>
-				<form id="logoutForm" method="POST" action="/logout">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<button class="btn btn-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout!</button>
-				</form>
+			
+			<div class="me-5">
+				<a href="#" class="header-current-user-wholename"><i class="fa-solid fa-user-ninja me-2"></i> ${currentUser.getFullName()}</a>
+			</div>
+			<form id="logoutForm" method="POST" action="/logout">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<button class="btn rounded-1 btn-outline-danger" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i></button>
+			</form>
 		</div>
 	  </nav>
 	
@@ -336,14 +337,16 @@
 				<table class="table table-hover">
 					<thead>
 						<tr class="table-secondary">
-							<th scope="col">Key <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-key"></i></th>
-							<th scope="col">Type <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-type"></i></th>
-							<th scope="col">Issue Name <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-name"></i></th>
-							<th scope="col">Status <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-status"></i></th>
-							<th scope="col">Priority <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-priority"></i></th>
-							<th scope="col">Severity <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-severity"></i></th>
-							<th scope="col">Modified <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-modified"></i></th>
-							<th scope="col">Assigned to <i class="fa-solid fa-sort ms-2 btn-lc-sorter" id="sort-assignee"></i></th>
+							<th scope="col">Key<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-key"></i></th>
+							<th scope="col">Type <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-type"></i></th>
+							<th scope="col">Issue Name <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-name"></i></th>
+							<th scope="col">Status <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-status"></i></th>
+							<th scope="col">Priority <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-priority"></i></th>
+							<th scope="col">Severity <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-severity"></i></th>
+							<th scope="col">Modified <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-modified"></i></th>
+							<th scope="col">Assigned to 
+								<!-- <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-assignee"></i> -->
+							</th>
 						</tr>
 					</thead>
 					<tbody>

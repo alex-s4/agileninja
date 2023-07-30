@@ -19,7 +19,7 @@
 	<nav class="navbar navbar-expand-lg fixed-top px-5">
 		<div class="container-fluid">
 				<a class="navbar-brand" href="/">
-					<img src="/img/navbar-logo-actualsize.png" alt="Agile Ninja Logo" class="navbar-img">
+					<img src="/img/agileninja-logo-2.png" alt="Agile Ninja Logo" class="navbar-img">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>

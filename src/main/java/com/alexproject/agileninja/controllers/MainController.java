@@ -110,10 +110,9 @@ public class MainController {
         
         
         // Either Ascending (ASC) or Descending (DESC)
-        Direction orderIn = (colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Direction orderIn = (colDirection != null && colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC;
         
-        System.out.println(colDirection);
-        System.out.println(orderIn);
+        System.out.println(colDirection + " " + orderIn);
         
         
         // TICKET FILTERING: 
@@ -148,8 +147,6 @@ public class MainController {
                 	filteredProjects.add(projectService.findProjectByKey(pKeySeparated));
         		}	
         	}
-        	
-        	
         	// Comma Separated String to List (Type)
         	if(issueTypeParam!=null) 
         	{
@@ -158,8 +155,6 @@ public class MainController {
                 	filteredTypes.add(typeService.findTypeByTypeName(issueTypeSeparated));
                 }
         	}
-        	
-        	
         	// Comma Separated String to List (Status)
         	if(issueStatParam!=null) 
         	{
@@ -169,8 +164,6 @@ public class MainController {
                 }
         		
         	}
-        	
-        	
         	// Comma Separated String to List (Priority)
         	if(issuePrioParam!=null) 
         	{
@@ -179,8 +172,6 @@ public class MainController {
                 	filteredPriorities.add(priorityService.findPriorityByIssuePrio(issuePrioSeparated));
                 }
         	}
-        	
-        	
         	// Comma Separated String to List (Severity)
         	if(issueSevParam!=null) 
         	{
@@ -190,8 +181,6 @@ public class MainController {
                 	filteredSeverity.add(severityService.findSeverityByName(issueSevSeparated));
                 }
         	}
-        	
-        	
         	// Comma Separated String to List (Assignee)
         	if(issueAssignedParam!=null) 
         	{
@@ -200,8 +189,6 @@ public class MainController {
                 	filteredAssignee.add(userService.findByUsername(issueAssignedSeparated));
                 }
         	}
-        	
-            
             // Get all objects when parameter is empty or null
             if(pKeyParam.isBlank() || issueTypeParam.isBlank() || issueStatParam.isBlank() || issuePrioParam.isBlank() || issueSevParam.isBlank() || issueAssignedParam.isBlank() ||
                pKeyParam == null || issueTypeParam == null || issueStatParam == null || issuePrioParam == null || issueSevParam == null || issueAssignedParam == null)
@@ -237,19 +224,16 @@ public class MainController {
                 	model.addAttribute("filterAssSize", filteredAssignee.size());
                 }
                 
+                
                 if(tableColumn == null || tableColumn.isEmpty()) {
                 	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, "ticketKey")));
                 } else {
                 	model.addAttribute("ticketsByProject", ticketService.findTicketsByProjects(filteredProjects, filteredTypes, filteredStatuses, filteredPriorities, filteredSeverity, filteredAssignee, Sort.by(orderIn, tableColumn)));
                 }
-                	
-                
-                           
-                	
-                
             }
-            // Normal fetching of data if no parameters were blank
+            
             else {
+            	// Normal fetching of data if no parameters were blank
             	
             	model.addAttribute("filterProjSize", filteredProjects.size());
             	model.addAttribute("filterTypeSize", filteredTypes.size());
