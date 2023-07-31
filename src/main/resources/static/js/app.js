@@ -422,10 +422,31 @@ $(".btn-lc-sorter-to-desc").click(function(){
     }
 })
 
+$(document).ready(function(){
 
-
-
-
+// Paginate Ticket List
+$('#main-tab-lc').after('<div id="pagi-counts-lc"></div>');
+    var rowsShown = 15;
+    var rowsTotal = $('#main-tab-lc tbody tr').length;
+    var numPages = rowsTotal/rowsShown;
+    for(i = 0;i < numPages;i++) {
+        var pageNum = i + 1;
+        $('#pagi-counts-lc').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
+    }
+    $('#main-tab-lc tbody tr').hide();
+    $('#main-tab-lc tbody tr').slice(0, rowsShown).show();
+    $('#pagi-counts-lc a:first').addClass('active');
+    $('#pagi-counts-lc a').on('click', function(){
+        console.log("click")
+        $('#pagi-counts-lc a').removeClass('active');
+        $(this).addClass('active');
+        var currPage = $(this).attr('rel');
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        $('#main-tab-lc tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+    });
+})
 
 
 

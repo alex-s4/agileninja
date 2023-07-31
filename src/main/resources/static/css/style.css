@@ -426,3 +426,8 @@ a.header-current-user-wholename {
     visibility: visible;
 
   }
+
+
+  #data tbody tr {
+    display: none;
+  }

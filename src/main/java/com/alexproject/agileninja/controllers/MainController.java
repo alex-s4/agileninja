@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
@@ -108,10 +109,8 @@ public class MainController {
         model.addAttribute("backlog", statusService.findStatusById((long) 1));
         
         
-        
-        // Either Ascending (ASC) or Descending (DESC)
+        // Values are Ascending "ASC" (default) or Descending "DESC"
         Direction orderIn = ((colDirection != null && colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC);
-        
         
         System.out.println(tableColumn + " " + orderIn);
         

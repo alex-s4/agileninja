@@ -338,7 +338,7 @@
 
 			<!-- ISSUE TABLE -->
 			<div>
-				<table class="table table-hover">
+				<table class="table table-hover" id="main-tab-lc">
 					<thead>
 						<tr class="table-secondary">
 							<th scope="col">Key
