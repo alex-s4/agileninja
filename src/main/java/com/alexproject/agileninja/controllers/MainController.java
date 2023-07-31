@@ -112,7 +112,7 @@ public class MainController {
         // Values are Ascending "ASC" (default) or Descending "DESC"
         Direction orderIn = ((colDirection != null && colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC);
         
-        System.out.println(tableColumn + " " + orderIn);
+        // System.out.println(tableColumn + " " + orderIn);
         
         model.addAttribute("orderBy", tableColumn);
         model.addAttribute("orderIn", orderIn.toString());

@@ -425,67 +425,106 @@ $(".btn-lc-sorter-to-desc").click(function(){
 $(document).ready(function(){
 
 // Paginate Ticket List
-$('#main-tab-lc').after('<div id="pagi-counts-lc"></div>');
-    var rowsShown = 15;
+$('#main-tab-lc').after(
+    '<nav aria-label="...">' +
+        '<ul class="pagination">' +
+            '<li id="pagi-counts-lc" class="page-item disabled"><a id="pagi-prev-lc" class="page-link">&laquo;</a></li>' +
+            '<li class="page-item"><a id="pagi-next-lc" class="page-link">&raquo;</a></li></ul></nav>'
+    );
+
+    var rowsShown = 15; // Number of Rows per page
     var rowsTotal = $('#main-tab-lc tbody tr').length;
     var numPages = rowsTotal/rowsShown;
-    for(i = 0;i < numPages;i++) {
+
+    for(i = 0; i < numPages;i++) {
         var pageNum = i + 1;
-        $('#pagi-counts-lc').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
+        if(i==0){
+            $('#pagi-counts-lc').after(
+                '<li class="page-item"><a class="page-link page-count-lc" href="#" rel="'+i+'">'+pageNum+'</a></li>'
+                );
+        }
+        else if(i>0){
+            $('.page-item').eq(i).after(
+                '<li class="page-item"><a class="page-link page-count-lc" href="#" rel="'+i+'">'+pageNum+'</a></li>'
+                );
+        }
     }
+
     $('#main-tab-lc tbody tr').hide();
     $('#main-tab-lc tbody tr').slice(0, rowsShown).show();
-    $('#pagi-counts-lc a:first').addClass('active');
-    $('#pagi-counts-lc a').on('click', function(){
-        console.log("click")
-        $('#pagi-counts-lc a').removeClass('active');
-        $(this).addClass('active');
+    $('.page-item a').eq(1).addClass('active');
+    $('a.page-count-lc').on('click', function(){
         var currPage = $(this).attr('rel');
         var startItem = currPage * rowsShown;
         var endItem = startItem + rowsShown;
+        $('.page-item a').removeClass('active');
+        $(this).addClass('active');
         $('#main-tab-lc tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
         css('display','table-row').animate({opacity:1}, 300);
+
+        console.log(`Page #${Number(currPage) + 1}`)
+        console.log(`Start: ${startItem}`)
+        console.log(`End: ${endItem}`)
+        console.log("***")
+
+        console.log(currPage)
+        if(currPage!=0){
+            $('#pagi-prev-lc').parent().removeClass("disabled");
+        } else {
+            $('#pagi-prev-lc').parent().addClass("disabled");
+        }
+        if(Number(currPage)!=Math.floor(numPages)){
+            $('#pagi-next-lc').parent().removeClass("disabled");
+        } else {
+            $('#pagi-next-lc').parent().addClass("disabled");
+        }
+        console.log(numPages)
+
     });
-})
 
+    $('#pagi-prev-lc, #pagi-next-lc').on('click', function(){
+        var currentHighlightedPage = $("li.page-item a.active")
+        var currPage = currentHighlightedPage.attr('rel')
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        
+        currentHighlightedPage.removeClass('active')
+        switch(this.id){
+            case "pagi-prev-lc":
+                currentHighlightedPage.parent().prev().children().addClass('active')
+                currPage--
+                startItem = currPage * rowsShown;
+                endItem = startItem + rowsShown;
+                break;
+            case "pagi-next-lc":
+                currentHighlightedPage.parent().next().children().addClass('active')
+                currPage++
+                startItem = currPage * rowsShown;
+                endItem = startItem + rowsShown;
+                break;
+        }
 
+        $('#main-tab-lc tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+        
 
-
-
-
-
-
-// $("#regform-roles").change(()=>{
-//     console.log($("#regform-roles").val())
-//     console.log($("#regform-roles").attr("action"))
-// })
-
-
-
-
-
-
-// This will change form when role was changed in registration page
-// if(window.location.href=="http://localhost:8080/registration")
-// {
-//     if(regFormRole.value=="user"){
-//         console.log()
-//         document.querySelector("#admin-regForm").style.display = "none";
-//         document.querySelector("#user-regForm").style.display = "block";
-//     } else if (regFormRole.value=="admin"){
-//         document.querySelector("#user-regForm").style.display = "none";
-//         document.querySelector("#admin-regForm").style.display = "block";
-//     }
+        if(currPage!==0){
+            $('#pagi-prev-lc').parent().removeClass("disabled");
+        } else {
+            $('#pagi-prev-lc').parent().addClass("disabled");
+        }
+        if(currPage!=Math.floor(numPages)){
+            $('#pagi-next-lc').parent().removeClass("disabled");
+        } else {
+            $('#pagi-next-lc').parent().addClass("disabled");
+        }
+        
+        
+        console.log(numPages)
+    })
     
-//     regFormRole.addEventListener("change", function(){
-//         console.log(regFormRole.value)
-//         if(regFormRole.value=="user"){
-//             console.log()
-//             document.querySelector("#admin-regForm").style.display = "none";
-//             document.querySelector("#user-regForm").style.display = "block";
-//         } else if (regFormRole.value=="admin"){
-//             document.querySelector("#user-regForm").style.display = "none";
-//             document.querySelector("#admin-regForm").style.display = "block";
-//         }
-//     })
-// }
+    
+    
+
+
+})
