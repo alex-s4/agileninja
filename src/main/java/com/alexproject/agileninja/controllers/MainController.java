@@ -110,10 +110,13 @@ public class MainController {
         
         
         // Either Ascending (ASC) or Descending (DESC)
-        Direction orderIn = (colDirection != null && colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Direction orderIn = ((colDirection != null && colDirection.equals("DESC")) ? Sort.Direction.DESC : Sort.Direction.ASC);
         
-        System.out.println(colDirection + " " + orderIn);
         
+        System.out.println(tableColumn + " " + orderIn);
+        
+        model.addAttribute("orderBy", tableColumn);
+        model.addAttribute("orderIn", orderIn.toString());
         
         // TICKET FILTERING: 
         // Returns all tickets if all parameters are empty or null (no parameter)

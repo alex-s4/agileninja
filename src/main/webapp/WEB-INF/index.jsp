@@ -341,13 +341,85 @@
 				<table class="table table-hover">
 					<thead>
 						<tr class="table-secondary">
-							<th scope="col">Key<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-key"></i></th>
-							<th scope="col">Type <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-type"></i></th>
-							<th scope="col">Issue Name <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-name"></i></th>
-							<th scope="col">Status <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-status"></i></th>
-							<th scope="col">Priority <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-priority"></i></th>
-							<th scope="col">Severity <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-severity"></i></th>
-							<th scope="col">Modified <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-modified"></i></th>
+							<th scope="col">Key
+								<c:if test="${orderBy==null || !orderBy.equals('ticketKey')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-key"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketKey') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-key"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketKey') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-key"></i>
+								</c:if>
+							</th>
+							<th scope="col">Type 
+								<c:if test="${orderBy==null || !orderBy.equals('ticketType')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-type"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketType') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-type"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketType') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-type"></i>
+								</c:if>
+							</th>
+							<th scope="col">Issue Name
+								<c:if test="${orderBy==null || !orderBy.equals('ticketName')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-name"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketName') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-name"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketName') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-name"></i>
+								</c:if>
+							</th>
+							<th scope="col">Status 
+								<c:if test="${orderBy==null || !orderBy.equals('ticketStatus')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-status"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketStatus') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-status"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketStatus') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-status"></i>
+								</c:if>
+							</th>
+							<th scope="col">Priority 
+								<c:if test="${orderBy==null || !orderBy.equals('ticketPriority')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-priority"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketPriority') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-priority"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketPriority') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-priority"></i>
+								</c:if>
+							</th>
+							<th scope="col">Severity 
+								<c:if test="${orderBy==null || !orderBy.equals('ticketSeverity')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-severity"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketSeverity') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-severity"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('ticketSeverity') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-severity"></i>
+								</c:if>
+							</th>
+							<th scope="col">Modified 
+								<c:if test="${orderBy==null || !orderBy.equals('updatedAt')}">
+									<i class="fa-solid fa-sort ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-modified"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('updatedAt') && orderIn.equals('ASC')}">
+									<i class="fa-solid fa-sort-down ms-2 btn-lc-sorter btn-lc-sorter-to-desc" id="sort-modified"></i>
+								</c:if>
+								<c:if test="${orderBy.equals('updatedAt') && orderIn.equals('DESC')}">
+									<i class="fa-solid fa-sort-up ms-2 btn-lc-sorter btn-lc-sorter-to-asc" id="sort-modified"></i>
+								</c:if>
+
+
+							</th>
 							<th scope="col">Assigned to 
 								<!-- <i class="fa-solid fa-sort-down ms-2 btn-lc-sorter" id="sort-assignee"></i> -->
 							</th>

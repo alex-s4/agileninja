@@ -338,10 +338,52 @@ cancelEditCmntBtn.click(function(){
     
 })
 
-$(".btn-lc-sorter").click(function(){
+$(".btn-lc-sorter-to-asc").click(function(){
 
     
     var orderDirection = "ASC"
+
+    switch (this.id)
+    {
+        case "sort-key":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketKey&orderIn=" + orderDirection
+            break;
+        case "sort-type":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketType&orderIn=" + orderDirection
+            break;
+        case "sort-name":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketName&orderIn=" + orderDirection
+            break;
+        case "sort-status":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketStatus&orderIn=" + orderDirection
+            break;
+        case "sort-priority":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketPriority&orderIn=" + orderDirection
+            break;
+        case "sort-severity":
+            // code here
+            window.location.href = document.URL + "&orderBy=ticketSeverity&orderIn=" + orderDirection
+            break;
+        case "sort-modified":
+            // code here
+            window.location.href = document.URL + "&orderBy=updatedAt&orderIn=" + orderDirection
+            break;
+        // case "sort-assignee":
+        //     // code here
+        //     console.log(8)
+        //     break;
+    }
+})
+
+$(".btn-lc-sorter-to-desc").click(function(){
+
+    
+    var orderDirection = "DESC"
 
     switch (this.id)
     {
