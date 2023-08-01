@@ -431,3 +431,7 @@ a.header-current-user-wholename {
   #data tbody tr {
     display: none;
   }
+
+  .empty-table-lc {
+    text-align: center;
+  }

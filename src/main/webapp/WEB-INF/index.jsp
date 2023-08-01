@@ -425,6 +425,7 @@
 							</th>
 						</tr>
 					</thead>
+					<c:if test="${ticketsByProject.size()!=0}">
 					<tbody>
 						<c:forEach var="ticket" items="${ticketsByProject}">
 						<tr>
@@ -444,8 +445,15 @@
 						</tr>
 						</c:forEach>
 					</tbody>
+					</c:if>
+					<c:if test="${ticketsByProject.size()==0}">
+					<tbody>
+						<tr><td class="empty-table-lc" colspan="8">No data available in table</td></tr>
+					</tbody>
+					</c:if>
 				</table>
 			</div>
+			<!-- <span class="current-tabl-row-count"></span> of ${ticketsByProject.size()} -->
 		</main>
 
 		<!-- FOOTER -->
